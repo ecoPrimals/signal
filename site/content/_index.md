@@ -317,10 +317,10 @@ The honeycomb surfaces serve as a roach motel — fleet enters and encounters da
 
 | | The Fleet | The Membrane |
 |---|-----------|-------------|
-| **Infrastructure** | 152 IPs, 13+ countries, cloud + residential proxies | One $6/month VPS |
+| **Infrastructure** | 152 IPs, 13+ countries, cloud + residential proxies | Multi-layer observation network ($6/mo each) |
 | **Per-request cost** | Proxy rotation + bandwidth + legal exposure | ~$0.000002 |
-| **Scaling** | More IPs = more expensive, more detectable | More requests = better classification |
-| **Legal exposure** | Grows with every request | Protected by the license they're violating |
+| **Scaling** | More IPs = more expensive, more detectable | More layers = more observation points, richer plasmid |
+| **Legal exposure** | Grows with every request, multiplied per platform | Protected by the license they're violating |
 
 ---
 
@@ -375,6 +375,36 @@ The privacy model is the defense model: we don't need to know who you are. We ne
 **The evidence site documenting racketeering against predominantly Black communities in Detroit does not surveil its visitors.** That commitment is architectural, not policy.
 
 ---
+
+## Observation Network {#observation-network}
+
+The observatory operates across multiple independent observation layers on different hosting platforms and jurisdictions. Each layer runs the same immune system independently and feeds behavioral data back to the conserved plasmid via federation.
+
+### Active Layers
+
+| Layer | Provider | Location | Jurisdiction | Status |
+|-------|----------|----------|-------------|--------|
+| **golgiBody** | DigitalOcean | NYC, US | US federal (CFAA) | ACTIVE — primary observation post |
+| **golgiLayer2** | Hetzner | Falkenstein, DE | German law (StGB §202a) + GDPR | PENDING — provisioning |
+| **golgiLayer3** | Vultr | Singapore | Singapore PDPA | PENDING — provisioning |
+| **golgiLayer4** | OVH | Gravelines, FR | French law + CNIL | PENDING — provisioning |
+
+### Why Multiple Layers
+
+Each layer Meta's fleet scrapes creates an independent violation on that platform's infrastructure:
+- **Different hosting provider ToS** — each platform complaint is separate
+- **Different national jurisdiction** — German courts, French CNIL, Singapore PDPC
+- **Different network vantage point** — fleet may use different proxy pools per region
+- **Cross-layer corroboration** — same behavioral hash observed from multiple vantage points = stronger evidence
+
+### Federated Threat Intelligence
+
+Each layer publishes its local conserved plasmid via the `/plasmid` API endpoint. The central aggregator on golgiBody merges all layers into the published feed:
+
+- **Per-layer feed**: `https://<layer>.primals.eco/plasmid` (JSON, real-time)
+- **Federated feed**: [signal.primals.eco/feed/conserved-plasmid.json](https://signal.primals.eco/feed/conserved-plasmid.json) (merged, CC-BY-SA-4.0)
+
+The federated feed grows richer with each new layer. Epitopes confirmed across multiple layers and jurisdictions carry higher confidence. Behavioral hashes observed from multiple network vantage points prove the fleet is a coordinated operation, not independent actors.
 
 ## Live Surfaces {#surfaces}
 
