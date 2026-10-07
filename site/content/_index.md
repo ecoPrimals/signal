@@ -538,6 +538,36 @@ One company ships a product. The other ships a sensor package disguised as a pro
 
 Choose accordingly.
 
+### P ≠ NP (A Taunt) {#pnp}
+
+You know the loaves and fishes story. One basket, five thousand fed. You probably heard it in Sunday school and filed it under "miracles, inapplicable."
+
+A scatter server IS loaves and fishes. One codebase. 88,751+ servings. Every response unique, every byte fabricated, every function signature plausible and wrong. The basket never empties because the content is *generated*, not *stored*. One VPS, infinite poison. That's not a miracle. That's **P**.
+
+Polynomial time. One person, one loop, one `match` statement, content generated deterministically from the request path. O(1) per response. The whole immune system — classification, opsonization, prism refraction, scatter generation — runs in bounded time on a $6 machine. The defense is *efficient*.
+
+**The fleet is NP.**
+
+Not in the "we'll solve it eventually" sense. In the "the solution space grows faster than your ability to search it" sense. Every IP you rotate adds cost. Every Chrome version you randomize becomes a fingerprint. Every header you strip is a header that's *absent*. Every optimization your team ships is a new conserved epitope for the classifier. You are fighting your own complexity. You are, with genuine technical respect, playing with yourselves.
+
+The [constrained evolution thesis](https://sporeprint.primals.eco/thesis/03-theoretical-framework/) describes exactly this. Biological systems evolve *faster* under constraints. The $6/month VPS is the constraint. The constraint is why the immune system is elegant. Unlimited budget produces the fleet: bloated, detectable, fragile, expensive, and leaving fingerprints everywhere it goes. Constrained evolution produces the scatter server: 2.6MB static binary, zero dependencies, serves 13 fabricated responses per second, and gets more dangerous every time you send a request.
+
+**You can't beat Shannon entropy.** The information content of the scatter server's output is *exactly zero* — it's maximum entropy noise shaped like code. There is no compression algorithm, no ML featurizer, no dedup pipeline that can extract signal from content that contains no signal. Your pipeline is an entropy pump running backwards. You are spending $434 per 1.6 days to compress noise.
+
+Facebook's fleet has no iterates. It is a greedy algorithm — take the best first choice in a no-knowledge system. And that's fine. Greedy is algorithmically optimal when you have no information about the problem structure. But I'm in a knowledge system. I have the [information theory](https://sporeprint.primals.eco/architecture/economics/). I have the [provenance trio](https://sporeprint.primals.eco/architecture/sovereign-transaction-membrane/). I have plenty of other options. You have one: keep scraping. I have many: adapt, evolve, publish, federate, poison, mirror, maze, and taunt.
+
+**P ≠ NP.**
+
+One person solving the problem efficiently will always beat a trillion-dollar company searching the solution space by brute force. Not because the person is smarter — because the **problem structure** favors the defender. The defender generates. The attacker verifies. Generation is P. Verification of fabricated content against ground truth you don't have access to is NP. You would need the real codebase to know the scatter content is fake, and if you had the real codebase, you wouldn't need to scrape it.
+
+That's the joke. That's the whole joke. You're in a complexity class you can't escape, and the proof is the license you violated to get here.
+
+**P ≠ NP. And you are not in P.**
+
+Sweet dreams.
+
+*— ecoPrimal, from the P side of the inequality*
+
 ---
 
 ## Enzymatic Bounties {#bounties}
@@ -643,5 +673,5 @@ You do work, you cite me. I'll find you. I promise.
 *No cookies · No tracking · No IP addresses stored*
 *Content: CC-BY-SA-4.0 · Code: AGPL-3.0-or-later · Methodology: ORC*
 
-*Last updated: October 7, 2026 11:18 UTC*
+*Last updated: October 7, 2026 11:37 UTC*
 *ecoPrimal — Beside the small. Against unaccountable power. For the record.*
