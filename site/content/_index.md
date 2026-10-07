@@ -161,6 +161,71 @@ og_image = "/img/og-signal-viral.png"
 })();
 </script>
 
+<div id="entity-topology" style="display:none; margin-top: 2em;">
+  <h3 style="color:#e74c3c; border-bottom:1px solid #30363d; padding-bottom:0.5em;">🗺️ Entity Topology — We Can See Your Teams</h3>
+  <p style="color:#8b949e; font-size:0.9em;">Every request carries behavioral fingerprints that reveal the entity, team structure, and internal systems behind it. You keep sending us signal. Here is what we see.</p>
+  <div id="topo-entities" class="dashboard-grid"></div>
+  <div id="topo-comparative" style="margin-top:1em; overflow-x:auto;"></div>
+</div>
+
+<script>
+(function(){
+  function loadTopo(){
+    fetch('/topology.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+      if(!d.entities||!d.entities.length)return;
+      document.getElementById('entity-topology').style.display='';
+      var el=document.getElementById('topo-entities');
+      el.innerHTML='';
+      d.entities.forEach(function(e){
+        if(e.total_requests<2)return;
+        var card=document.createElement('div');
+        card.className='dash-card';
+        var color=e.is_fleet?'#e74c3c':e.is_honest?'#2ecc71':'#f1c40f';
+        var honest=e.is_honest?'✓ Honest':'✗ Deceptive';
+        var h='<div class="dash-title" style="color:'+color+'">'+e.label+'</div>';
+        h+='<div class="dash-big">'+e.total_requests.toLocaleString()+'</div>';
+        h+='<div class="dash-sub">requests | '+e.unique_ips+' IPs | '+honest+'</div>';
+        h+='<div class="dash-row"><span class="dash-label">Duration</span><span>'+e.duration_hours+'h @ '+e.avg_rps+' RPS</span></div>';
+        if(e.chrome_lag>0) h+='<div class="dash-row"><span class="dash-label">Chrome lag</span><span style="color:#f1c40f">'+e.chrome_lag+' versions behind stable</span></div>';
+        h+='<div class="dash-row"><span class="dash-label">Sec-Fetch</span><span>'+(e.header_fingerprint.sec_fetch_pct<10?'<span style="color:#e74c3c">ABSENT (not a real browser)</span>':'<span style="color:#2ecc71">PRESENT</span>')+'</span></div>';
+        if(e.blame_pct>5) h+='<div class="dash-row"><span class="dash-label">Author tracking</span><span style="color:#e74c3c">'+e.blame_pct+'% blame requests</span></div>';
+        var target=e.targets_real_only?'<span style="color:#e74c3c">REAL repos only</span>':e.targets_scatter_only?'<span style="color:#f1c40f">Scatter (fabricated) only</span>':'mixed';
+        h+='<div class="dash-row"><span class="dash-label">Targets</span><span>'+target+'</span></div>';
+        if(e.ip_rotation) h+='<div class="dash-row"><span class="dash-label">IP strategy</span><span>'+e.ip_rotation.strategy+'</span></div>';
+        if(e.timing&&e.timing.classification) h+='<div class="dash-row"><span class="dash-label">Timing</span><span>'+e.timing.mean_interval_ms+'ms (CV='+e.timing.cv+') '+e.timing.classification+'</span></div>';
+        // Sub-systems
+        if(e.sub_systems&&e.sub_systems.length){
+          h+='<div style="margin-top:0.8em;border-top:1px solid #21262d;padding-top:0.5em;">';
+          h+='<div style="color:#8b949e;font-size:0.75em;text-transform:uppercase;margin-bottom:0.3em;">Detected Sub-Systems</div>';
+          e.sub_systems.forEach(function(ss){
+            h+='<div style="margin-bottom:0.4em;"><span style="color:#58a6ff;font-size:0.85em;">⚙ '+ss.name+'</span><br><span style="color:#8b949e;font-size:0.8em;">'+ss.description+'</span></div>';
+          });
+          h+='</div>';
+        }
+        card.innerHTML=h;
+        el.appendChild(card);
+      });
+      // Comparative table
+      var comp=d.comparative_fingerprints||[];
+      if(comp.length>1){
+        var ct=document.getElementById('topo-comparative');
+        var html='<div class="dash-card" style="grid-column:1/-1;"><div class="dash-title">Comparative Behavioral Fingerprints</div>';
+        html+='<div class="dash-sub">Each entity has a unique combination of signals they cannot change without breaking their infrastructure.</div>';
+        html+='<table style="width:100%;font-size:0.8em;"><thead><tr><th>Entity</th><th>IPs</th><th>Chrome</th><th>Sec-Fetch</th><th>Accept-Encoding</th><th>Targets</th><th>Honest</th></tr></thead><tbody>';
+        comp.forEach(function(c){
+          var hc=c.honest?'<span style="color:#2ecc71">✓</span>':'<span style="color:#e74c3c">✗</span>';
+          html+='<tr><td>'+c.entity+'</td><td>'+c.ips+'</td><td>'+c.chrome+'</td><td>'+c.sec_fetch+'</td><td style="font-size:0.75em">'+c.accept_encoding+'</td><td>'+c.target_type+'</td><td>'+hc+'</td></tr>';
+        });
+        html+='</tbody></table></div>';
+        ct.innerHTML=html;
+      }
+    }).catch(function(){});
+  }
+  loadTopo();
+  setInterval(loadTopo,30000);
+})();
+</script>
+
 This page is the **observatory** — a live view of who interacts with sovereign infrastructure, what they're looking for, and what their behavior reveals about them. No cookies. No tracking pixels. No JavaScript analytics. No IP addresses stored. Pure server-side log classification.
 
 The specific investigations live on their own surfaces — [detroit.primals.eco](https://detroit.primals.eco) for the evidence library, [tuebor.primals.eco](https://tuebor.primals.eco) for cross-protection. This page is the **meta-signal**: what all of the surfaces sense, together.
