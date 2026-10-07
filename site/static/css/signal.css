@@ -296,6 +296,92 @@ hr {
   .dot { width: 10px; height: 10px; }
 }
 
+/* ── Live Dashboard ── */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 1.5em 0 2em;
+}
+
+.dash-card {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 16px 20px;
+  overflow: hidden;
+}
+
+#dash-offenders, #dash-targets {
+  grid-column: span 2;
+}
+
+.dash-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.dash-big {
+  font-size: 2.5rem;
+  font-weight: 800;
+  font-family: 'Courier New', monospace;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.dash-sub {
+  font-size: 0.72rem;
+  color: #6e7681;
+  margin-bottom: 8px;
+}
+
+.dash-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 0.82rem;
+  border-bottom: 1px solid #1c2028;
+}
+
+.dash-label {
+  color: #8b949e;
+}
+
+.dash-row span:last-child {
+  font-family: 'Courier New', monospace;
+  color: #fff;
+  font-weight: 600;
+}
+
+.dash-card table {
+  width: 100%;
+  font-size: 0.78rem;
+  margin-top: 8px;
+}
+
+.dash-card th {
+  background: transparent;
+  border-bottom: 1px solid #30363d;
+  padding: 4px 6px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6e7681;
+}
+
+.dash-card td {
+  padding: 5px 6px;
+  border-bottom: 1px solid #1c2028;
+}
+
+@media (max-width: 700px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  #dash-offenders, #dash-targets { grid-column: span 1; }
+  .dash-big { font-size: 2rem; }
+}
+
 /* ── Signal exploration graph ── */
 #signal-exploration {
   min-height: 400px;

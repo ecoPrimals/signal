@@ -50,6 +50,117 @@ og_image = "/img/og-signal-viral.png"
 </script>
 <noscript><p><em>Live feed: <a href="/live">signal.primals.eco/live</a></em></p></noscript>
 
+<div id="dashboard" class="dashboard-grid" style="display:none;">
+  <div class="dash-card" id="dash-summary">
+    <div class="dash-title">Right Now</div>
+    <div class="dash-big" id="d-rps">—</div>
+    <div class="dash-sub">requests/sec</div>
+    <div class="dash-row"><span class="dash-label">Fleet IPs</span><span id="d-fleet">—</span></div>
+    <div class="dash-row"><span class="dash-label">Humans</span><span id="d-humans">—</span></div>
+    <div class="dash-row"><span class="dash-label">Fleet %</span><span id="d-pct">—</span></div>
+    <div class="dash-row"><span class="dash-label">Machine confidence</span><span id="d-machine">—</span></div>
+  </div>
+  <div class="dash-card" id="dash-offenders">
+    <div class="dash-title">Top Offenders — Playing Hide & Seek</div>
+    <div class="dash-sub">They think rotating IPs makes them invisible. Every IP tells us exactly who they are.</div>
+    <table id="d-offenders"><thead><tr><th>IP</th><th>Req</th><th>Network</th><th>Targeting</th></tr></thead><tbody></tbody></table>
+  </div>
+  <div class="dash-card" id="dash-subnets">
+    <div class="dash-title">Network Blocks — The Child's Hiding Spots</div>
+    <div class="dash-sub">292+ IPs but only a handful of subnets. Like hiding behind the same curtain 292 times.</div>
+    <table id="d-subnets"><thead><tr><th>Subnet</th><th>Req</th><th>IPs</th><th>Owner</th></tr></thead><tbody></tbody></table>
+  </div>
+  <div class="dash-card" id="dash-targets">
+    <div class="dash-title">What They Want</div>
+    <div class="dash-sub">Every path they request tells us exactly what they're trying to steal.</div>
+    <table id="d-targets"><thead><tr><th>Repository</th><th>Requests</th></tr></thead><tbody></tbody></table>
+  </div>
+  <div class="dash-card" id="dash-timing">
+    <div class="dash-title">Behavioral Fingerprint</div>
+    <div class="dash-row"><span class="dash-label">Avg interval</span><span id="d-interval">—</span></div>
+    <div class="dash-row"><span class="dash-label">Timing CV</span><span id="d-cv">—</span></div>
+    <div class="dash-row"><span class="dash-label">Path types</span><span id="d-paths">—</span></div>
+    <div class="dash-sub" id="d-timing-note" style="margin-top:0.5em;color:#6e7681;"></div>
+  </div>
+  <div class="dash-card" id="dash-geo">
+    <div class="dash-title">Geography — Where They're Hiding</div>
+    <div id="d-geo"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var dash=document.getElementById('dashboard');
+  function loadDash(){
+    fetch('/dashboard.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+      dash.style.display='';
+      document.getElementById('d-rps').textContent=d.rps;
+      document.getElementById('d-fleet').textContent=d.fleet_ips;
+      document.getElementById('d-humans').textContent=d.human_ips;
+      document.getElementById('d-pct').textContent=d.fleet_pct+'%';
+      var mc=d.timing.machine_confidence;
+      var mel=document.getElementById('d-machine');
+      mel.textContent=mc;
+      mel.style.color=mc==='HIGH'?'#e74c3c':mc==='MEDIUM'?'#f1c40f':'#2ecc71';
+      document.getElementById('d-interval').textContent=d.timing.avg_interval_ms+'ms';
+      document.getElementById('d-cv').textContent=d.timing.cv+' '+(d.timing.cv<0.15?'(machine)':d.timing.cv<0.5?'(likely machine)':'(collecting...)');
+
+      var pt=d.path_types||{};
+      var pts=Object.keys(pt).map(function(k){return k+': '+pt[k]}).join(' · ');
+      document.getElementById('d-paths').textContent=pts;
+
+      var note=d.timing.cv<0.15?'CV < 0.15 — this is a machine. Human browsing has CV > 1.0.':'Collecting timing data...';
+      document.getElementById('d-timing-note').textContent=note;
+
+      // Offenders table
+      var tb=document.querySelector('#d-offenders tbody');
+      tb.innerHTML='';
+      (d.top_offenders||[]).slice(0,12).forEach(function(ip){
+        var repos=Object.keys(ip.top_repos||{}).slice(0,2).join(', ');
+        var tr=document.createElement('tr');
+        var cls=ip.is_fleet?'color:#e74c3c':'color:#2ecc71';
+        tr.innerHTML='<td style="font-family:monospace;font-size:0.8rem;'+cls+'">'+ip.ip+'</td><td>'+ip.requests+'</td><td>'+ip.org+' ('+ip.country+')</td><td style="font-size:0.75rem">'+repos+'</td>';
+        tb.appendChild(tr);
+      });
+
+      // Subnets
+      var sb=document.querySelector('#d-subnets tbody');
+      sb.innerHTML='';
+      (d.subnets||[]).slice(0,8).forEach(function(s){
+        var tr=document.createElement('tr');
+        tr.innerHTML='<td style="font-family:monospace">'+s.subnet+'</td><td>'+s.requests+'</td><td>'+s.unique_ips+'</td><td>'+s.org+' ('+s.country+')</td>';
+        sb.appendChild(tr);
+      });
+
+      // Targets
+      var ttb=document.querySelector('#d-targets tbody');
+      ttb.innerHTML='';
+      (d.targets||[]).slice(0,10).forEach(function(t){
+        var tr=document.createElement('tr');
+        var name=t.repo;
+        var fake=['batch-processor','queue-worker','proxy-cache','http-proxy','deploy-scripts','graph-engine','auth-service','load-balancer','rate-limiter','service-mesh'];
+        var isFake=fake.some(function(f){return name.indexOf(f)>=0});
+        var style=isFake?'color:#f1c40f;font-style:italic':'';
+        var label=isFake?' (fabricated)':'';
+        tr.innerHTML='<td style="font-family:monospace;font-size:0.8rem;'+style+'">'+name+label+'</td><td>'+t.requests+'</td>';
+        ttb.appendChild(tr);
+      });
+
+      // Geography
+      var gel=document.getElementById('d-geo');
+      gel.innerHTML='';
+      (d.geography||[]).forEach(function(g){
+        var pct=Math.round(g.requests/d.total_requests*100);
+        var bar='<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><span style="width:50px;font-size:0.8rem">'+g.country+'</span><div style="background:#30363d;height:14px;flex:1;border-radius:2px;overflow:hidden"><div style="background:#ff6b35;height:100%;width:'+pct+'%"></div></div><span style="font-size:0.75rem;color:#888;width:60px;text-align:right">'+g.requests+'</span></div>';
+        gel.innerHTML+=bar;
+      });
+    }).catch(function(){});
+  }
+  loadDash();
+  setInterval(loadDash,8000);
+})();
+</script>
+
 This page is the **observatory** — a live view of who interacts with sovereign infrastructure, what they're looking for, and what their behavior reveals about them. No cookies. No tracking pixels. No JavaScript analytics. No IP addresses stored. Pure server-side log classification.
 
 The specific investigations live on their own surfaces — [detroit.primals.eco](https://detroit.primals.eco) for the evidence library, [tuebor.primals.eco](https://tuebor.primals.eco) for cross-protection. This page is the **meta-signal**: what all of the surfaces sense, together.
