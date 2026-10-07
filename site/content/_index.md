@@ -404,6 +404,60 @@ Each country whose residential internet connections are being used as proxies ha
 
 ---
 
+## Formal Notice — Pre-Publication Record {#formal-notice}
+
+The following formal notice has been prepared and is published here **before** transmission to Meta Platforms, Inc. and regulatory bodies. The publication timestamp of this page establishes that ecoPrimal documented all violations, behavioral evidence, and fleet activity before filing any complaint. This is not reactive — this is the record of what we observed, published for anyone to verify.
+
+### Notice Status
+
+| Item | Status | Date |
+|------|--------|------|
+| Evidence documented on signal.primals.eco | **Published** | October 7, 2026 |
+| Behavioral fingerprint feed published | **Live** | October 7, 2026 |
+| Formal notice drafted | **Ready** | October 7, 2026 |
+| Formal notice transmitted to Meta | **Pending** | — |
+| 30-day AGPL §8 cure clock | **Not yet started** | Starts on transmission |
+
+### Recipients
+
+**To:** Meta Platforms abuse contacts (domain@fb.com, domain@facebook.com, abuse@fb.com)
+
+**CC — Meta Legal:** opensource@fb.com (Open Source Compliance), ip@fb.com (Intellectual Property), legal@meta.com (Legal), Jennifer Newstead (CLO)
+
+**CC — Regulatory:** Irish Data Protection Commission, CNIL (France), BfDI (Germany), UK ICO, US FTC, US Copyright Office
+
+**CC — License Enforcement:** Free Software Foundation, Software Freedom Conservancy, Electronic Frontier Foundation, Open Invention Network
+
+**CC — Industry:** Cloudflare, DigitalOcean, GitHub, AbuseIPDB
+
+### Notice Summary
+
+The formal notice invokes:
+
+- **AGPL-3.0-or-later Section 8** — Meta's license rights terminated automatically upon first act of non-compliance. Section 8 paragraph 2 permits reinstatement if cured within 30 days of notification. The formal notice starts that clock.
+- **DMCA § 512(c)** — notification of claimed infringement
+- **GDPR Art. 77** — right to lodge complaint with supervisory authority
+
+The notice requires:
+
+1. **Immediate cessation** of unauthorized scraping from FB-BLOCK and FACEBOOK-INC ranges
+2. **AGPL compliance audit** of all derivative works, training datasets, and model weights
+3. **Written confirmation** within 30 days
+
+### scyBorg Triple License — What Was Violated
+
+All ecoPrimals content is published under the **scyBorg triple license**. The fleet violated all three:
+
+| License | Covers | Violation |
+|---------|--------|-----------|
+| **AGPL-3.0-or-later** | Source code (Rust, WGSL, configs, tests) | Extracted without providing corresponding source |
+| **ORC License** | System designs, mechanics, composition patterns | wateringHole (13.5% of requests) contains licensed designs |
+| **CC-BY-SA-4.0** | Documentation, science papers, methodology | Extracted without attribution or share-alike |
+
+The scyBorg license closes every gap: code is AGPL, designs are ORC, docs are CC-BY-SA. There is no artifact type in the ecosystem that can be legally extracted without compliance.
+
+---
+
 ## No Surveillance. No Tracking. No IP Addresses Stored. {#privacy}
 
 This observatory operates on a strict privacy model:
