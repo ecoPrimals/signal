@@ -14,22 +14,41 @@ og_image = "/img/og-signal-viral.png"
 
 > *A living organism doesn't just defend itself. It senses. It classifies. It remembers. The defense IS the sensing.*
 
-<div id="live-terminal" style="background:#0d1117;color:#c9d1d9;font-family:'Cascadia Code','Fira Code','JetBrains Mono',monospace;font-size:12px;line-height:1.4;padding:16px;border-radius:8px;border:1px solid #30363d;max-height:320px;overflow-y:auto;white-space:pre;margin:1.5em 0;">Loading live terminal feed...</div>
+<div class="terminal-chrome">
+  <div class="terminal-titlebar">
+    <div class="terminal-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+    <div class="terminal-title">membrane — live feed</div>
+    <div class="terminal-status"><span id="live-pulse" class="pulse"></span><span id="live-status">connecting...</span></div>
+  </div>
+  <div id="live-terminal" class="terminal-body">Loading live terminal feed...</div>
+</div>
 <script>
 (function(){
   var el=document.getElementById('live-terminal');
+  var status=document.getElementById('live-status');
+  var pulse=document.getElementById('live-pulse');
   if(!el)return;
+  var ok=false;
   function refresh(){
     fetch('/live',{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){
-      el.textContent=t;
+      var lines=t.split('\n');
+      var last30=lines.slice(-35).join('\n');
+      el.textContent=last30;
       el.scrollTop=el.scrollHeight;
-    }).catch(function(){});
+      if(!ok){ok=true;pulse.classList.add('live');}
+      var m=t.match(/(\d+\.\d+)\/s\)/);
+      status.textContent=m?m[1]+' req/s — live':'live';
+    }).catch(function(){
+      status.textContent='reconnecting...';
+      pulse.classList.remove('live');
+      ok=false;
+    });
   }
   refresh();
-  setInterval(refresh,5000);
+  setInterval(refresh,4000);
 })();
 </script>
-<noscript><p><em>Live feed available at <a href="/live">signal.primals.eco/live</a> (plain text, auto-updating with JS enabled)</em></p></noscript>
+<noscript><p><em>Live feed: <a href="/live">signal.primals.eco/live</a></em></p></noscript>
 
 This page is the **observatory** — a live view of who interacts with sovereign infrastructure, what they're looking for, and what their behavior reveals about them. No cookies. No tracking pixels. No JavaScript analytics. No IP addresses stored. Pure server-side log classification.
 
