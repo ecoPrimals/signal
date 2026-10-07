@@ -14,6 +14,23 @@ og_image = "/img/og-signal-viral.png"
 
 > *A living organism doesn't just defend itself. It senses. It classifies. It remembers. The defense IS the sensing.*
 
+<div id="live-terminal" style="background:#0d1117;color:#c9d1d9;font-family:'Cascadia Code','Fira Code','JetBrains Mono',monospace;font-size:12px;line-height:1.4;padding:16px;border-radius:8px;border:1px solid #30363d;max-height:320px;overflow-y:auto;white-space:pre;margin:1.5em 0;">Loading live terminal feed...</div>
+<script>
+(function(){
+  var el=document.getElementById('live-terminal');
+  if(!el)return;
+  function refresh(){
+    fetch('/live',{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){
+      el.textContent=t;
+      el.scrollTop=el.scrollHeight;
+    }).catch(function(){});
+  }
+  refresh();
+  setInterval(refresh,5000);
+})();
+</script>
+<noscript><p><em>Live feed available at <a href="/live">signal.primals.eco/live</a> (plain text, auto-updating with JS enabled)</em></p></noscript>
+
 This page is the **observatory** — a live view of who interacts with sovereign infrastructure, what they're looking for, and what their behavior reveals about them. No cookies. No tracking pixels. No JavaScript analytics. No IP addresses stored. Pure server-side log classification.
 
 The specific investigations live on their own surfaces — [detroit.primals.eco](https://detroit.primals.eco) for the evidence library, [tuebor.primals.eco](https://tuebor.primals.eco) for cross-protection. This page is the **meta-signal**: what all of the surfaces sense, together.
