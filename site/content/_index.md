@@ -12,6 +12,29 @@ og_image = "/img/og-signal-viral.png"
 
 # Signal — What the Membrane Sees
 
+<div id="billboard" style="background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:1em 1.5em; margin-bottom:1.5em; display:none;">
+  <div style="display:flex; align-items:center; gap:0.8em; margin-bottom:0.5em;">
+    <span style="width:8px; height:8px; background:#3fb950; border-radius:50%; animation:pulse 2s infinite; flex-shrink:0;"></span>
+    <span style="font-family:monospace; font-size:0.8em; color:#8b949e; text-transform:uppercase; letter-spacing:0.05em;">ecoPrimal — live</span>
+  </div>
+  <div id="billboard-msg" style="font-family:Georgia,serif; font-size:1.05em; color:#e8e8e8; line-height:1.6; white-space:pre-wrap;"></div>
+</div>
+<script>
+(function(){
+  var el=document.getElementById('billboard');
+  var msg=document.getElementById('billboard-msg');
+  function load(){
+    fetch('/billboard',{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){
+      t=t.trim();
+      if(t&&t.length>0){el.style.display='';msg.textContent=t;}
+      else{el.style.display='none';}
+    }).catch(function(){});
+  }
+  load();
+  setInterval(load,10000);
+})();
+</script>
+
 > *A living organism doesn't just defend itself. It senses. It classifies. It remembers. The defense IS the sensing.*
 
 <div class="terminal-chrome">
