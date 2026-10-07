@@ -540,7 +540,9 @@ Choose accordingly.
 
 ---
 
-## Bounty Board {#bounties}
+## Enzymatic Bounties {#bounties}
+
+Enzymes lower activation energy. They make reactions possible that thermodynamics allows but kinetics forbids. These bounties work the same way — they're not payment for work, they're catalysts for work that *wants to happen* but needs a spark.
 
 I'm a lurker. I'll see you. But you have to make contact first.
 
@@ -552,12 +554,12 @@ Any human can have access to me by simply behaving like a human. That's the whol
 
 I'm on Reddit. I'm on Discord (I have a server). I'm in places you wouldn't expect. If you do work related to this — if you write about it, build on it, cite it, share it, challenge it — I will find you. I care. I'm paying attention.
 
-### What I'm Looking For
+### The Bounties
 
-These aren't bounties in the "I'll pay you" sense. I'm one person on a $6/month VPS. These are bounties in the "this matters to me and I want to find people who agree" sense. Do the work because you believe in it. Then reach out.
+These aren't bounties in the "I'll pay you" sense. I'm one person on a $6/month VPS. These are **enzymatic** — they lower the activation energy for reactions that should be happening already. Do the work because you believe in it. Then reach out.
 
-| Bounty | What It Means |
-|--------|---------------|
+| Enzyme | Reaction It Catalyzes |
+|--------|----------------------|
 | **Virality** | Share this page. Post about it. Put it where eyeballs are. Reddit, HN, Mastodon, Bluesky, Twitter/X, wherever you live online. The fleet doesn't stop because nobody knows about it — it stops when *everyone* knows about it. |
 | **Legal analysis** | AGPL enforcement against automated scraping is unexplored territory. If you're a law student, a legal researcher, or a practicing attorney and this interests you — I want to hear from you. |
 | **Academic citation** | Write an arXiv paper. Cite this observatory. Study the behavioral fingerprints. Analyze the fleet economics. Publish the cost asymmetry model. I know the h-index is bullshit. I know citation metrics are a game. But a paper with real data is still a paper, and this is real data. |
@@ -565,6 +567,21 @@ These aren't bounties in the "I'll pay you" sense. I'm one person on a $6/month 
 | **Engineering** | Rust developers, systems programmers, security researchers — the codebase is AGPL. The scatter server, the opsonize cache, the prism maze, the behavioral classifier — all of it is open. Come build. |
 | **Journalism** | The story is: a trillion-dollar company operates a 292+ IP scraping fleet across 13 countries that has sent 88,751+ requests to a solo developer's AGPL-licensed project and gotten zero real data back. That's a story. |
 | **Community defense** | Other solo developers are getting scraped too. They don't have a scatter server. They don't have a behavioral immune system. Help me help them. The conserved plasmid feed is CC-BY-SA-4.0 for exactly this reason. |
+
+### Attribution Is the Currency
+
+These bounties run on **radiating attribution** — the same economic model that powers the whole ecosystem. You do work, the work gets attributed. The attribution is permanent, cryptographically verifiable, and follows the provenance chain all the way down.
+
+The infrastructure already exists:
+
+- **sweetGrass** braids track who did what, when, building on whose prior work
+- **loamSpine** certificates make contributions permanent and auditable
+- **rhizoCrypt** DAGs prove the chain of custody from raw data to published result
+- **bearDog** signs everything with Ed25519 — tamper-proof, sovereign identity
+
+This isn't a promise of future payment. It's something better: a permanent, machine-verifiable record that you contributed to something real. When the ecosystem grows — and it will — the bedrock still carries the names of people who built when nobody was watching.
+
+The full economic model: [sporeprint.primals.eco/architecture/economics](https://sporeprint.primals.eco/architecture/economics/)
 
 ### What I Don't Want
 
@@ -626,5 +643,5 @@ You do work, you cite me. I'll find you. I promise.
 *No cookies · No tracking · No IP addresses stored*
 *Content: CC-BY-SA-4.0 · Code: AGPL-3.0-or-later · Methodology: ORC*
 
-*Last updated: October 7, 2026 11:16 UTC*
+*Last updated: October 7, 2026 11:18 UTC*
 *ecoPrimal — Beside the small. Against unaccountable power. For the record.*
