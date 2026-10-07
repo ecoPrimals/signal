@@ -1,0 +1,128 @@
+{
+  "schema": "ecoPrimals/conserved-plasmid/v1",
+  "generated": "2026-10-07T09:56:00Z",
+  "source": "signal.primals.eco",
+  "license": "CC-BY-SA-4.0",
+  "description": "Conserved behavioral epitopes from automated scraping fleet. Published for community immunity. Any infrastructure operator can use these signatures for detection.",
+  "population": {
+    "total_ips_observed": 152,
+    "behavioral_subgroups": 47,
+    "observation_period": "2026-09 to 2026-10",
+    "countries_observed": 13,
+    "total_requests_analyzed": 53162
+  },
+  "attribution": {
+    "primary_entity": "Meta Platforms, Inc.",
+    "whois_confirmed_blocks": [
+      {
+        "cidr": "57.141.0.0/13",
+        "netname": "FB-BLOCK",
+        "org": "Meta Platforms Ireland Limited",
+        "country": "IE",
+        "abuse_contact": "domain@fb.com",
+        "observed_ips": 65,
+        "confirmed_via": "RIPE WHOIS"
+      },
+      {
+        "cidr": "173.252.0.0/16",
+        "netname": "FACEBOOK-INC",
+        "org": "Facebook, Inc.",
+        "country": "US",
+        "abuse_contact": "domain@facebook.com",
+        "observed_ips": 1,
+        "confirmed_via": "ARIN WHOIS"
+      }
+    ],
+    "direct_meta_infrastructure_pct": 43
+  },
+  "conserved_epitopes": [
+    {
+      "name": "header_poverty",
+      "frequency_pct": 100,
+      "description": "Missing Sec-Fetch-Mode header. Mandatory in all Chromium browsers since Chrome 76 (July 2019). Absence proves the client is not a browser.",
+      "detection": "Count HTTP headers per request. Fleet sends 3. Chrome sends 11+. Firefox sends 8+.",
+      "false_positive_risk": "low",
+      "evasion_cost": "Must implement full browser header stack — fundamentally changes the scraping toolkit."
+    },
+    {
+      "name": "stale_chrome",
+      "frequency_pct": 100,
+      "description": "User-Agent claims Chrome/150 but current stable is Chrome/155. Real Chrome auto-updates. Hardcoded UA string proves automation.",
+      "detection": "Parse Chrome major version from User-Agent. Compare to current stable release.",
+      "false_positive_risk": "low",
+      "evasion_cost": "Must implement UA version tracking — reveals the UA is dynamically generated, not from a real browser."
+    },
+    {
+      "name": "connection_absent",
+      "frequency_pct": 100,
+      "description": "No Connection: keep-alive header. Chrome always sends this header. Absence proves the client is not Chrome.",
+      "detection": "Check for Connection header presence.",
+      "false_positive_risk": "very_low",
+      "evasion_cost": "Trivial to add — but adding it while missing other headers increases detection confidence."
+    },
+    {
+      "name": "content_gate",
+      "frequency_pct": 99,
+      "description": "Over 50% of requests target /commit/, /src/, /raw/, /blame/ paths. Source code extraction, not browsing.",
+      "detection": "Calculate ratio of requests to code-hosting paths vs. all paths.",
+      "false_positive_risk": "medium",
+      "evasion_cost": "Must add noise requests to non-code paths — increases bandwidth cost and detection surface."
+    },
+    {
+      "name": "accept_monoculture",
+      "frequency_pct": 89,
+      "description": "Universal */* Accept header. Real browsers send resource-specific Accept headers (text/html for pages, image/webp for images, etc.).",
+      "detection": "Check if Accept header is exactly '*/*' for HTML page requests.",
+      "false_positive_risk": "low",
+      "evasion_cost": "Must implement resource-type-aware Accept headers — requires understanding page context."
+    },
+    {
+      "name": "blame_ratio",
+      "frequency_pct": 67,
+      "description": "Over 10% of requests target /blame/ paths. Author attribution mining — mapping who wrote every line of code.",
+      "detection": "Calculate ratio of /blame/ requests to total requests per behavioral subgroup.",
+      "false_positive_risk": "medium",
+      "evasion_cost": "Cannot be avoided if the goal is author attribution data."
+    }
+  ],
+  "detection_rules": {
+    "description": "Any system exhibiting 4 or more of these rules simultaneously is this fleet.",
+    "rules": [
+      "User-Agent contains 'Chrome/' but Sec-Fetch-Mode header is ABSENT",
+      "User-Agent contains 'Chrome/' but Sec-Ch-Ua header is ABSENT",
+      "Connection header is ABSENT",
+      "Accept header is exactly '*/*'",
+      "Chrome major version is 5+ behind current stable",
+      "Accept-Encoding is identical across >90% of population",
+      "Accept-Language is identical across >90% of population",
+      ">50% of requests target /commit/, /src/, /raw/, /blame/ paths",
+      "Inter-request timing coefficient of variation < 0.15",
+      ">80% of IPs make exactly 1 request (single-page rotation)",
+      ">10% of requests target /blame/ paths (author attribution)",
+      "Requests continue after 403 response"
+    ],
+    "threshold": 4
+  },
+  "timing_signature": {
+    "description": "Inter-request timing distribution. 99.3% of requests arrive at 0.0-0.1 second intervals.",
+    "distribution": [
+      { "interval_seconds": "0.0", "count": 1782, "pct": 23.1 },
+      { "interval_seconds": "0.1", "count": 5860, "pct": 76.0 },
+      { "interval_seconds": "0.2", "count": 42, "pct": 0.5 },
+      { "interval_seconds": ">=0.3", "count": 17, "pct": 0.2 }
+    ],
+    "coefficient_of_variation": 0.057,
+    "human_cv_minimum": 1.0
+  },
+  "network_blocks": {
+    "confirmed_meta": [
+      "57.141.0.0/13",
+      "173.252.0.0/16"
+    ],
+    "cloud_proxies": [
+      { "provider": "Amazon AWS", "prefixes": ["3.0.0.0/8", "52.0.0.0/8", "54.0.0.0/8"] },
+      { "provider": "Hewlett Packard Enterprise", "prefixes": ["16.216.88.0/24"] },
+      { "provider": "cleardocks LLC", "prefixes": ["139.84.0.0/16"] }
+    ]
+  }
+}

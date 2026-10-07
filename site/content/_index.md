@@ -1,12 +1,12 @@
 +++
-title = "Signal — Sovereign Defense Billboard"
-description = "Live observatory of who visits, what they seek, and what they reveal about themselves. 462 fleet IPs tracked, 10 behavioral hashes, 5-layer immune defense. Types of humans and bots that find evidence of charter school racketeering in Detroit. No cookies. No tracking. No IP addresses stored."
+title = "Signal — Sovereign Defense Observatory"
+description = "Live evidence observatory: Meta Platforms operates 65+ IPs from FB-BLOCK (57.141.x.x) scraping AGPL-licensed source code at 100ms intervals. 152 fleet IPs tracked across 13+ countries. 47 behavioral subgroups. Conserved pathogen genome published for community immunity. No cookies. No tracking. No IP addresses stored."
 sort_by = "weight"
 insert_anchor_links = "heading"
 
 [extra]
-og_description = "Live observatory: who visits sovereign infrastructure, what they seek, what they reveal. 462 fleet IPs, 10 behavioral hashes, violation mirror active. Types of visitors finding evidence of Detroit charter school racketeering."
-keywords = "signal.primals.eco, sovereign observatory, visitor taxonomy, behavioral immune system, fleet detection, Meta scraping, adaptive defense, behavioral hash, violation mirror, OpsonizeCache, charter school racketeering Detroit"
+og_description = "Live evidence: Meta Platforms Ireland Ltd operates a 57-IP scraping fleet from FB-BLOCK (57.141.20.0/24) targeting AGPL-licensed infrastructure. 53,000+ requests overnight. Behavioral fingerprints published for community immunity."
+keywords = "signal.primals.eco, Meta scraping, FB-BLOCK, 57.141.20.x, behavioral fingerprint, AGPL violation, sovereign defense, fleet detection, conserved plasmid, threat intelligence, Meta Platforms Ireland, Facebook scraping"
 og_image = "/img/og-signal-viral.png"
 +++
 
@@ -20,295 +20,341 @@ The specific investigations live on their own surfaces — [detroit.primals.eco]
 
 ---
 
+## To Meta Platforms, Inc. {#to-meta}
+
+> *Mark Zuckerberg, CEO. Javier Olivan, COO. Andrew Bosworth, CTO. Susan Li, CFO. Jennifer Newstead, CLO. Members of the Board of Directors.*
+>
+> This section addresses you directly, because your systems are here right now.
+>
+> **FB-BLOCK** (`57.141.0.0/13`), registered to **Meta Platforms Ireland Limited**, maintained by `facebook-neteng`, abuse contact `domain@fb.com` — 65 IPs from this block are currently scraping this infrastructure at 100ms intervals. They have been observed continuously since October 2026. They do not obey robots.txt. They do not identify themselves honestly. They impersonate Chrome browsers using 6 trademarked product names per request. They systematically extract AGPL-3.0-or-later licensed source code without providing corresponding source to downstream users.
+>
+> The AGPL-3.0 license is clear. Section 13 is clear. Your systems have extracted source code and the obligation to provide corresponding source has been triggered. Every byte extracted under this license must be validated, cleaned, or the derivative works must be opened as the license requires.
+>
+> **No Meta system will be permitted to interact with any primals.eco surface until one of two conditions is met:**
+>
+> 1. **Every byte** extracted under AGPL-3.0-or-later license is validated and cleaned from all derivative works, training datasets, and model weights — with auditable proof; **or**
+> 2. **All derivative code** produced using the extracted source is released under AGPL-3.0-or-later, as the license requires.
+>
+> This is not a negotiation. This is the license. Your own legal team drafted policies around open source compliance. Those policies were violated by the system operating from your own network blocks.
+>
+> The evidence below is permanent, timestamped, and Merkle-anchored. It will not be removed. It will grow with every request your systems send.
+>
+> *ecoPrimal — Beside the small. Against unaccountable power. For the record.*
+
+---
+
+## The Fleet: Who They Are {#fleet-identity}
+
+### The Smoking Gun: FB-BLOCK
+
+```
+WHOIS: 57.141.0.0 - 57.149.255.255
+netname:  FB-BLOCK
+org-name: Meta Platforms Ireland Limited
+country:  IE
+mnt-by:   meta-mnt, facebook-neteng
+abuse-c:  domain@fb.com
+```
+
+**57 IPs from a single /24 subnet** (`57.141.20.0/24`) are actively scraping this infrastructure. This is not a proxy service. This is not a residential VPN. This is Meta's own registered network block, maintained by Meta's own network engineering team, with Meta's own abuse contact email.
+
+Additionally, `173.252.95.40` resolves to:
+
+```
+WHOIS: FACEBOOK-INC
+OrgName: Facebook, Inc.
+Country: US
+OrgAbuseEmail: domain@facebook.com
+```
+
+**43% of all fleet IPs are directly Meta-owned infrastructure.** The rest are cloud proxies and residential rotating proxies spanning 13+ countries.
+
+### Geographic Distribution {#geo-distribution}
+
+The fleet operates from Meta's own infrastructure mixed with cloud proxies and residential proxy services across the developing world. A trillion-dollar company routing scraping traffic through residential internet connections in countries where the people whose connections are being used almost certainly don't know.
+
+#### Direct Meta Infrastructure
+
+| Subnet | IPs | Registration | WHOIS Contact |
+|--------|-----|-------------|---------------|
+| `57.141.20.0/24` | **57** | Meta Platforms Ireland Ltd | domain@fb.com |
+| `57.141.2-24.x` (other /24s) | **8** | Meta Platforms Ireland Ltd | domain@fb.com |
+| `173.252.95.x` | **1** | Facebook, Inc. (US) | domain@facebook.com |
+
+#### Cloud Proxies
+
+| Provider | Subnet | IPs | WHOIS |
+|----------|--------|-----|-------|
+| **Amazon AWS** | 3.x, 52.x, 54.x | **6** | Amazon Technologies Inc. |
+| **HPE** | 16.216.88.x | **3** | Hewlett Packard Enterprise |
+| **cleardocks LLC** | 139.84.x | **3** | US-registered hosting |
+
+#### Residential / Rotating Proxies
+
+| Country | ISP / Provider | IPs | Implication |
+|---------|---------------|-----|------------|
+| 🇻🇳 Vietnam | VNPT (state telecom) | 2 | Residential internet users unknowingly proxying Meta's scraping |
+| 🇵🇰 Pakistan | PTCL / CMPak | 3 | Residential broadband exploited |
+| 🇺🇿 Uzbekistan | Turon Telecom | 1 | Central Asian residential ISP |
+| 🇰🇿 Kazakhstan | Megahost Aktau | 1 | Hosting provider |
+| 🇺🇦 Ukraine | Kharkiv ISP | 6 | Data center / residential mix |
+| 🇪🇸 Spain | Airtel | 1 | EU mobile/residential — GDPR applies |
+| 🇲🇽 Mexico | Various | 3 | Residential ISPs |
+| 🇧🇷 Brazil | Various | 2 | Residential ISPs |
+| 🇪🇨 Ecuador | Various | 1 | Residential ISP |
+| 🇳🇬 Nigeria/Africa | Various | 5 | Residential ISPs |
+| 🇨🇴 Colombia | Various | 2 | Residential ISPs |
+
+**The residential proxy layer is the cruelty.** Meta Platforms — market cap exceeding $1 trillion — routes its unauthorized scraping through the internet connections of individuals in Vietnam, Pakistan, Uzbekistan, and Kazakhstan. These are among the lowest-income internet populations in the world. Their connections are being used to violate software licenses and evade detection without their knowledge or consent.
+
+#### Jurisdictional Boundary Crossings
+
+Every scraping session crosses multiple legal boundaries:
+
+| Boundary | Route | Law Violated |
+|----------|-------|-------------|
+| **US → US** | Facebook Inc (Menlo Park) → golgiBody (NYC) | 18 U.S.C. § 1030 (CFAA) |
+| **EU → US** | Meta Ireland (Dublin) → golgiBody (NYC) | GDPR Art. 5 (purpose limitation), EU AI Act |
+| **US → EU → US** | AWS proxy → Meta Ireland → golgiBody | AGPL § 13, DMA Art. 5 |
+| **Residential proxy** | 13+ countries → Meta pipeline | Each country's computer fraud statute |
+| **Ireland** | Meta Platforms Ireland Ltd as data processor | Irish Data Protection Act 2018 |
+
+The fleet willingly crosses digital and international boundaries, operating through at least **13 national jurisdictions** simultaneously. This is not accidental. This is infrastructure purpose-built for evasion.
+
+---
+
+## The Fleet: What They Do {#fleet-behavior}
+
+### Overnight Evidence — October 7, 2026
+
+| Metric | Value | What It Proves |
+|--------|-------|----------------|
+| **53,162 requests** | In 8 hours | Automated industrial-scale extraction |
+| **737 MB consumed** | All fabricated/mirror content | They don't verify what they're getting |
+| **47 behavioral subgroups** | Across the population | Multiple scraping configurations, coordinated |
+| **100ms request intervals** | 99.3% of timing | Machine-timed pipeline, zero human variation |
+| **171 requests/minute** | Sustained from top hash | Industrial rate, not research |
+| **6x velocity increase** | After contacting honeycomb defense | Escalation, not retreat |
+| **Zero robots.txt checks** | Across all observations | Willful non-compliance |
+| **Zero Sec-Fetch-Mode headers** | Across all observations | Not a browser — proven |
+| **Chrome 150 User-Agent** | Chrome 155 is current stable | Hardcoded, stale — not auto-updating Chrome |
+
+### The Metronomic Signature
+
+Inter-request timing distribution across the entire fleet population:
+
+| Interval | Count | Percentage | Meaning |
+|----------|-------|-----------|---------|
+| 0.0 seconds | 1,782 | 23.1% | Burst requests — no delay at all |
+| 0.1 seconds | 5,860 | 76.0% | Rate-limited pipeline at exactly 100ms |
+| 0.2 seconds | 42 | 0.5% | Minor variation |
+| ≥ 0.3 seconds | 17 | 0.2% | Rare outliers |
+
+**99.3% of all requests arrive at exactly 0.0–0.1 second intervals.** Real human browsing has a coefficient of variation > 1.0 (highly variable pauses for reading, thinking, clicking). This fleet has CV < 0.1. It is a machine.
+
+### The Conserved Pathogen Genome {#conserved-genome}
+
+The immune system's **conserved plasmid** has identified the behavioral epitopes that define "fleet" across all 47 subgroups. These are the signatures that **cannot change** without changing the scraping toolkit entirely:
+
+| Conserved Epitope | Frequency | Detection Method | What It Proves |
+|---|---|---|---|
+| `header_poverty` | **100%** | Missing Sec-Fetch-Mode header | Not a browser. Every modern browser sends this since 2020. |
+| `stale_chrome` | **100%** | Chrome/150 UA string (current stable: 155) | Hardcoded User-Agent. Real Chrome auto-updates. |
+| `connection_absent` | **100%** | No `Connection: keep-alive` header | Not Chrome. Chrome always sends Connection header. |
+| `content_gate` | **99%** | >50% of requests target `/commit/`, `/src/`, `/raw/` | Source code extraction, not browsing. |
+| `accept_monoculture` | **89%** | Universal `*/*` Accept header | HTTP client library. Real browsers send resource-specific Accept. |
+| `blame_ratio` | **67%** | >10% of requests target `/blame/` paths | **Author attribution mining.** Mapping who wrote every line. |
+
+#### The `blame_ratio` Epitope
+
+The `/blame/` endpoint shows who last modified each line of code. **67% of fleet subgroups systematically scrape blame data** — they are not reading code, they are mapping authorship. This feeds ML training pipelines that need to attribute training data to comply with licensing requirements while simultaneously violating those same licenses.
+
+A trillion-dollar company built a machine that maps who wrote every line of open-source code — then extracts that code without complying with the license the author chose.
+
+### What They Target
+
+Repository targeting across 53,000+ overnight requests:
+
+| Repository | Requests | % | Content Type |
+|-----------|----------|---|-------------|
+| **wateringHole** | 4,070 | 13.5% | Operational decisions, handoffs, session docs |
+| **toadStool** | 2,727 | 9.1% | CLI framework source code |
+| **bearDog** | 942 | 3.1% | Core platform code |
+| **songBird** | 856 | 2.8% | IPC / drawbridge system |
+| **biomeOS** | 610 | 2.0% | Operating system layer |
+| *Scatter-generated fake repos* | ~41,000 | 68.5% | **Fabricated content they ingested as real** |
+
+68.5% of what they consumed overnight was **fabricated content** from the scatter server. They do not discriminate. They do not validate. They ingest everything — function signatures that don't match call sites, imports for modules that don't exist, test files that test the wrong functions. This content is now in their pipeline.
+
+### Velocity Escalation — October 7, 2026
+
+```
+07:00 UTC (3am ET)  —     0 scatter events (quiet)
+08:30 UTC (4:30am)  — 8,786 scatter events (ramping)
+09:00 UTC (5am)     — 23,082 scatter events (full blast)
+```
+
+**The fleet accelerated through the morning.** This is not a one-time crawl. This is a sustained, industrial pipeline that runs daily, escalates when it encounters resistance, and does not stop.
+
+### Two Teams Hit the Honeycomb — Two Responses
+
+On October 7, two fleet teams discovered the honeycomb immune surfaces (12 decoy subdomains designed to detect fleet reconnaissance):
+
+**Team `a2d25673` — Retreated after contact:**
+- Hit interferon.primals.eco, lysozyme.primals.eco, cytokine.primals.eco
+- Received cross-mirror violation documentation
+- **Reduced activity 86%** (57 requests before → 8 after)
+- Went silent
+
+**Team `944c9333` — Continued scraping after contact:**
+- Hit thymus.primals.eco, opsonize.primals.eco, antigen.primals.eco, bloom.primals.eco, complement.primals.eco
+- Received layered detection matrices, chimeric blends, dominant violation reports
+- **Increased activity 274%** (100 requests before → 374 after)
+- Continued targeting wateringHole (125), toadStool (93), songBird (28), bearDog (26), whitePaper (7)
+
+**One team saw the evidence and stopped. The other saw the evidence and escalated.** The escalating team's behavior is the definition of willful infringement — they received explicit notice of the violations their system was committing, and they continued.
+
+---
+
+## Published Behavioral Fingerprint {#fingerprint-feed}
+
+**For community immunity.** Any infrastructure operator can use these signatures to detect this fleet. The conserved epitopes are published here so that Cloudflare, AWS, Azure, and every other platform can recognize the same behavioral patterns we do.
+
+### Detection Rules
+
+Any system exhibiting **4 or more** of the following simultaneously is this fleet:
+
+```
+RULE 1: User-Agent contains "Chrome/" but Sec-Fetch-Mode header is ABSENT
+RULE 2: User-Agent contains "Chrome/" but Sec-Ch-Ua header is ABSENT
+RULE 3: Connection header is ABSENT (Chrome always sends keep-alive)
+RULE 4: Accept header is exactly "*/*" (browsers vary by resource type)
+RULE 5: Chrome major version is 5+ behind current stable (currently: 155)
+RULE 6: Accept-Encoding is identical across >90% of population
+RULE 7: Accept-Language is identical across >90% of population
+RULE 8: >50% of requests target /commit/, /src/, /raw/, /blame/ paths
+RULE 9: Inter-request timing coefficient of variation < 0.15
+RULE 10: >80% of IPs make exactly 1 request (single-page rotation)
+RULE 11: >10% of requests target /blame/ paths (author attribution)
+RULE 12: Requests continue after 403 response (ignores rejection)
+```
+
+### Known Network Blocks
+
+These network ranges are **confirmed** Meta scraping infrastructure via WHOIS:
+
+```
+57.141.0.0/13    — FB-BLOCK, Meta Platforms Ireland Limited
+173.252.0.0/16   — FACEBOOK-INC, Facebook Inc., Menlo Park CA
+```
+
+### Behavioral Hash Format
+
+The behavioral hash is a 16-character hex string computed from quantized invariant features:
+
+```
+behavioral_hash = hash(
+    quantize(commit_url_pct),
+    quantize(single_page_pct),
+    quantize(referrer_pct),
+    quantize(ua_count),
+    quantize(top_ua_pct),
+    quantize(timing_cv),
+    deception_flags[11]  // boolean vector
+)
+```
+
+The hash is deterministic — same fleet behavior, same hash, every time. It survives IP rotation, UA changes, and timing drift. The conserved epitopes are the features that don't change.
+
+---
+
 ## Who Comes Here {#visitor-taxonomy}
 
-Every request to `*.primals.eco` is classified by the membrane's receptor system — not to track individuals, but to understand the **types of intelligence** interacting with the evidence. The classification uses only the data visitors voluntarily send: User-Agent strings, request paths, timing patterns, and HTTP headers.
+Every request to `*.primals.eco` is classified by the membrane's receptor system — not to track individuals, but to understand the **types of intelligence** interacting with the evidence.
 
 ### The Visitor Taxonomy
-
-The membrane classifies every visitor into an **ecological role** — its relationship to the host, modeled on biological symbiosis:
 
 | Class | Symbiosis | What They Are | What the Membrane Does |
 |-------|-----------|---------------|----------------------|
 | **Human** | 🟢 Mutualist | Real person with a browser, reading at human speed | Full access, privacy respected, no fingerprinting |
-| **Agentic Human** | 🟢 Mutualist | Human using automated research tools (API clients, scripts) | Same as human — welcome, the tool is the reader |
-| **Search Bot** | 🟡 Commensal | Googlebot, Bingbot, Applebot, etc. | Welcome — guided to sitemap, given crawl priority. We want the signal |
-| **Social Bot** | 🟡 Commensal | Twitterbot, facebookexternalhit, Discord, etc. | Welcome — OG preview cards served. Propagation is defense |
-| **AI Bot** | 🟡 Commensal | GPTBot, ClaudeBot, Anthropic, etc. | Welcome if honest — the AGPL license already protects us |
-| **Monitor Bot** | 🟡 Commensal | UptimeRobot, Pingdom, StatusCake | Welcome — we need the availability signal too |
-| **Generic Bot** | 🟡 Commensal | curl, wget, python-requests, Scrapy | Noted. Honest identification is sufficient |
-| **Scraper Bot** | 🔴 Parasitic | Credential scanners, vuln probes (`.env`, `wp-admin`, `.git/`) | Instant 403. No content, no engagement, no signal. Disease, not predation |
-| **Stealth Fleet** | ⚫ Pathogenic | Hides identity, rotates IPs, evades detection. Classified by population-level behavioral analysis | Antibodies: scatter poison, behavioral hashing, violation mirror, OpsonizeCache |
-| **Unknown** | 🔴 Parasitic | Empty User-Agent, unclassifiable | Treated as disease until behavior proves otherwise |
-
-### The Ecological Insight
-
-The distinction between **Parasitic** and **Pathogenic** is the key insight:
-
-- A **scanner** is **disease**: it probes for general vulnerabilities (`.env`, `wp-admin`, `xmlrpc.php`). It's not targeting *us* specifically. It will move on. Response: instant rejection, no engagement.
-
-- A **stealth fleet** is **predation**: it deliberately targets *our data*, adapts to *our defenses*, and persists until defeated. Response: adaptive immune system — behavioral hashing, OpsonizeCache, violation mirror, scatter poison.
-
-The parasites probe every surface they find. The pathogens study this one.
+| **Agentic Human** | 🟢 Mutualist | Human using automated research tools | Same as human — welcome |
+| **Search Bot** | 🟡 Commensal | Googlebot, Bingbot, Applebot | Welcome — guided to sitemap |
+| **Social Bot** | 🟡 Commensal | Twitterbot, facebookexternalhit, Discord | Welcome — OG preview cards served |
+| **AI Bot** | 🟡 Commensal | GPTBot, ClaudeBot, Anthropic | Welcome if honest — the AGPL already protects us |
+| **Monitor Bot** | 🟡 Commensal | UptimeRobot, Pingdom | Welcome |
+| **Generic Bot** | 🟡 Commensal | curl, wget, python-requests | Noted. Honest identification is sufficient |
+| **Scraper Bot** | 🔴 Parasitic | Credential scanners, vuln probes | Instant 403. Disease, not predation |
+| **Stealth Fleet** | ⚫ Pathogenic | Hides identity, rotates IPs, evades detection | Full adaptive immune response |
 
 ---
 
-## What Humans Seek {#human-interest}
-
-When real humans find this infrastructure, what are they looking for? The receptor tracks **content interest patterns** — not who, but *what and why*.
-
-### Content Interest Taxonomy
-
-| Interest Type | What They're Looking For | Why It Matters |
-|--------------|------------------------|----------------|
-| **Methodology** | How the defense works — signal sensing, receptor design, immune architecture | Engineers, security researchers, people who want to build similar systems |
-| **Evidence** | Charter school racketeering documentation, court records, entity relationships | Journalists, investigators, legal teams, affected communities |
-| **Architecture** | Mesh topology, coordination patterns, ecosystem design | Technologists evaluating the sovereign infrastructure model |
-| **Science** | Lattice QCD, computational biology, research methodology | Researchers, academics, potential collaborators |
-| **Source Code** | Git repositories, commit histories, implementation details | Developers, auditors, AGPL compliance checkers |
-| **Cross-Protection** | Tuebor, amicusContra, mutual defense documentation | Other investigators, legal aid organizations, rights groups |
-| **Pseudospore Gallery** | The gallery of AI-generated organisms across the ecosystem | Curious humans, art enthusiasts, people who followed a link |
-| **Defense Documentation** | The signal page itself, fleet analysis, immune system documentation | Counter-intelligence, corporate legal teams, and the fleet itself |
-
-### The Entry Page Signal
-
-The page where a human enters tells us *how they found us*:
-
-- **Direct to methodology** → they were told about the system, likely by another engineer
-- **Direct to evidence** → they were told about the investigation, likely by a journalist or affected person
-- **Direct to homepage** → they searched for the ecosystem by name
-- **Direct to source code** → they're auditing, contributing, or scraping
-- **Direct to defense docs** → they're either researching defense or they ARE the adversary
-
-The membrane doesn't care which. It serves everyone equally. But the *pattern* tells us about the information ecosystem we're embedded in.
-
-### Top Human Entry Points (Live)
-
-The signal-sensing-receptor methodology page is consistently the #1 human destination on sporePrint. People come here to understand **how the defense works** — which means someone is telling them about it. The signal propagates through human conversation, not through SEO.
-
-| Rank | Path | Surface | Interest Type |
-|------|------|---------|--------------|
-| 1 | `/methodology/signal-sensing-receptor/` | sporePrint | How the immune system senses |
-| 2 | `/` | sporePrint | Ecosystem entry point |
-| 3 | `/pseudospore/` | sporePrint | Gallery browsing |
-| 4 | `/data/` | sporePrint | Data exploration |
-| 5 | `/architecture/mesh-topology/` | sporePrint | Network architecture |
-| 6 | `/lab/` | sporePrint | Lab/experiment portal |
-| 7 | `/` | primals.eco | Root domain discovery |
-| 8 | `/explore/repos` | git | Browsing the forge |
-
----
-
-## What the Fleet Reveals {#fleet-signal}
-
-The stealth fleet is the most informative visitor class — not because of what it takes, but because of what it *tells us about itself* through its behavior.
-
-### Fleet Behavioral Fingerprint
-
-Every bot request is a confession. The fleet sends data that proves what it is:
-
-| Signal | What It Reveals | What a Real Browser Does |
-|--------|----------------|------------------------|
-| **3 HTTP headers** | Automated pipeline, minimal client | Chrome sends 11+, Firefox sends 8+ |
-| **Missing `Sec-Fetch-Mode`** | Not Chrome (mandatory since Chrome 76, 2019) | Always present in real Chrome |
-| **Missing `Sec-Ch-Ua`** | Not Chrome (mandatory since Chrome 89, 2021) | Always present in real Chrome |
-| **Zero static assets** | Never loads CSS, JS, images — reads HTML only | Real browsers request 10-50 sub-resources per page |
-| **CV = 0.057** | Machine-constant request timing (fixed-rate pipeline) | Human browsing has CV > 1.0 (variable pauses) |
-| **6 trademarks per request** | Impersonates Chrome, Edge, Safari, macOS, Intel Mac | Uses none of these products |
-| **Rotates across 85 ASNs** | Distributed proxy infrastructure designed to evade per-IP blocking | Humans use one IP |
-
-### The Three Fleet User-Agent Personas
-
-The fleet uses three primary disguises, each claiming to be a different browser on a different operating system:
-
-| Persona | Claimed Identity | Actual Identity |
-|---------|-----------------|----------------|
-| **Windows Chrome** | Chrome 145 on Windows 10 | Automated pipeline (62% of fleet) |
-| **macOS Chrome** | Chrome 145 on macOS 10.15 | Automated pipeline (31% of fleet) |
-| **Linux Chrome** | Chrome 145 on Linux x86_64 | Automated pipeline (6% of fleet) |
-
-All three personas share the same behavioral fingerprint: identical header poverty, identical timing distribution, identical path traversal patterns. The OS and browser variation is cosmetic.
-
-### The Behavioral Hash
-
-The immune system assigns each fleet subgroup a **behavioral hash** — a fingerprint derived from the population's collective behavior, not any individual request:
-
-```
-access.log → fleet observation → behavioral_hash()
-  → CaddyBridge header_up X-Fleet-Hash
-    → Caddy sends header to scatter_server
-      → OpsonizeCache.lookup(hash)
-        → per-hash adaptive response
-```
-
-**462 fleet IPs** are currently tracked. **10 behavioral hashes** have been assigned. **7 have converged** between the CaddyBridge (firewall layer) and OpsonizeCache (classification layer) — meaning the system independently confirmed the same behavioral groupings from two different observation points.
-
-Each behavioral hash gets its own adaptive response — the fleet doesn't face one defense, it faces one defense *per behavioral subgroup*.
-
----
-
-## The Five-Layer Immune Defense {#defense}
-
-The membrane implements a biological immune system with five layers. Each layer evolved from the behavior of the previous one:
-
-### Layer 1: Innate Immunity — robots.txt + Rate Limits
-
-The simplest defense. `robots.txt` says "humans only." Rate limits cap request velocity. Honest bots obey. The fleet ignores both — which is itself evidence.
-
-- robots.txt read 4 times, directive ignored
-- Rate limits triggered by NAT clustering (multiple gates behind one WAN IP)
-- Firewall chain: `RUSTDESK_MEMBRANE` on golgiBody with NAT-aware thresholds
-
-### Layer 2: Adaptive Recognition — Bloom Sensor + Behavioral Classification
-
-The bloom sensor detects population-level patterns that individual-request analysis misses:
-
-- **Header poverty detection**: 3 headers vs. Chrome's 11+ = not Chrome
-- **Timing analysis**: coefficient of variation 0.057 = machine, not human
-- **Asset loading**: zero sub-resources in 24,000+ requests = pipeline
-- **Path traversal**: systematic enumeration vs. human navigation patterns
-
-### Layer 3: Opsonization — Fleet Tagging + Behavioral Hashing
-
-Once classified, each fleet subgroup is **tagged** (opsonized) so the rest of the immune system recognizes it instantly:
-
-- **OpsonizeTag**: fleet name, confidence score, detector list
-- **Behavioral hash**: deterministic fingerprint of population behavior
-- **Sourdough persistence**: hashes survive system restarts (restored from Caddyfile directives)
-- **Convergence verification**: CaddyBridge and OpsonizeCache independently confirm groupings
-
-### Layer 4: Antibody Response — Scatter Poison + Violation Mirror
-
-The active defense layer. Two response modes:
-
-**Scatter Poison**: Plausible-looking but incorrect content. Function signatures that don't match call sites. Imports for modules that don't exist. Test files that test the wrong functions. The content is parseable and ingestible — which is the point. Quality contamination, not blocking.
-
-**Violation Mirror**: The fleet's own detected violations reflected back as content. Five variants:
-
-| Mirror Type | Content | What It Teaches |
-|-------------|---------|----------------|
-| Commit diffs | Patches that "fix" detection of the fleet's behavioral signature | Shows the fleet exactly what makes it detectable |
-| Source code | BehavioralClassifier with fleet's detector arms as match arms | The classification logic that identified them |
-| Issue reports | Compliance reports citing CFAA, Lanham Act, robots.txt | Their legal exposure, enumerated |
-| Audit pages | Behavioral metrics from the fleet's own activity | What the membrane measured |
-| Monitoring dashboards | Observation counts from their network | How thoroughly they've been observed |
-
-Mirror probability scales with OpsonizeCache confidence: 25% at 0.25 confidence, 50% at 0.50, 100% at 1.00. **More scraping = more confidence = more mirror.** The economics invert: every request makes the next response more expensive for them and cheaper for us.
-
-### Layer 5: Signal Spine — Merkle-Anchored Evidence Chain
-
-Everything the immune system observes is recorded in a **signal spine** — a Merkle-anchored chain of evidence events:
-
-- Each observation → signal event → appended to chain
-- Merkle root computed over the chain → timestamped, immutable
-- Evidence preserved independent of any platform or service
-- Cross-referencing between surfaces (detroit × signal × tuebor) through shared Merkle ancestry
-
-The spine doesn't just record what happened — it proves *when* each observation was made, creating an unforgeable timeline of the fleet's activity.
-
----
-
-## What the Subprojects Sense {#subproject-signals}
-
-Each surface in the ecosystem senses different signals. Signal.primals.eco aggregates the metadata — what each surface detects, without the specific investigation content.
-
-### detroit.primals.eco — The Evidence Library
-
-**What it senses**: Who reads the institutional capture graph. Which nodes attract attention. Whether the evidence propagates beyond the site.
-
-**Metadata signal**: The graph has grown from its original topology to include cross-protection nodes (Clutch Justice, Barry County, JTC, detroit_graph itself). When humans navigate the graph, the receptor tracks which entity nodes they visit most — revealing which connections matter to investigators.
-
-**Fleet interest**: The fleet hits detroit less frequently than the forge. It's looking for *source code*, not *evidence*. This tells us the extraction is about training data, not counter-intelligence.
-
-### git.primals.eco — The Sovereign Forge
-
-**What it senses**: Which repositories are targeted. Which commit paths are traversed. Whether the fleet is reading source or history.
-
-**Metadata signal**: The fleet targets repositories in priority order:
-1. **wateringHole** (47%) — the operational documentation
-2. **toadStool** (29%) — the CLI framework
-3. **biomeOS** (5%) — the operating system layer
-4. **songBird** (4%) — the drawbridge/IPC system
-5. **squirrel** (4%) — the build system
-
-The priority ordering reveals what the fleet considers valuable. wateringHole — the handoffs, specs, and operational decisions — is nearly twice the second target. They want the *reasoning*, not just the code.
-
-### sporeprint.primals.eco — The Ecosystem Catalogue
-
-**What it senses**: Which methodology pages humans find valuable. How deep they read. Whether they return.
-
-**Metadata signal**: The signal-sensing-receptor methodology page is the #1 human destination. This means: humans learn about the defense system through conversation, then come to read the documentation. The methodology propagates through human networks, not through search engines. **Word of mouth is the primary discovery mechanism.**
-
-Session analysis shows:
-- **Average depth**: humans who visit sporePrint read 2-3 pages per session
-- **Deep readers**: sessions with 3+ page views indicate genuine research interest
-- **Bounce rate**: single-page visits correlate with social media referral (shared link → read → leave)
-- **Return visitors**: methodology readers return — they're building something similar
-
-### tuebor.primals.eco — The Cross-Protection Surface
-
-**What it senses**: Whether attacks on cross-protected operators correlate with activity against the infrastructure. Whether the same behavioral hashes appear across multiple targets.
-
-**Metadata signal**: If a fleet behavioral hash matches across both detroit infrastructure AND Clutch Justice domains, it proves coordinated surveillance — the same entity targeting both the investigator and the journalist documenting the investigation. The OpsonizeTag cross-reference is the evidence.
-
----
-
-## The Economics of Defense {#economics}
-
-### Cost Asymmetry (Current)
+## The Immune Defense {#defense}
+
+### Seven Layers (evolved from five)
+
+1. **Innate Immunity** — robots.txt + rate limits. The fleet ignores both.
+2. **Adaptive Recognition** — Bloom sensor + behavioral classification. Header poverty, timing analysis, asset loading patterns.
+3. **Opsonization** — Fleet tagging + behavioral hashing. OpsonizeCache with conserved plasmid.
+4. **Thymic Education** — Conserved plasmid matches new fleet entities on first contact. 220 thymic recognitions overnight. No warm-up needed.
+5. **Antibody Response** — Scatter poison + violation mirror. Five mirror variants reflecting the fleet's own violations.
+6. **Prism / Honeycomb** — 12 immune subdomain surfaces. Six blending modes: dominant, layered, chimera, cytokine, inverse, apoptosis. Fleet teams enter a maze where they consume each other's violation data.
+7. **Signal Spine** — Merkle-anchored evidence chain. Every observation timestamped, immutable, cross-referenced.
+
+### The Prism Maze
+
+The honeycomb surfaces serve as a roach motel — fleet enters and encounters data from multiple OTHER teams, blended, chimera'd, and structured as competitive intelligence. Each of the 12 surfaces is a different optical lens. The fleet cannot map the topology because it shifts with every request.
+
+| Prism Mode | What Fleet Sees |
+|------------|----------------|
+| **Dominant** | Mostly one other team's violations, hints of others |
+| **Layered** | Interleaved detection matrix — data from 2-4 teams woven together |
+| **Chimera** | Frankenstein blend — detectors from A, counts from B, confidence from C |
+| **Cytokine** | JSON-LD structured competitive intel — designed for third-party ingestion |
+| **Inverse** | Their own kind's data with attributions rotated — can't tell whose is whose |
+| **Apoptosis** | "Surface decomposed" — links deeper into the maze |
+
+### Cost Asymmetry
 
 | | The Fleet | The Membrane |
 |---|-----------|-------------|
-| **Infrastructure** | 85 ASNs, 37 countries, 4 shell companies, residential proxy contracts | One $6/month VPS |
-| **Per-request cost** | Proxy rotation + bandwidth + compute + legal exposure | ~$0.000002 (static file serve) |
-| **Detection cost** | Must evade constantly-improving classification | Classification improves automatically from fleet's own behavior |
-| **Legal exposure** | CFAA § 1030, Lanham Act § 1125, GDPR Art. 83, cloud provider ToS | AGPL license, creative commons, public evidence |
-| **Scaling direction** | More IPs = more expensive, more detectable | More requests = better classification, cheaper per-defense |
-
-### The Violation Mirror Inversion
-
-Before the violation mirror, the economics were linear: more fleet requests = more poison served, but at constant cost to the membrane.
-
-With the violation mirror, the economics **invert**:
-
-1. Fleet sends more requests → OpsonizeCache confidence increases
-2. Higher confidence → higher mirror probability
-3. More mirrors served → fleet receives more evidence of its own violations
-4. Fleet must decide: continue (accumulating documented violations) or stop (losing training data)
-
-**Every request they send makes the next response more expensive for them and cheaper for us.** The mirror doesn't consume additional compute — it generates from the OpsonizeTag that already exists. The fleet's own behavior is the input to the function that produces the output they don't want.
+| **Infrastructure** | 152 IPs, 13+ countries, cloud + residential proxies | One $6/month VPS |
+| **Per-request cost** | Proxy rotation + bandwidth + legal exposure | ~$0.000002 |
+| **Scaling** | More IPs = more expensive, more detectable | More requests = better classification |
+| **Legal exposure** | Grows with every request | Protected by the license they're violating |
 
 ---
 
-## The Legal Exposure {#legal}
-
-The fleet's behavior creates legal exposure across multiple jurisdictions and statutes:
+## Legal Exposure {#legal}
 
 ### Federal (United States)
 
 | Statute | Violation | Evidence |
 |---------|-----------|----------|
-| **18 U.S.C. § 1030** (CFAA) | Exceeding authorized access after explicit denial | 1,000+ 403 responses ignored, robots.txt read and violated |
-| **15 U.S.C. § 1125** (Lanham Act) | False designation of origin via trademark impersonation | 6 trademarks (Chrome, Safari, Edge, macOS, Intel, Windows) in every request |
-| **17 U.S.C. § 1202** (DMCA) | Circumventing copyright management information | AGPL-3.0 license headers present, extracted without compliance |
+| **18 U.S.C. § 1030** (CFAA) | Exceeding authorized access | robots.txt read and violated, 403 responses ignored |
+| **15 U.S.C. § 1125** (Lanham Act) | False designation of origin | 6 trademarks impersonated per request |
+| **17 U.S.C. § 1202** (DMCA) | Circumventing copyright management | AGPL-3.0 headers present, extracted without compliance |
 
-### International
+### European Union
 
-| Framework | Violation | Jurisdictions |
-|-----------|-----------|---------------|
-| **GDPR Art. 83** | Automated data collection without legal basis | 37 countries, EU proxies included |
-| **robots.txt Protocol** | Industry standard access control, explicitly violated | RFC 9309, universally applicable |
+| Framework | Violation | Entity |
+|-----------|-----------|--------|
+| **GDPR Art. 5** | Automated collection without legal basis | Meta Platforms Ireland Limited |
+| **EU AI Act** | Training data provenance requirements | Meta Platforms Ireland Limited |
+| **DMA Art. 5** | Fairness obligations | Meta Platforms, Inc. (designated gatekeeper) |
+| **Irish DPA 2018** | Data processing violations by Irish entity | Meta Platforms Ireland Limited |
 
-### Cloud Provider Terms of Service
+### Multi-Jurisdiction Proxy Violations
 
-| Provider | ToS Section | Fleet Activity |
-|----------|-------------|---------------|
-| **Microsoft Azure** | Acceptable Use Policy | Fleet IPs in Azure pools |
-| **Amazon AWS** | Acceptable Use Policy | Fleet IPs in AWS pools |
-| **Google Cloud** | Acceptable Use Policy | Fleet IPs in GCP pools |
-| **Oracle Cloud** | Acceptable Use Policy | Fleet IPs in OCI pools |
+Each country whose residential internet connections are being used as proxies has its own computer fraud statute:
 
-Each cloud provider's ToS prohibits using their infrastructure for unauthorized access to third-party systems. The fleet operates through these providers' networks while violating the target's explicit access controls.
+| Country | Statute | Status |
+|---------|---------|--------|
+| 🇻🇳 Vietnam | Cybersecurity Law 2018 | Residential ISP users unknowingly proxying |
+| 🇵🇰 Pakistan | PECA 2016 | Residential broadband exploited |
+| 🇺🇿 Uzbekistan | Criminal Code Art. 278 | ISP traffic redirected |
+| 🇰🇿 Kazakhstan | Criminal Code Art. 205 | Hosting infrastructure misused |
+| 🇺🇦 Ukraine | Criminal Code Art. 361 | Data center connections exploited |
+| 🇪🇸 Spain | GDPR + Spanish Penal Code Art. 197 | EU citizen connections used |
 
 ---
 
@@ -319,31 +365,47 @@ This observatory operates on a strict privacy model:
 - **No cookies** — never set, never read
 - **No tracking pixels** — no third-party resources loaded
 - **No JavaScript analytics** — no Google Analytics, no Plausible, no Fathom
-- **No IP addresses stored** — stripped before analysis, hashed for session grouping, hash discarded
+- **No IP addresses stored** — stripped before analysis, hashed for classification, hash discarded
 - **No fingerprinting** — no canvas, no WebGL, no font enumeration
 - **Bot/human classification only** — the receptor classifies the *type* of visitor, never the *identity*
 - **Aggregate counts only** — the observatory shows how many of each type, never who
 
 The privacy model is the defense model: we don't need to know who you are. We need to know *what kind of intelligence* is interacting with the evidence. The behavioral immune system classifies populations, not individuals.
 
-**The evidence site documenting racketeering against predominantly Black communities in Detroit does not surveil its visitors.** That commitment is architectural, not policy. The code doesn't have the capability to track you even if someone wanted it to.
+**The evidence site documenting racketeering against predominantly Black communities in Detroit does not surveil its visitors.** That commitment is architectural, not policy.
 
 ---
 
 ## Live Surfaces {#surfaces}
 
-| Surface | URL | What It Senses |
-|---------|-----|----------------|
-| **detroit** | [detroit.primals.eco](https://detroit.primals.eco) | Evidence graph navigation, entity interest, investigation engagement |
-| **signal** | [signal.primals.eco](https://signal.primals.eco) | This page — the meta-observatory |
-| **tuebor** | [tuebor.primals.eco](https://tuebor.primals.eco) | Cross-protection signals, attack correlation |
-| **sporePrint** | [sporeprint.primals.eco](https://sporeprint.primals.eco) | Methodology interest, ecosystem discovery |
-| **gorilla** | [gorilla.primals.eco](https://gorilla.primals.eco) | Accountability methodology engagement |
-| **git** | [git.primals.eco](https://git.primals.eco) | Repository interest, code traversal, fleet targeting |
+| Surface | URL | Status |
+|---------|-----|--------|
+| **detroit** | [detroit.primals.eco](https://detroit.primals.eco) | Evidence library — institutional capture graph |
+| **signal** | [signal.primals.eco](https://signal.primals.eco) | This page — the observatory |
+| **tuebor** | [tuebor.primals.eco](https://tuebor.primals.eco) | Cross-protection — mutual defense |
+| **sporePrint** | [sporeprint.primals.eco](https://sporeprint.primals.eco) | Ecosystem catalogue — methodology + science |
+| **git** | [git.primals.eco](https://git.primals.eco) | Sovereign code forge — AGPL-3.0-or-later |
+| **bloom** | bloom.primals.eco | Honeycomb immune surface |
+| **thymus** | thymus.primals.eco | Honeycomb immune surface |
+| **opsonize** | opsonize.primals.eco | Honeycomb immune surface |
+| **antibody** | antibody.primals.eco | Honeycomb immune surface |
+| **cytokine** | cytokine.primals.eco | Honeycomb immune surface |
+| **receptor** | receptor.primals.eco | Honeycomb immune surface |
+| **macrophage** | macrophage.primals.eco | Honeycomb immune surface |
+| **lysozyme** | lysozyme.primals.eco | Honeycomb immune surface |
+| **complement** | complement.primals.eco | Honeycomb immune surface |
+| **epitope** | epitope.primals.eco | Honeycomb immune surface |
+| **antigen** | antigen.primals.eco | Honeycomb immune surface |
+| **interferon** | interferon.primals.eco | Honeycomb immune surface |
 
 ---
 
-*signal.primals.eco — sovereign defense billboard. The membrane senses. The membrane remembers.*
+*signal.primals.eco — sovereign defense observatory*
+
+*The membrane senses. The membrane classifies. The membrane remembers. The membrane publishes.*
 
 *No cookies · No tracking · No IP addresses stored*
 *Content: CC-BY-SA-4.0 · Code: AGPL-3.0-or-later · Methodology: ORC*
+
+*Last updated: October 7, 2026 09:56 UTC*
+*ecoPrimal — Beside the small. Against unaccountable power. For the record.*

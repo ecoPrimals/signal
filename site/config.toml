@@ -1,6 +1,6 @@
 base_url = "https://signal.primals.eco"
-title = "Signal — Sovereign Defense Billboard"
-description = "Live evidence of corporate data extraction against sovereign infrastructure. Meta Platforms, 330 fleet IPs, 85 networks, 37 countries, 6 stolen trademarks per request. Behavioral immune defense. No cookies. No tracking. No IP addresses stored."
+title = "Signal — Sovereign Defense Observatory"
+description = "Live evidence observatory: Meta Platforms operates 65+ IPs from FB-BLOCK (57.141.x.x) scraping AGPL-licensed code at 100ms intervals. 152 fleet IPs, 47 subgroups, 13+ countries. Behavioral fingerprints published for community immunity. No cookies. No tracking. No IP addresses stored."
 compile_sass = false
 build_search_index = false
 generate_feeds = true

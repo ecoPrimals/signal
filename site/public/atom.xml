@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-    <title>Signal — Sovereign Defense Billboard</title>
-    <subtitle>Live evidence of corporate data extraction against sovereign infrastructure. Meta Platforms, 330 fleet IPs, 85 networks, 37 countries, 6 stolen trademarks per request. Behavioral immune defense. No cookies. No tracking. No IP addresses stored.</subtitle>
+    <title>Signal — Sovereign Defense Observatory</title>
+    <subtitle>Live evidence observatory: Meta Platforms operates 65+ IPs from FB-BLOCK (57.141.x.x) scraping AGPL-licensed code at 100ms intervals. 152 fleet IPs, 47 subgroups, 13+ countries. Behavioral fingerprints published for community immunity. No cookies. No tracking. No IP addresses stored.</subtitle>
     <link rel="self" type="application/atom+xml" href="https://signal.primals.eco/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://signal.primals.eco"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
