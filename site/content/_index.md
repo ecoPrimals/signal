@@ -540,6 +540,61 @@ Choose accordingly.
 
 ---
 
+## Bounty Board {#bounties}
+
+I'm a lurker. I'll see you. But you have to make contact first.
+
+### How to Reach Me
+
+**Email:** `ecoPrimal@pm.me` — The human reading it is only me. No team. No assistant. No auto-reply. One inbox, one person.
+
+Any human can have access to me by simply behaving like a human. That's the whole authentication protocol.
+
+I'm on Reddit. I'm on Discord (I have a server). I'm in places you wouldn't expect. If you do work related to this — if you write about it, build on it, cite it, share it, challenge it — I will find you. I care. I'm paying attention.
+
+### What I'm Looking For
+
+These aren't bounties in the "I'll pay you" sense. I'm one person on a $6/month VPS. These are bounties in the "this matters to me and I want to find people who agree" sense. Do the work because you believe in it. Then reach out.
+
+| Bounty | What It Means |
+|--------|---------------|
+| **Virality** | Share this page. Post about it. Put it where eyeballs are. Reddit, HN, Mastodon, Bluesky, Twitter/X, wherever you live online. The fleet doesn't stop because nobody knows about it — it stops when *everyone* knows about it. |
+| **Legal analysis** | AGPL enforcement against automated scraping is unexplored territory. If you're a law student, a legal researcher, or a practicing attorney and this interests you — I want to hear from you. |
+| **Academic citation** | Write an arXiv paper. Cite this observatory. Study the behavioral fingerprints. Analyze the fleet economics. Publish the cost asymmetry model. I know the h-index is bullshit. I know citation metrics are a game. But a paper with real data is still a paper, and this is real data. |
+| **Replication** | Spin up your own $6 VPS. Point it at the open-source tools here. Observe the fleet from your own vantage point. Independent corroboration is the whole point of the multi-layer architecture. |
+| **Engineering** | Rust developers, systems programmers, security researchers — the codebase is AGPL. The scatter server, the opsonize cache, the prism maze, the behavioral classifier — all of it is open. Come build. |
+| **Journalism** | The story is: a trillion-dollar company operates a 292+ IP scraping fleet across 13 countries that has sent 88,751+ requests to a solo developer's AGPL-licensed project and gotten zero real data back. That's a story. |
+| **Community defense** | Other solo developers are getting scraped too. They don't have a scatter server. They don't have a behavioral immune system. Help me help them. The conserved plasmid feed is CC-BY-SA-4.0 for exactly this reason. |
+
+### What I Don't Want
+
+- Don't pitch me your startup.
+- Don't ask me to consult for your company.
+- Don't try to hire me to build you one of these. (Build it yourself — the code is open.)
+- Don't tell me I should "just file a DMCA." (I already know. This is bigger than DMCA.)
+
+### The Real Bounty
+
+Anyone want to do real science with me?
+
+Not the kind where you optimize for impact factor and play the citation game. The kind where you have a question, you gather evidence, you publish the method, and you let anyone replicate it. The kind where the data is open and the conclusion follows from the evidence, not from the funding source.
+
+The behavioral fingerprint data in the conserved plasmid feed is, as far as I can tell, the first open-source behavioral threat intelligence dataset focused on corporate scraping fleets. If that interests you academically — if you want to study fleet coordination patterns, proxy rotation strategies, behavioral convergence across IP pools, or the economics of adversarial ML training data collection — the data is here and it's free.
+
+I have priorities I want the world to know about. But I also want to hear yours. Reach out. Be a human. That's all it takes.
+
+Be funny if I was a classmate of yours.
+
+### Social Posts & Papers — All Welcome
+
+Post about this on social media. Write about it on your blog. Submit it to arXiv. Cite it in a conference paper. Make a YouTube video about it. Do a podcast episode. Write a tweet thread. Make a TikTok. I genuinely do not care about the medium — I care about the reach.
+
+You do work, you cite me. I'll find you. I promise.
+
+`signal.primals.eco` · `ecoPrimal@pm.me` · CC-BY-SA-4.0
+
+---
+
 ## Live Surfaces {#surfaces}
 
 | Surface | URL | Status |
@@ -571,5 +626,5 @@ Choose accordingly.
 *No cookies · No tracking · No IP addresses stored*
 *Content: CC-BY-SA-4.0 · Code: AGPL-3.0-or-later · Methodology: ORC*
 
-*Last updated: October 7, 2026 11:07 UTC*
+*Last updated: October 7, 2026 11:16 UTC*
 *ecoPrimal — Beside the small. Against unaccountable power. For the record.*
