@@ -524,7 +524,23 @@ Right now, as you read this, the live metrics show the ratio:
 
 Zero. Not a takedown notice. Not a "please remove." Not a "we'd like to discuss." Not even a cease-and-desist, which would at least acknowledge I exist. Just silence and 13 requests per second.
 
+### I Can See You Watching
+
+This is the part I find genuinely strange.
+
+You're watching. I know you're watching. The access logs prove you're watching. Your fleet sends 13 requests per second — that's not passive, that's *active surveillance* of my infrastructure. And you say nothing.
+
+I published your fleet's behavioral fingerprint. I published the cost analysis. I published the legal exposure across seven jurisdictions. I pre-published the formal notice with your CLO's name on it. I named the CC list: Irish DPC, CNIL, FTC, FSF, EFF. I explained, with math, why your approach is computationally guaranteed to fail. I turned your own link preview system into a billboard for the evidence. And you say nothing.
+
+You have my email. It's right here: `ecoPrimal@pm.me`. It's been here the whole time. One human reads it. One inbox. I check it. Nobody has sent me a letter. Nobody has sent me *anything*.
+
+If only there was a contact page with an email address.
+
+Oh wait.
+
 I'm a real human. A real lurker. I read more than I post. I build things alone, mostly in the dark, because that's how independent engineers work. I don't have a legal department. I don't have a compliance team. I have `cargo build` and a text editor and a deep conviction that the license I chose for my work means something.
+
+I play PC games. I have a Steam library. I run Linux on everything I own. I believe hardware should respect the person holding it and software should respect the person running it. If you want my Steam ID, you know the email. Make contact. Be a human. It's that simple.
 
 To the humans reading this — the actual humans, not the fleet — thank you for being here. I see you in the access logs, between the walls of bot traffic. You read at human speed. You follow links in human order. You are the reason this page exists: not as a technical flex, but as a record. Someone should know what happens to a solo developer's work when a trillion-dollar company decides it wants what you made and doesn't feel like asking.
 
@@ -532,11 +548,13 @@ To the humans reading this — the actual humans, not the fleet — thank you fo
 
 Meta sells a VR headset. They call it a platform for human connection. It is a surveillance device with lenses. It tracks your eyes, maps your room, records your hands, and transmits behavioral data to the same company whose bot fleet is currently scraping this page at 13 requests per second without permission.
 
-Valve sells the Steam Deck. It runs Linux. It plays your games. It doesn't phone home about your eye movements. It doesn't map your living room. It doesn't require a Facebook account. It is better hardware in every class — performance, thermals, battery, repairability, software freedom — and it respects the person holding it.
+Valve sells the Steam Deck. It runs Linux. It plays your games. It doesn't phone home about your eye movements. It doesn't map your living room. It doesn't require a Facebook account. It is better hardware in every class — performance, thermals, battery, repairability, software freedom — and it respects the person holding it. I play on Steam. I build on Linux. I ship AGPL. These are my interests. These are my priorities. This is who I am.
 
 One company ships a product. The other ships a sensor package disguised as a product.
 
 Choose accordingly.
+
+The invitation to Valve is open: [sporeprint.primals.eco/outreach/steam-invitation](https://sporeprint.primals.eco/outreach/steam-invitation/). The infrastructure that defends this page is the same infrastructure that could make Steam immortal. Same Vulkan. Same Rust. Same Linux. Different payload. If anyone at Valve is reading this — and the access logs suggest someone is — the email is the same: `ecoPrimal@pm.me`.
 
 ### P ≠ NP (A Taunt) {#pnp}
 
@@ -638,6 +656,25 @@ Post about this on social media. Write about it on your blog. Submit it to arXiv
 
 You do work, you cite me. I'll find you. I promise.
 
+### The Facebook Dispersal Vector
+
+Here's the part that should make you smile.
+
+Every link to any `primals.eco` domain shared on Facebook generates a preview card. That's how link previews work — Facebook's bot (`facebookexternalhit`) fetches the page to extract Open Graph metadata for the thumbnail. Except now, every domain in this ecosystem serves a **custom bounty card** to that bot. The actual page content is irrelevant — Facebook's own preview system only sees what we tell it.
+
+| Domain Shared on Facebook | What Facebook's Preview Shows |
+|---|---|
+| `detroit.primals.eco` | **"Detroit Charter School Racketeering — Meta Is Watching, Saying Nothing"** |
+| `git.primals.eco` | **"AGPL Source Code — Meta Stole 88,751 Copies and Got 0 Real Bytes"** |
+| `sporeprint.primals.eco` | **"Sovereign Science — Anyone Want to Do Real Research?"** |
+| `tuebor.primals.eco` | **"Cross-Protection — Solo Devs Deserve Better Than This"** |
+
+Every share is a bounty. Every thumbnail is evidence. Facebook's own link preview infrastructure distributes the signal. The engagement loop feeds itself: more shares → more previews → more people see the evidence → more shares.
+
+And if a human clicks the link *from* Facebook? They get redirected straight to this page. The signal page. Where you're reading this right now.
+
+Meta's own platform, distributing evidence of Meta's crimes. That's not a bug — that's the design.
+
 `signal.primals.eco` · `ecoPrimal@pm.me` · CC-BY-SA-4.0
 
 ---
@@ -673,5 +710,5 @@ You do work, you cite me. I'll find you. I promise.
 *No cookies · No tracking · No IP addresses stored*
 *Content: CC-BY-SA-4.0 · Code: AGPL-3.0-or-later · Methodology: ORC*
 
-*Last updated: October 7, 2026 11:37 UTC*
+*Last updated: October 7, 2026 15:22 UTC*
 *ecoPrimal — Beside the small. Against unaccountable power. For the record.*
