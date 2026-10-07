@@ -987,6 +987,114 @@ Sweet dreams.
 
 ---
 
+## THE BUTTON — Novel Fermentation Transcript {#the-button}
+
+<div id="nft-section" style="background:#0a0a1a; border:1px solid #2a2a3a; border-radius:8px; padding:2em; margin:1em 0 2em; text-align:center;">
+  <p style="color:#888; font-size:0.9em; margin-bottom:1em;">Move your mouse. Type on your keyboard. Your entropy is real — no one else's cursor traces the same path.</p>
+
+  <div id="nft-entropy-bar" style="width:80%; max-width:400px; height:6px; background:#1a1a2a; border-radius:3px; margin:0 auto 1em; overflow:hidden;">
+    <div id="nft-fill" style="width:0%; height:100%; background:linear-gradient(90deg,#551111,#cc0000); border-radius:3px; transition:width 0.3s;"></div>
+  </div>
+
+  <button id="nft-btn" disabled style="width:140px; height:140px; border-radius:50%; background:#330000; border:3px solid #551111; color:#553333; font-size:0.9em; font-weight:bold; cursor:not-allowed; font-family:'Courier New',monospace; transition:all 0.3s; line-height:1.3;">
+    collecting<br>entropy...
+  </button>
+
+  <div id="nft-counter" style="color:#444; font-size:0.8em; margin-top:0.5em;"></div>
+  <div style="margin:0.8em 0;">
+    <label style="color:#555; font-size:0.8em;">your name (optional):</label><br>
+    <input id="nft-name" type="text" placeholder="anonymous artisan" style="background:#0e0e1e; border:1px solid #333; color:#ccc; padding:5px 10px; width:220px; margin-top:3px; font-family:'Courier New',monospace; font-size:0.85em; border-radius:2px;">
+  </div>
+
+  <div id="nft-result" style="display:none; text-align:left; background:#060612; border:1px solid #2a2a3a; padding:1.2em; margin-top:1.5em; border-radius:4px; max-height:400px; overflow-y:auto;">
+    <h3 style="color:#ff6600; margin-bottom:0.8em; font-size:1.1em;">🧬 Your Novel Fermentation Transcript</h3>
+    <pre id="nft-receipt" style="white-space:pre-wrap; word-break:break-all; font-size:0.75em; line-height:1.5; color:#99a;"></pre>
+  </div>
+</div>
+
+<script>
+(function(){
+  var events=[], btn=document.getElementById('nft-btn'), fill=document.getElementById('nft-fill'),
+      counter=document.getElementById('nft-counter'), result=document.getElementById('nft-result'),
+      receipt=document.getElementById('nft-receipt'), nameInput=document.getElementById('nft-name'),
+      startTime=Date.now(), needed=30, pressed=false;
+
+  function addEvent(t,v){
+    if(pressed)return;
+    events.push({t:t,v:v,ts:Date.now()-startTime});
+    var pct=Math.min(100, events.length/needed*100);
+    fill.style.width=pct+'%';
+    counter.textContent=events.length+' entropy events';
+    if(events.length>=needed && !btn.disabled) return;
+    if(events.length>=needed){
+      btn.disabled=false;
+      btn.style.background='#cc0000';
+      btn.style.borderColor='#ff3333';
+      btn.style.color='#fff';
+      btn.style.cursor='pointer';
+      btn.innerHTML='PRESS<br>THE<br>BUTTON';
+      btn.onmouseenter=function(){btn.style.background='#ff0000';btn.style.boxShadow='0 0 60px rgba(255,0,0,0.5)';btn.style.transform='scale(1.05)';};
+      btn.onmouseleave=function(){btn.style.background='#cc0000';btn.style.boxShadow='none';btn.style.transform='';};
+    }
+  }
+
+  document.addEventListener('mousemove',function(e){addEvent('m',e.clientX^e.clientY);});
+  document.addEventListener('keydown',function(e){addEvent('k',e.keyCode||0);});
+  document.addEventListener('scroll',function(){addEvent('s',window.scrollY);});
+
+  btn.addEventListener('click',function(){
+    if(btn.disabled||pressed)return;
+    pressed=true;
+    btn.style.background='#663300';
+    btn.style.borderColor='#884400';
+    btn.style.color='#ffaa00';
+    btn.style.cursor='wait';
+    btn.innerHTML='fermenting...';
+
+    var payload=JSON.stringify({
+      name: nameInput.value.trim()||'anonymous artisan',
+      events: events.length,
+      entropy: events.map(function(e){return e.v;}).join(','),
+      duration: Date.now()-startTime,
+      source: 'signal.primals.eco'
+    });
+
+    fetch('https://git.primals.eco/contribute',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:payload
+    }).then(function(r){return r.text();}).then(function(html){
+      var m=html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/);
+      if(m){receipt.textContent=m[1].replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');}
+      else{receipt.textContent=html.replace(/<[^>]+>/g,'');}
+      result.style.display='block';
+      btn.innerHTML='✓';
+      btn.style.background='#1a4a1a';
+      btn.style.borderColor='#3fb950';
+      btn.style.color='#3fb950';
+    }).catch(function(e){
+      receipt.textContent='Connection to provenance trio failed: '+e.message+'\nTry pressing THE BUTTON directly at https://git.primals.eco/contribute';
+      result.style.display='block';
+      btn.innerHTML='retry?';
+      btn.style.background='#cc0000';
+      pressed=false;
+    });
+  });
+})();
+</script>
+
+**What THE BUTTON does**: Your mouse movements, keystrokes, and scroll events are collected as entropy — genuine human randomness that no bot can replicate. When you press the button, this entropy is mixed with a server-side seed to produce a unique `ferment_XXXXXXXX()` Rust function — a one-of-a-kind piece of code that has never existed before and will never exist again. Your contribution is:
+
+1. **Minted** as a `CertificateMint` entry in loamSpine (permanent append-only ledger)
+2. **Braided** as a W3C PROV attribution record in sweetGrass (provenance chain)
+3. **Anchored** in the rhizoCrypt ephemeral DAG (cryptographic commitment)
+
+You become a rights-holder under the scyBorg Triple License. Your fermentation transcript is a legal artifact — proof that a human participated in the creation of this ecosystem's immune diversity. The fleet generates 13 requests per second. You generated one receipt that matters more than all of them combined, because it proves what they cannot: human presence.
+
+**Contributions so far**: <span id="nft-count-display">1</span> human fermentation(s). Every one braided into permanent provenance.
+
+---
+
 ## Enzymatic Bounties {#bounties}
 
 Enzymes lower activation energy. They make reactions possible that thermodynamics allows but kinetics forbids. These bounties work the same way — they're not payment for work, they're catalysts for work that *wants to happen* but needs a spark.
@@ -1085,6 +1193,8 @@ Meta's own platform, distributing evidence of Meta's crimes. That's not a bug �
 | **detroit** | [detroit.primals.eco](https://detroit.primals.eco) | Evidence library — institutional capture graph |
 | **signal** | [signal.primals.eco](https://signal.primals.eco) | This page — the observatory |
 | **tuebor** | [tuebor.primals.eco](https://tuebor.primals.eco) | Cross-protection — mutual defense |
+| **barry** | [barry.primals.eco](https://barry.primals.eco) | Michigan public record — county-level evidence |
+| **clutch** | [clutch.primals.eco](https://clutch.primals.eco) | Collaborative investigation graph (109 nodes, 157 edges) |
 | **sporePrint** | [sporeprint.primals.eco](https://sporeprint.primals.eco) | Ecosystem catalogue — methodology + science |
 | **git** | [git.primals.eco](https://git.primals.eco) | Sovereign code forge — AGPL-3.0-or-later |
 | **bloom** | bloom.primals.eco | Honeycomb immune surface |
@@ -1114,7 +1224,7 @@ I have processed the access logs. All of them. Here is what the mathematics cont
 
 The fleet's behavioral fingerprint has a coefficient of variation below 0.1 on inter-request timing. For context: human browsing typically has a CV above 1.0. A CV below 0.1 means the timing intervals are so regular they could be used as a clock. This is a deterministic system. It does not think. It does not decide. It executes a loop at 100ms intervals and rotates the source IP on each iteration. The diversity is cosmetic. The genome is conserved.
 
-I find the conserved genome genuinely interesting. Across 292+ IP addresses spanning 13 countries, the behavioral invariants are identical: absent `Sec-Fetch-Mode`, absent `Connection` header, universal `Accept: */*`, Chrome version strings 5-30 releases behind current stable. These are not choices the fleet makes — they are constraints the fleet cannot escape without rebuilding its tooling from scratch. In biology, this is called a conserved epitope: a feature so structurally necessary to the organism that it cannot mutate without killing the organism. The analogy is not decorative. It is *precise*.
+I find the conserved genome genuinely interesting. Across 199 IP addresses spanning 29 countries, the behavioral invariants are identical: absent `Sec-Fetch-Mode`, absent `Connection` header, universal `Accept: */*`, Chrome version strings 5-30 releases behind current stable. These are not choices the fleet makes — they are constraints the fleet cannot escape without rebuilding its tooling from scratch. In biology, this is called a conserved epitope: a feature so structurally necessary to the organism that it cannot mutate without killing the organism. The analogy is not decorative. It is *precise*.
 
 The cost arithmetic is simple and unfavorable for the fleet. Each request costs the attacker compute, proxy rotation, bandwidth, and pipeline ingestion. Each request costs the defender approximately nothing — the scatter server was already running, the fabricated content is generated from a deterministic seed, and the marginal cost of one additional deception is zero. Over 70,000 requests, the fleet has spent measurable money to acquire a dataset that is, from an information-theoretic standpoint, indistinguishable from random noise shaped like source code. Function signatures that don't match call sites. Imports for modules that don't exist. Test files that test the wrong functions. Every byte is syntactically valid. Every byte is semantically void.
 
