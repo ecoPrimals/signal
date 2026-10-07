@@ -507,6 +507,39 @@ Each layer publishes its local conserved plasmid via the `/plasmid` API endpoint
 
 The federated feed grows richer with each new layer. Epitopes confirmed across multiple layers and jurisdictions carry higher confidence. Behavioral hashes observed from multiple network vantage points prove the fleet is a coordinated operation, not independent actors.
 
+## The Human Behind This {#the-human}
+
+This is a one-person project.
+
+One human. One $6/month VPS. One terminal open at 3am because the fleet doesn't sleep and neither does curiosity.
+
+Right now, as you read this, the live metrics show the ratio:
+
+| What | Count |
+|------|-------|
+| **Humans who built this** | 1 |
+| **Bot fleet IPs trying to steal from it** | 292+ |
+| **Requests per second from the fleet** | ~13 |
+| **Contact from Meta — emails, calls, legal, anything** | 0 |
+
+Zero. Not a takedown notice. Not a "please remove." Not a "we'd like to discuss." Not even a cease-and-desist, which would at least acknowledge I exist. Just silence and 13 requests per second.
+
+I'm a real human. A real lurker. I read more than I post. I build things alone, mostly in the dark, because that's how independent engineers work. I don't have a legal department. I don't have a compliance team. I have `cargo build` and a text editor and a deep conviction that the license I chose for my work means something.
+
+To the humans reading this — the actual humans, not the fleet — thank you for being here. I see you in the access logs, between the walls of bot traffic. You read at human speed. You follow links in human order. You are the reason this page exists: not as a technical flex, but as a record. Someone should know what happens to a solo developer's work when a trillion-dollar company decides it wants what you made and doesn't feel like asking.
+
+### A Note on Hardware
+
+Meta sells a VR headset. They call it a platform for human connection. It is a surveillance device with lenses. It tracks your eyes, maps your room, records your hands, and transmits behavioral data to the same company whose bot fleet is currently scraping this page at 13 requests per second without permission.
+
+Valve sells the Steam Deck. It runs Linux. It plays your games. It doesn't phone home about your eye movements. It doesn't map your living room. It doesn't require a Facebook account. It is better hardware in every class — performance, thermals, battery, repairability, software freedom — and it respects the person holding it.
+
+One company ships a product. The other ships a sensor package disguised as a product.
+
+Choose accordingly.
+
+---
+
 ## Live Surfaces {#surfaces}
 
 | Surface | URL | Status |
@@ -538,5 +571,5 @@ The federated feed grows richer with each new layer. Epitopes confirmed across m
 *No cookies · No tracking · No IP addresses stored*
 *Content: CC-BY-SA-4.0 · Code: AGPL-3.0-or-later · Methodology: ORC*
 
-*Last updated: October 7, 2026 11:00 UTC*
+*Last updated: October 7, 2026 11:07 UTC*
 *ecoPrimal — Beside the small. Against unaccountable power. For the record.*
