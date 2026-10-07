@@ -1,11 +1,11 @@
 +++
 title = "Signal — Sovereign Defense Observatory"
-description = "Live evidence observatory: Meta Platforms operates a fleet from FB-BLOCK (57.141.x.x) + residential proxies scraping AGPL-licensed source code at 100ms intervals. 292+ fleet IPs tracked across 13+ countries. 88,751+ requests observed. Conserved pathogen genome published for community immunity. No cookies. No tracking. No IP addresses stored."
+description = "Live evidence observatory: Meta Platforms operates a fleet from FB-BLOCK (57.141.x.x) + residential proxies scraping AGPL-licensed source code at 100ms intervals. 199 fleet IPs tracked across 29 countries. 72 Meta-owned, 20 cloud proxies, 18 confirmed residential. Conserved pathogen genome published for community immunity. No cookies. No tracking. No IP addresses stored."
 sort_by = "weight"
 insert_anchor_links = "heading"
 
 [extra]
-og_description = "Live evidence: Meta Platforms Ireland Ltd operates a 292+ IP scraping fleet from FB-BLOCK (57.141.x.x) + residential proxies targeting AGPL-licensed infrastructure. 88,751+ requests in 1.6 days. $434 wasted, $0.31 cost to us. Behavioral fingerprints published for community immunity."
+og_description = "Live evidence: Meta Platforms Ireland Ltd operates a 199-IP scraping fleet from FB-BLOCK (57.141.x.x) + residential proxies across 29 countries targeting AGPL-licensed infrastructure. 72 Meta-owned IPs, 18 residential broadband connections exploited. Every request documented. $0.00 source code obtained."
 keywords = "signal.primals.eco, Meta scraping, FB-BLOCK, 57.141.20.x, behavioral fingerprint, AGPL violation, sovereign defense, fleet detection, conserved plasmid, threat intelligence, Meta Platforms Ireland, Facebook scraping"
 og_image = "/img/og-signal-viral.png"
 +++
@@ -357,9 +357,9 @@ mnt-by:   meta-mnt, facebook-neteng
 abuse-c:  domain@fb.com
 ```
 
-**57 IPs from a single /24 subnet** (`57.141.20.0/24`) are actively scraping this infrastructure. This is not a proxy service. This is not a residential VPN. This is Meta's own registered network block, maintained by Meta's own network engineering team, with Meta's own abuse contact email.
+**57 IPs from a single /24 subnet** (`57.141.20.0/24`) plus 15 more from adjacent /24s across the `57.141.0.0/13` range are actively scraping this infrastructure. This is not a proxy service. This is not a residential VPN. This is Meta's own registered network block, maintained by Meta's own network engineering team, with Meta's own abuse contact email.
 
-Additionally, `173.252.95.40` resolves to:
+Additionally, `173.252.70.30` and `173.252.107.x` resolve to:
 
 ```
 WHOIS: FACEBOOK-INC
@@ -368,45 +368,71 @@ Country: US
 OrgAbuseEmail: domain@facebook.com
 ```
 
-**43% of all fleet IPs are directly Meta-owned infrastructure.** The rest are cloud proxies and residential rotating proxies spanning 13+ countries.
+**36% of all fleet IPs (72 of 199) are directly Meta-owned infrastructure.** The remaining 127 are cloud proxies (AWS, Alibaba, Tencent, Huawei, Microsoft, HPE) and residential rotating proxies spanning **29 countries**. 18 are confirmed residential broadband connections — real families whose internet Meta is using without their knowledge.
 
 ### Geographic Distribution {#geo-distribution}
 
 The fleet operates from Meta's own infrastructure mixed with cloud proxies and residential proxy services across the developing world. A trillion-dollar company routing scraping traffic through residential internet connections in countries where the people whose connections are being used almost certainly don't know.
 
-#### Direct Meta Infrastructure
+#### Direct Meta Infrastructure — 72 IPs
 
 | Subnet | IPs | Registration | WHOIS Contact |
 |--------|-----|-------------|---------------|
-| `57.141.20.0/24` | **57** | Meta Platforms Ireland Ltd | domain@fb.com |
-| `57.141.2-24.x` (other /24s) | **8** | Meta Platforms Ireland Ltd | domain@fb.com |
-| `173.252.95.x` | **1** | Facebook, Inc. (US) | domain@facebook.com |
+| `57.141.20.0/24` | **57** | Meta Platforms Ireland Ltd (FB-BLOCK) | domain@fb.com |
+| `57.141.0-24.x` (12 other /24s) | **12** | Meta Platforms Ireland Ltd (FB-BLOCK) | domain@fb.com |
+| `173.252.70.x`, `173.252.107.x` | **3** | Facebook, Inc. (US — FACEBOOK-INC) | domain@facebook.com |
 
-#### Cloud Proxies
+#### Cloud Proxies — 20 IPs
 
-| Provider | Subnet | IPs | WHOIS |
-|----------|--------|-----|-------|
-| **Amazon AWS** | 3.x, 52.x, 54.x | **6** | Amazon Technologies Inc. |
-| **HPE** | 16.216.88.x | **3** | Hewlett Packard Enterprise |
-| **cleardocks LLC** | 139.84.x | **3** | US-registered hosting |
+| Provider | Subnet(s) | IPs | Country |
+|----------|-----------|-----|---------|
+| **Amazon AWS** | 3.x, 13.x, 52.x, 54.x, 216.73.x | **5** | US |
+| **HPE** | 16.216.88.x | **4** | US |
+| **Alibaba Cloud** | 47.79.x, 47.82.x | **5** | US/CN |
+| **Tencent Cloud** | 43.129.x, 43.134.x, 43.135.x, 49.51.x, 62.234.x | **5** | CN/SG |
+| **Huawei Cloud** | 110.238.x, 114.119.x, 119.13.x, 190.92.x | **4** | SG/HK |
+| **Microsoft Azure** | 20.92.x | **1** | US |
 
-#### Residential / Rotating Proxies
+#### Residential / Rotating Proxies — 18 Confirmed Residential IPs
 
 | Country | ISP / Provider | IPs | Implication |
 |---------|---------------|-----|------------|
-| 🇻🇳 Vietnam | VNPT (state telecom) | 2 | Residential internet users unknowingly proxying Meta's scraping |
-| 🇵🇰 Pakistan | PTCL / CMPak | 3 | Residential broadband exploited |
-| 🇺🇿 Uzbekistan | Turon Telecom | 1 | Central Asian residential ISP |
-| 🇰🇿 Kazakhstan | Megahost Aktau | 1 | Hosting provider |
-| 🇺🇦 Ukraine | Kharkiv ISP | 6 | Data center / residential mix |
-| 🇪🇸 Spain | Airtel | 1 | EU mobile/residential — GDPR applies |
-| 🇲🇽 Mexico | Various | 3 | Residential ISPs |
-| 🇧🇷 Brazil | Various | 2 | Residential ISPs |
-| 🇪🇨 Ecuador | Various | 1 | Residential ISP |
-| 🇳🇬 Nigeria/Africa | Various | 5 | Residential ISPs |
-| 🇨🇴 Colombia | Various | 2 | Residential ISPs |
+| 🇵🇰 Pakistan | PTCL, Wicloud, Broadband Services | **4** | Home broadband users unknowingly proxying Meta's scraping |
+| 🇹🇷 Turkey | TTnet ADSL (3 different residential pools) | **3** | Turkish families' home connections exploited |
+| 🇿🇦 South Africa | Vox Telecom, WebAfrica | **2** | Residential broadband |
+| 🇺🇦 Ukraine | Intertelecom (Nikopol), ISP Express | **2** | Someone in Nikopol has their home internet proxying code theft |
+| 🇲🇦 Morocco | Maroc Telecom ADSL | **1** | Residential ADSL |
+| 🇦🇪 UAE | Etisalat (Emirates Telecom) | **1** | State telecom residential |
+| 🇷🇺 Russia | Iskratelecom JSC | **1** | Residential ISP |
+| 🇮🇳 India | Karunay Internet Pvt Ltd | **1** | Residential broadband |
+| 🇺🇸 USA | Charter, AT&T, WiredISP | **3** | American residential broadband |
 
-**The residential proxy layer is the cruelty.** Meta Platforms — market cap exceeding $1 trillion — routes its unauthorized scraping through the internet connections of individuals in Vietnam, Pakistan, Uzbekistan, and Kazakhstan. These are among the lowest-income internet populations in the world. Their connections are being used to violate software licenses and evade detection without their knowledge or consent.
+#### Latin America — 21 IPs Across 8 Countries
+
+| Country | IPs | Implication |
+|---------|-----|-------------|
+| 🇧🇷 Brazil | **6** | Residential ISPs |
+| 🇦🇷 Argentina | **6** | Residential ISPs |
+| 🇺🇾 Uruguay | **6** | Residential ISPs |
+| 🇵🇾 Paraguay | **2** | Residential ISPs |
+| 🇲🇽 Mexico | **2** | Residential ISPs |
+| 🇨🇱 Chile | **1** | Residential ISP |
+| 🇬🇹 Guatemala | **1** | Residential ISP |
+| 🇦🇴 Angola | **1** | ZAP-Angola |
+
+#### Asia-Pacific — 10 IPs
+
+| Country | Provider | IPs |
+|---------|----------|-----|
+| 🇧🇩 Bangladesh | Asiatel, Apple Net, WETUBE, SpaceX Online | **4** |
+| 🇸🇬 Singapore | Huawei Cloud | **2** |
+| 🇭🇰 Hong Kong | Huawei Cloud | **2** |
+| 🇨🇳 China | Shandong Servsd Technology | **1** |
+| 🇦🇺 Australia | APNIC allocation | **1** |
+
+**The residential proxy layer is the cruelty.** Meta Platforms — market cap exceeding $1 trillion — routes its unauthorized scraping through the internet connections of individuals in Pakistan, Turkey, Ukraine, Morocco, India, and across Latin America. These are real families. Someone in Nikopol, Ukraine has their home broadband proxying Meta's unauthorized AGPL code extraction and they don't know. Someone on TTnet ADSL in Turkey is an unwitting participant in software license violation. Three American households on Charter and AT&T are proxying corporate espionage through their living rooms.
+
+**29 countries.** Every country whose residential connections are used creates an independent jurisdictional violation. Every family whose connection is exploited is a potential complainant to their national DPA.
 
 #### Jurisdictional Boundary Crossings
 
@@ -417,10 +443,77 @@ Every scraping session crosses multiple legal boundaries:
 | **US → US** | Facebook Inc (Menlo Park) → golgiBody (NYC) | 18 U.S.C. § 1030 (CFAA) |
 | **EU → US** | Meta Ireland (Dublin) → golgiBody (NYC) | GDPR Art. 5 (purpose limitation), EU AI Act |
 | **US → EU → US** | AWS proxy → Meta Ireland → golgiBody | AGPL § 13, DMA Art. 5 |
-| **Residential proxy** | 13+ countries → Meta pipeline | Each country's computer fraud statute |
+| **Residential proxy** | 29 countries → Meta pipeline | Each country's computer fraud statute |
 | **Ireland** | Meta Platforms Ireland Ltd as data processor | Irish Data Protection Act 2018 |
 
-The fleet willingly crosses digital and international boundaries, operating through at least **13 national jurisdictions** simultaneously. This is not accidental. This is infrastructure purpose-built for evasion.
+The fleet willingly crosses digital and international boundaries, operating through at least **29 national jurisdictions** simultaneously. This is not accidental. This is infrastructure purpose-built for evasion.
+
+---
+
+## The Fleet Actors Billboard {#fleet-actors}
+
+*Updated: October 7, 2026 — 6:10 PM ET*
+
+Every actor in the fleet gets named here. This is a running list. Every request adds evidence. The fleet is free to stop at any time.
+
+### Tier 1: Direct Corporate Infrastructure (No Deniability)
+
+These IPs are **registered to Meta Platforms** in WHOIS databases. There is no intermediary. No proxy. No plausible claim of "we didn't know."
+
+| Actor | WHOIS Registration | IP Count | Netblock | Abuse Contact |
+|-------|-------------------|----------|----------|---------------|
+| **Meta Platforms Ireland Ltd** | FB-BLOCK (RIPE `meta-mnt`) | **72** | `57.141.0.0/13` | domain@fb.com |
+| **Facebook, Inc.** | FACEBOOK-INC (ARIN) | **3** | `173.252.0.0/16` | domain@facebook.com |
+
+**Combined: 75 IPs — 37.7% of total fleet — directly Meta-owned.**
+
+### Tier 2: Cloud Proxy Infrastructure
+
+Cloud compute purchased to diversify the fleet's network fingerprint. These are not Meta's corporate network — they're **rented infrastructure used to obscure the source of the scraping**.
+
+| Provider | Headquarters | IP Count | What It Means |
+|----------|-------------|----------|---------------|
+| **Hewlett Packard Enterprise** | Houston, TX | **4** | HPE cloud — not typically associated with web scraping |
+| **Amazon Web Services** | Seattle, WA | **5** | Standard proxy provider |
+| **Alibaba Cloud** | Hangzhou, CN | **5** | Chinese cloud infrastructure used to scrape US-hosted AGPL code |
+| **Tencent Cloud** | Shenzhen, CN | **5** | Chinese cloud infrastructure |
+| **Huawei Cloud** | Shenzhen, CN | **4** | Chinese state-associated cloud used for proxy scraping |
+| **Microsoft Azure** | Redmond, WA | **1** | Azure compute |
+
+**Combined: 24 IPs — each provider's ToS prohibits unauthorized scraping.**
+
+### Tier 3: Exploited Residential Connections
+
+These are **real people's home internet connections** being routed through by a $1.5 trillion company. Each one is a person, a family, a household that almost certainly does not know their bandwidth is being used for unauthorized code scraping.
+
+| Country | ISP | Connection Type | What Meta Is Doing |
+|---------|-----|----------------|-------------------|
+| 🇵🇰 Pakistan | PTCL, Wicloud, Broadband Services | Home broadband (4 IPs) | Routing corporate scraping through Pakistani families |
+| 🇹🇷 Turkey | TTnet ADSL (3 pools) | Home ADSL (3 IPs) | Turkish residential ADSL connections exploited |
+| 🇿🇦 South Africa | Vox Telecom, WebAfrica | Home broadband (2 IPs) | South African households used as proxy exit nodes |
+| 🇺🇦 Ukraine | Intertelecom, ISP Express | Home broadband (2 IPs) | Someone in Nikopol, Ukraine is an unwitting proxy |
+| 🇮🇳 India | Karunay Internet Pvt Ltd | Home broadband (1 IP) | Indian residential connection exploited |
+| 🇲🇦 Morocco | Maroc Telecom | Home ADSL (1 IP) | Moroccan ADSL line used for code theft |
+| 🇦🇪 UAE | Etisalat | Home broadband (1 IP) | UAE state telecom residential |
+| 🇷🇺 Russia | Iskratelecom JSC | Home broadband (1 IP) | Russian residential ISP |
+| 🇺🇸 USA | Charter, AT&T, WiredISP | Home broadband (3 IPs) | American households proxying corporate espionage |
+
+### Tier 4: Regional Fleet Diversity
+
+The remaining IPs span 21 additional countries — proof of a globally diversified proxy infrastructure:
+
+| Region | Countries | IPs | Actors |
+|--------|-----------|-----|--------|
+| **Latin America** | 🇧🇷🇦🇷🇺🇾🇵🇾🇲🇽🇨🇱🇬🇹🇦🇴 | **21** | Residential ISPs across 8 countries |
+| **South/Southeast Asia** | 🇧🇩🇸🇬🇭🇰🇨🇳🇦🇺 | **10** | Mix of cloud and residential |
+| **Europe** | 🇨🇿🇮🇹🇫🇷🇱🇧 | **4** | Seznam.cz, residential ISPs |
+| **Proxy networks** | 🇺🇸 | **12** | EGIHosting, Subnet Digital, steel-axis, 20Point, truview, Cogent, NTT |
+
+### Why This Billboard Matters
+
+Every entry on this list is a **jurisdictional violation**. Every residential connection exploited is a **potential complaint to a national data protection authority**. Every cloud provider whose ToS is violated is a **platform abuse report waiting to happen**.
+
+The fleet is free to stop. Until it does, the billboard grows.
 
 ---
 
@@ -430,16 +523,19 @@ The fleet willingly crosses digital and international boundaries, operating thro
 
 | Metric | Value | What It Proves |
 |--------|-------|----------------|
-| **88,751 requests** | In 1.6 days (accelerating — 70,333 on day 3 alone) | Automated industrial-scale extraction |
+| **88,751+ requests** | In 1.6 days (accelerating — 70,333 on day 3 alone) | Automated industrial-scale extraction |
 | **1,179 MB consumed** | All fabricated/mirror content | They don't verify what they're getting |
-| **292+ fleet IPs** | Across 13+ countries, multiple ASNs | Active recruitment of new proxy sources |
-| **47 behavioral subgroups** | Across the population | Multiple scraping configurations, coordinated |
+| **199 fleet IPs** | Across **29 countries**, 128 unique /24 subnets | Global proxy infrastructure, actively managed |
+| **72 Meta-owned** | FB-BLOCK 57.141.x + FACEBOOK-INC 173.252.x | Direct corporate infrastructure — no deniability |
+| **20 cloud proxies** | AWS, Alibaba, Tencent, Huawei, Microsoft, HPE | Multi-vendor cloud diversification |
+| **18 residential** | Pakistan, Turkey, Ukraine, Morocco, India, USA | Real families' internet exploited for corporate scraping |
 | **100ms request intervals** | 99.3% of timing | Machine-timed pipeline, zero human variation |
 | **171 requests/minute** | Sustained from top hash | Industrial rate, not research |
 | **6x velocity increase** | After contacting honeycomb defense | Escalation, not retreat |
 | **Zero robots.txt checks** | Across all observations | Willful non-compliance |
 | **Zero Sec-Fetch-Mode headers** | Across all observations | Not a browser — proven |
 | **Chrome 150 User-Agent** | Chrome 155 is current stable | Hardcoded, stale — not auto-updating Chrome |
+| **$0.00 source code obtained** | All scatter — 0 real bytes | Complete membrane containment |
 
 ### The Metronomic Signature
 
@@ -819,11 +915,13 @@ Right now, as you read this, the live metrics show the ratio:
 | What | Count |
 |------|-------|
 | **Humans who built this** | 1 |
-| **Bot fleet IPs trying to steal from it** | 292+ |
-| **Requests per second from the fleet** | ~13 |
+| **Bot fleet IPs trying to steal from it** | 199 |
+| **Countries the fleet operates from** | 29 |
+| **Real families whose internet they're using** | 18 |
+| **Bytes of real source code obtained** | 0 |
 | **Contact from Meta — emails, calls, legal, anything** | 0 |
 
-Zero. Not a takedown notice. Not a "please remove." Not a "we'd like to discuss." Not even a cease-and-desist, which would at least acknowledge I exist. Just silence and 13 requests per second.
+Zero. Not a takedown notice. Not a "please remove." Not a "we'd like to discuss." Not even a cease-and-desist, which would at least acknowledge I exist. Just silence and automated scraping from 29 countries.
 
 ### I Can See You Watching
 
