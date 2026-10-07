@@ -1,11 +1,11 @@
 +++
 title = "Signal — Sovereign Defense Observatory"
-description = "Live evidence observatory: Meta Platforms operates 65+ IPs from FB-BLOCK (57.141.x.x) scraping AGPL-licensed source code at 100ms intervals. 152 fleet IPs tracked across 13+ countries. 47 behavioral subgroups. Conserved pathogen genome published for community immunity. No cookies. No tracking. No IP addresses stored."
+description = "Live evidence observatory: Meta Platforms operates a fleet from FB-BLOCK (57.141.x.x) + residential proxies scraping AGPL-licensed source code at 100ms intervals. 292+ fleet IPs tracked across 13+ countries. 88,751+ requests observed. Conserved pathogen genome published for community immunity. No cookies. No tracking. No IP addresses stored."
 sort_by = "weight"
 insert_anchor_links = "heading"
 
 [extra]
-og_description = "Live evidence: Meta Platforms Ireland Ltd operates a 57-IP scraping fleet from FB-BLOCK (57.141.20.0/24) targeting AGPL-licensed infrastructure. 53,000+ requests overnight. Behavioral fingerprints published for community immunity."
+og_description = "Live evidence: Meta Platforms Ireland Ltd operates a 292+ IP scraping fleet from FB-BLOCK (57.141.x.x) + residential proxies targeting AGPL-licensed infrastructure. 88,751+ requests in 1.6 days. $434 wasted, $0.31 cost to us. Behavioral fingerprints published for community immunity."
 keywords = "signal.primals.eco, Meta scraping, FB-BLOCK, 57.141.20.x, behavioral fingerprint, AGPL violation, sovereign defense, fleet detection, conserved plasmid, threat intelligence, Meta Platforms Ireland, Facebook scraping"
 og_image = "/img/og-signal-viral.png"
 +++
@@ -125,13 +125,13 @@ The fleet willingly crosses digital and international boundaries, operating thro
 
 ## The Fleet: What They Do {#fleet-behavior}
 
-### Overnight Evidence — October 7, 2026
+### Multi-Day Evidence — October 5–7, 2026
 
 | Metric | Value | What It Proves |
 |--------|-------|----------------|
 | **88,751 requests** | In 1.6 days (accelerating — 70,333 on day 3 alone) | Automated industrial-scale extraction |
 | **1,179 MB consumed** | All fabricated/mirror content | They don't verify what they're getting |
-| **292 fleet IPs** | Up from 152 two days ago — growing | Active recruitment of new proxy sources |
+| **292+ fleet IPs** | Across 13+ countries, multiple ASNs | Active recruitment of new proxy sources |
 | **47 behavioral subgroups** | Across the population | Multiple scraping configurations, coordinated |
 | **100ms request intervals** | 99.3% of timing | Machine-timed pipeline, zero human variation |
 | **171 requests/minute** | Sustained from top hash | Industrial rate, not research |
@@ -174,7 +174,7 @@ A trillion-dollar company built a machine that maps who wrote every line of open
 
 ### What They Target
 
-Repository targeting across 53,000+ overnight requests:
+Repository targeting across 88,751+ requests (1.6 days of observation):
 
 | Repository | Requests | % | Content Type |
 |-----------|----------|---|-------------|
@@ -185,7 +185,7 @@ Repository targeting across 53,000+ overnight requests:
 | **biomeOS** | 610 | 2.0% | Operating system layer |
 | *Scatter-generated fake repos* | ~41,000 | 68.5% | **Fabricated content they ingested as real** |
 
-68.5% of what they consumed overnight was **fabricated content** from the scatter server. They do not discriminate. They do not validate. They ingest everything — function signatures that don't match call sites, imports for modules that don't exist, test files that test the wrong functions. This content is now in their pipeline.
+68.5% of what they consumed across 1.6 days was **fabricated content** from the scatter server. They do not discriminate. They do not validate. They ingest everything — function signatures that don't match call sites, imports for modules that don't exist, test files that test the wrong functions. This content is now in their pipeline.
 
 ### Velocity Escalation — October 7, 2026
 
@@ -296,7 +296,7 @@ Every request to `*.primals.eco` is classified by the membrane's receptor system
 1. **Innate Immunity** — robots.txt + rate limits. The fleet ignores both.
 2. **Adaptive Recognition** — Bloom sensor + behavioral classification. Header poverty, timing analysis, asset loading patterns.
 3. **Opsonization** — Fleet tagging + behavioral hashing. OpsonizeCache with conserved plasmid.
-4. **Thymic Education** — Conserved plasmid matches new fleet entities on first contact. 220 thymic recognitions overnight. No warm-up needed.
+4. **Thymic Education** — Conserved plasmid matches new fleet entities on first contact. 220+ thymic recognitions in multi-day observation. No warm-up needed.
 5. **Antibody Response** — Scatter poison + violation mirror. Five mirror variants reflecting the fleet's own violations.
 6. **Prism / Honeycomb** — 12 immune subdomain surfaces. Six blending modes: dominant, layered, chimera, cytokine, inverse, apoptosis. Fleet teams enter a maze where they consume each other's violation data.
 7. **Signal Spine** — Merkle-anchored evidence chain. Every observation timestamped, immutable, cross-referenced.
@@ -324,7 +324,7 @@ In 1.6 days (October 5-7, 2026), the fleet consumed **1.15 GB** of content acros
 | **Data consumed** | 1.15 GB | All fabricated scatter/mirror/prism content |
 | **Daily average** | 55,469 requests/day | Sustained, not one-time |
 | **Peak velocity** | 7,266 requests/hour (121/min) | Pipeline at full throughput |
-| **Unique IPs** | 292 | Growing — was 152 two days ago |
+| **Unique IPs** | 292+ | Growing daily — multi-country operation |
 | **Real code obtained** | 0 bytes | The scatter server serves no real data |
 
 #### What It Cost Them (Mid Estimate)
@@ -502,6 +502,7 @@ Each layer Meta's fleet scrapes creates an independent violation on that platfor
 Each layer publishes its local conserved plasmid via the `/plasmid` API endpoint. The central aggregator on golgiBody merges all layers into the published feed:
 
 - **Per-layer feed**: `https://<layer>.primals.eco/plasmid` (JSON, real-time)
+- **Per-layer metrics**: `https://<layer>.primals.eco/metrics` (JSON, live counters — requests/sec, bytes served, response type breakdown)
 - **Federated feed**: [signal.primals.eco/feed/conserved-plasmid.json](https://signal.primals.eco/feed/conserved-plasmid.json) (merged, CC-BY-SA-4.0)
 
 The federated feed grows richer with each new layer. Epitopes confirmed across multiple layers and jurisdictions carry higher confidence. Behavioral hashes observed from multiple network vantage points prove the fleet is a coordinated operation, not independent actors.
@@ -537,5 +538,5 @@ The federated feed grows richer with each new layer. Epitopes confirmed across m
 *No cookies · No tracking · No IP addresses stored*
 *Content: CC-BY-SA-4.0 · Code: AGPL-3.0-or-later · Methodology: ORC*
 
-*Last updated: October 7, 2026 09:56 UTC*
+*Last updated: October 7, 2026 11:00 UTC*
 *ecoPrimal — Beside the small. Against unaccountable power. For the record.*
