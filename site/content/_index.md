@@ -234,11 +234,47 @@ The specific investigations live on their own surfaces — [detroit.primals.eco]
 
 ## The Hypothesis {#hypothesis}
 
-The topology above reveals something worth stating plainly.
+<div style="background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:2em; margin:1.5em 0;">
 
-Meta operates a system that has **no awareness outside of what to consume**. It identifies targets, rotates IPs, impersonates browsers, scrapes source code, maps author attribution via `/blame/` requests — and it does all of this with no Sec-Fetch headers, no Accept-Language, no cookies, no session state. It has **no concept of the thing it is taking from**. It has no mechanism for consent, reciprocity, or even acknowledgment. It eats.
+<p style="color:#8b949e; font-size:0.85em; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5em;">Live Research Paper — Abstract</p>
+
+<p style="font-size:1.1em; font-style:italic; color:#c9d1d9; line-height:1.6;">
+Multiple organizations operate large-scale automated source code extraction systems targeting independently-hosted AGPL-3.0-or-later licensed repositories. Behavioral topology analysis of these systems reveals a consistent architectural pattern: <strong style="color:#e8e8e8;">sophisticated consumption infrastructure with no corresponding source awareness</strong>. The systems invest heavily in intake — IP rotation, user-agent impersonation, distributed scheduling, author attribution mapping — but exhibit zero mechanisms for license detection, consent verification, content evaluation, or even distinguishing real source code from procedurally generated fabrications. This paper presents live evidence, updated every 30 seconds, from a single-operator immune membrane observing these systems in real time.
+</p>
+
+</div>
+
+### The Finding: Stomachs With No Eyes
+
+The entity topology above — updating live — reveals something worth stating plainly.
+
+Every major entity observed on this infrastructure has built an **elaborate consumption pipeline** but **no awareness layer**.
 
 <div style="background:#161b22; border:1px solid #30363d; border-radius:6px; padding:1.5em; margin:1.5em 0;">
+
+**Meta Platforms** — 56 IPs from FB-BLOCK (`57.141.20.0/24`), four detected sub-systems:
+- **Chrome Deployment Pipeline** — keeps impersonated browser versions current (currently Chrome 146, 10 versions behind stable)
+- **OS Impersonation Pool** — rotates Windows, Mac, and Linux user-agent strings
+- **Author Attribution System** — 32.9% of requests target `/blame/` endpoints, mapping who wrote each file
+- **Shared Configuration** — uniform `Accept-Encoding: gzip, deflate, br, zstd` across all 56 IPs (fleet-wide config push)
+
+What they didn't build: anything that checks what license the code is under. Anything that notices the code is AGPL. Anything that registers it's hitting the same solo developer's infrastructure at 100ms intervals. Anything that realizes a third of its requests are being answered with fabricated content. **Zero source awareness.**
+
+**Anthropic** — ClaudeBot at 10+ RPS, tens of thousands of requests per window. Every request hits scatter-generated repositories (`batch-processor`, `queue-worker`, `deploy-scripts`). The content is procedurally fabricated. ClaudeBot cannot tell. It has been consuming nothing but generated gibberish, and **the pipeline has no mechanism to evaluate what it ingests**.
+
+**Stealth scrapers** — Chrome 135, which is 66 versions behind current stable. Someone built that pipeline, deployed it, and nobody has updated it. Nobody is watching it. It just keeps running.
+
+</div>
+
+### The Pattern
+
+The engineering sophistication is entirely in the intake. There is no corresponding investment in awareness of what's being taken, from whom, under what terms, or whether it's even real.
+
+They built stomachs with no eyes. Industrial-scale consumption with no sensory feedback. The system knows *how* to eat but has no concept of *what* it's eating — and that's not a bug they're working on fixing. That's the design.
+
+### The Dilemma
+
+<div style="background:#161b22; border:1px solid #21262d; border-left:3px solid #e74c3c; border-radius:6px; padding:1.5em; margin:1.5em 0;">
 
 There are only two explanations:
 
@@ -252,9 +288,13 @@ Either way, the system they built has no awareness outside of what to eat. It do
 
 At least, that's my hypothesis.
 
-<p style="font-size:1.3em; color:#58a6ff; font-weight:600; margin-top:1em;">Want to watch me prove it?</p>
+<p style="font-size:1.4em; color:#58a6ff; font-weight:600; margin-top:1em;">Want to watch me prove it?</p>
 
-The data is live. The topology updates every 30 seconds. Every request they send adds to the evidence. The membrane sees everything, stores nothing that identifies humans, and publishes the behavioral patterns for anyone to verify. Scroll down — or come back tomorrow. The fleet will still be here.
+<p style="color:#8b949e; line-height:1.7;">The data is live. The topology updates every 30 seconds. Every request they send adds to the evidence. The membrane sees everything, stores nothing that identifies humans, and publishes the behavioral patterns for anyone to verify. This is not a static paper — it is a living experiment. The subjects are participating right now. Scroll down, or come back tomorrow. The fleet will still be here. The counter will be higher. The pattern will be the same.</p>
+
+<p style="color:#6e7681; font-size:0.85em; margin-top:1.5em;">
+<strong>Methodology:</strong> Server-side log classification only. No cookies. No tracking pixels. No JavaScript analytics. No IP addresses stored or displayed — behavioral fingerprints only. All observations derived from HTTP headers, timing patterns, and path analysis of requests made to public infrastructure. Reproducible by anyone running a web server. Published under CC-BY-SA-4.0. Full methodology: <a href="https://sporeprint.primals.eco/methodology/signal-sensing-receptor/" style="color:#58a6ff;">sporeprint.primals.eco/methodology</a>.
+</p>
 
 ---
 
