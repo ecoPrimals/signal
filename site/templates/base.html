@@ -1,0 +1,63 @@
+{# SPDX-License-Identifier: CC-BY-SA-4.0 #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+  <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
+  <meta name="author" content="{{ config.extra.author }}">
+  <meta name="robots" content="index, follow">
+
+  {# Open Graph #}
+  <meta property="og:title" content="{% block og_title %}{{ config.title }}{% endblock og_title %}">
+  <meta property="og:description" content="{% block og_description %}{{ config.description }}{% endblock og_description %}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ config.base_url }}">
+  {% if config.extra.og_image %}<meta property="og:image" content="{{ config.extra.og_image }}">{% endif %}
+
+  {# Twitter Card #}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% block tw_title %}{{ config.title }}{% endblock tw_title %}">
+
+  {# License #}
+  <meta name="license" content="CC-BY-SA-4.0">
+  <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
+
+  <link rel="stylesheet" href="{{ get_url(path='css/signal.css') }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') }}">
+  <link rel="sitemap" type="application/xml" href="{{ get_url(path='sitemap.xml') }}">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/" class="site-title">signal.primals.eco</a>
+      <ul>
+        <li><a href="#evidence-brief">Evidence Brief</a></li>
+        <li><a href="#defense">Defense</a></li>
+        <li><a href="#named-entities">Named Entities</a></li>
+        <li><a href="{{ config.extra.surfaces.detroit }}">detroit ↗</a></li>
+        <li><a href="{{ config.extra.surfaces.tuebor }}">tuebor ↗</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="site-main">
+    {% block content %}{% endblock content %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>signal.primals.eco — sovereign defense billboard</p>
+      <p>Evidence: <a href="{{ config.extra.surfaces.detroit }}">detroit.primals.eco</a> ·
+         Science: <a href="{{ config.extra.surfaces.sporeprint }}">sporeprint.primals.eco</a> ·
+         Methodology: <a href="{{ config.extra.surfaces.gorilla }}">gorilla.primals.eco</a> ·
+         Cross-protection: <a href="{{ config.extra.surfaces.tuebor }}">tuebor.primals.eco</a></p>
+      <p>No cookies · No tracking pixels · No IP addresses stored · <a href="https://sporeprint.primals.eco/methodology/signal-sensing-receptor/">Methodology</a></p>
+      <p>Content: CC-BY-SA-4.0 · Code: AGPL-3.0-or-later · Methodology: ORC</p>
+    </div>
+  </footer>
+</body>
+</html>

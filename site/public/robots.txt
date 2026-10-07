@@ -1,0 +1,8 @@
+# signal.primals.eco — sovereign defense billboard
+# This is a public evidence site. Index everything. Share everything.
+# The evidence is designed to propagate.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://signal.primals.eco/sitemap.xml

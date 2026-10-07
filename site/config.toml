@@ -1,0 +1,46 @@
+base_url = "https://signal.primals.eco"
+title = "Signal — Sovereign Defense Billboard"
+description = "Live evidence of corporate data extraction against sovereign infrastructure. Meta Platforms, 330 fleet IPs, 85 networks, 37 countries, 6 stolen trademarks per request. Behavioral immune defense. No cookies. No tracking. No IP addresses stored."
+compile_sass = false
+build_search_index = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+generate_sitemap = true
+minify_html = true
+
+[markdown]
+smart_punctuation = true
+
+[markdown.highlighting]
+enabled = true
+light_theme = "github-light"
+dark_theme = "github-dark"
+
+[extra]
+author = "ecoPrimal"
+repo_url = "https://git.primals.eco/ecoPrimals/signal"
+github_url = "https://github.com/defendDetroit/publicRecord"
+
+# ── Dispersal Pattern ────────────────────────────────────────────────────
+# signal.primals.eco is the defense billboard — extracted from detroit's
+# signal page into its own surface for independent propagation.
+#
+# Three-tier + signal:
+#   sporePrint  (sporeprint.primals.eco) — ecosystem catalogue
+#   guerillaGorilla (gorilla.primals.eco) — methodology bridge
+#   detroit     (detroit.primals.eco)    — living evidence library
+#   signal      (signal.primals.eco)     — defense billboard        ← THIS
+#   tuebor      (tuebor.primals.eco)     — cross-protection surface
+
+[extra.surfaces]
+detroit = "https://detroit.primals.eco"
+sporeprint = "https://sporeprint.primals.eco"
+gorilla = "https://gorilla.primals.eco"
+tuebor = "https://tuebor.primals.eco"
+
+[extra.defense]
+scatter_server = true
+opsonize_cache = true
+violation_mirror = true
+signal_spine = true
+threat_feed = true

@@ -1,0 +1,21 @@
+{# SPDX-License-Identifier: CC-BY-SA-4.0 #}
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} — {{ config.title }}{% endblock title %}
+
+{% block content %}
+<article class="section-page">
+  {{ section.content | safe }}
+
+  {% if section.pages %}
+  <div class="section-pages">
+    {% for page in section.pages %}
+    <div class="page-card">
+      <h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+      {% if page.description %}<p>{{ page.description }}</p>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</article>
+{% endblock content %}
