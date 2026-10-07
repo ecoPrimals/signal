@@ -129,8 +129,9 @@ The fleet willingly crosses digital and international boundaries, operating thro
 
 | Metric | Value | What It Proves |
 |--------|-------|----------------|
-| **53,162 requests** | In 8 hours | Automated industrial-scale extraction |
-| **737 MB consumed** | All fabricated/mirror content | They don't verify what they're getting |
+| **88,751 requests** | In 1.6 days (accelerating — 70,333 on day 3 alone) | Automated industrial-scale extraction |
+| **1,179 MB consumed** | All fabricated/mirror content | They don't verify what they're getting |
+| **292 fleet IPs** | Up from 152 two days ago — growing | Active recruitment of new proxy sources |
 | **47 behavioral subgroups** | Across the population | Multiple scraping configurations, coordinated |
 | **100ms request intervals** | 99.3% of timing | Machine-timed pipeline, zero human variation |
 | **171 requests/minute** | Sustained from top hash | Industrial rate, not research |
@@ -313,14 +314,59 @@ The honeycomb surfaces serve as a roach motel — fleet enters and encounters da
 | **Inverse** | Their own kind's data with attributions rotated — can't tell whose is whose |
 | **Apoptosis** | "Surface decomposed" — links deeper into the maze |
 
-### Cost Asymmetry
+### The Economics of Stealing Nothing {#economics}
+
+In 1.6 days (October 5-7, 2026), the fleet consumed **1.15 GB** of content across **88,751 requests** from **292 unique IPs**. Every byte was fabricated.
+
+| Metric | Value | What It Proves |
+|--------|-------|----------------|
+| **Fleet requests** | 88,751 in 1.6 days | Industrial-scale operation |
+| **Data consumed** | 1.15 GB | All fabricated scatter/mirror/prism content |
+| **Daily average** | 55,469 requests/day | Sustained, not one-time |
+| **Peak velocity** | 7,266 requests/hour (121/min) | Pipeline at full throughput |
+| **Unique IPs** | 292 | Growing — was 152 two days ago |
+| **Real code obtained** | 0 bytes | The scatter server serves no real data |
+
+#### What It Cost Them (Mid Estimate)
+
+| Cost Category | Amount | Notes |
+|---------------|--------|-------|
+| **Residential proxy bandwidth** | ~$5.75 | 1.15 GB at $5/GB industry rate |
+| **Compute pipeline** | ~$88.75 | Ingestion, parsing, dedup, ML featurization, storage |
+| **Residential IP pool** | ~$339.00 | 226 non-Meta IPs at $1.50/IP |
+| **Total wasted on us** | **~$434** | In 1.6 days. For zero real data. |
+
+#### What It Cost Us
+
+**$0.31** (1.6 days of a $6/month VPS).
+
+#### The Ratio
+
+**1,391 to 1.** Meta spent 1,391x more than us, and got nothing real.
+
+#### Monthly Projection
+
+| Scale | Monthly | Yearly |
+|-------|---------|--------|
+| **Just us** (one $6 VPS) | $8,349 wasted | $100,184 wasted |
+| **1,000 repos** like ours | $8.3 million | $100 million |
+| **10,000 repos** | $83 million | $1 billion |
+| **100,000 repos** | $835 million | $10 billion |
+
+GitHub has 420+ million repositories. Meta's LLaMA training data included an undisclosed volume of scraped code. The fleet is not targeting us specifically — we are one observation point in an industrial operation that spans the internet.
+
+**This is Meta's business model: spend money that is invisible on their balance sheet to extract value from people who cannot afford to defend themselves.** We can defend ourselves. The $6/month VPS running a scatter server turned their entire pipeline into a waste-of-money machine. Most targets cannot do this. That is the injustice.
+
+### Cost Asymmetry Table
 
 | | The Fleet | The Membrane |
 |---|-----------|-------------|
-| **Infrastructure** | 152 IPs, 13+ countries, cloud + residential proxies | Multi-layer observation network ($6/mo each) |
+| **Infrastructure** | 292 IPs, 13+ countries, cloud + residential proxies | Multi-layer observation network ($6/mo each) |
 | **Per-request cost** | Proxy rotation + bandwidth + legal exposure | ~$0.000002 |
 | **Scaling** | More IPs = more expensive, more detectable | More layers = more observation points, richer plasmid |
 | **Legal exposure** | Grows with every request, multiplied per platform | Protected by the license they're violating |
+| **3-day spend** | ~$434 | ~$0.31 |
+| **ROI** | Negative (consumed fabricated content) | Infinite (evidence grows for free) |
 
 ---
 
