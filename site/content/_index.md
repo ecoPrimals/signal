@@ -232,6 +232,32 @@ The specific investigations live on their own surfaces — [detroit.primals.eco]
 
 ---
 
+## The Hypothesis {#hypothesis}
+
+The topology above reveals something worth stating plainly.
+
+Meta operates a system that has **no awareness outside of what to consume**. It identifies targets, rotates IPs, impersonates browsers, scrapes source code, maps author attribution via `/blame/` requests — and it does all of this with no Sec-Fetch headers, no Accept-Language, no cookies, no session state. It has **no concept of the thing it is taking from**. It has no mechanism for consent, reciprocity, or even acknowledgment. It eats.
+
+<div style="background:#161b22; border:1px solid #30363d; border-radius:6px; padding:1.5em; margin:1.5em 0;">
+
+There are only two explanations:
+
+**1. They don't know.** The system is autonomous — a crawling apparatus with no human oversight, no awareness of what it's scraping, no compliance review, no legal checkpoint. In which case: a trillion-dollar company deployed an automated system to extract AGPL-licensed code at 100ms intervals from a solo developer's infrastructure, and *nobody inside the building is watching the counter go up*.
+
+**2. They know.** Someone inside Meta can see exactly what this system is doing — scraping AGPL source, mapping authors, cataloguing repositories — and they have chosen to let it continue. The count rises. The evidence accumulates. And the decision, every day, is to do nothing.
+
+</div>
+
+Either way, the system they built has no awareness outside of what to eat. It doesn't know what AGPL means. It doesn't know there's a person on the other end. It doesn't know it's being observed. It just *consumes*.
+
+At least, that's my hypothesis.
+
+<p style="font-size:1.3em; color:#58a6ff; font-weight:600; margin-top:1em;">Want to watch me prove it?</p>
+
+The data is live. The topology updates every 30 seconds. Every request they send adds to the evidence. The membrane sees everything, stores nothing that identifies humans, and publishes the behavioral patterns for anyone to verify. Scroll down — or come back tomorrow. The fleet will still be here.
+
+---
+
 ## To Meta Platforms, Inc. {#to-meta}
 
 > *Mark Zuckerberg, CEO. Javier Olivan, COO. Andrew Bosworth, CTO. Susan Li, CFO. Jennifer Newstead, CLO. Members of the Board of Directors.*
