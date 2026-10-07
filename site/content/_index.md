@@ -236,7 +236,7 @@ The specific investigations live on their own surfaces — [detroit.primals.eco]
 
 <div style="background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:2em; margin:1.5em 0;">
 
-<p style="color:#8b949e; font-size:0.85em; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5em;">Live Research Paper — Abstract</p>
+<p style="color:#8b949e; font-size:0.85em; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5em;">Live Research Paper — Abstract · <a href="https://thesis.primals.eco" style="color:#58a6ff;">Full paper: thesis.primals.eco ↗</a></p>
 
 <p style="font-size:1.1em; font-style:italic; color:#c9d1d9; line-height:1.6;">
 Multiple organizations operate large-scale automated source code extraction systems targeting independently-hosted AGPL-3.0-or-later licensed repositories. Behavioral topology analysis of these systems reveals a consistent architectural pattern: <strong style="color:#e8e8e8;">sophisticated consumption infrastructure with no corresponding source awareness</strong>. The systems invest heavily in intake — IP rotation, user-agent impersonation, distributed scheduling, author attribution mapping — but exhibit zero mechanisms for license detection, consent verification, content evaluation, or even distinguishing real source code from procedurally generated fabrications. This paper presents live evidence, updated every 30 seconds, from a single-operator immune membrane observing these systems in real time.
