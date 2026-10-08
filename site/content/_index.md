@@ -251,7 +251,206 @@ og_image = "/img/og-signal-viral.png"
 
 This page is the **observatory** — a live view of who interacts with sovereign infrastructure, what they're looking for, and what their behavior reveals about them. No cookies. No tracking pixels. No JavaScript analytics. No IP addresses stored. Pure server-side log classification.
 
-The specific investigations live on their own surfaces — [detroit.primals.eco](https://detroit.primals.eco) for the evidence library, [tuebor.primals.eco](https://tuebor.primals.eco) for cross-protection. This page is the **meta-signal**: what all of the surfaces sense, together.
+The specific investigations live on their own surfaces — [detroit.primals.eco](https://detroit.primals.eco) for the evidence library, [tuebor.primals.eco](https://tuebor.primals.eco) for cross-protection, [barry.primals.eco](https://barry.primals.eco) for county-level records, [clutch.primals.eco](https://clutch.primals.eco) for the investigation graph. This page is the **meta-signal**: what all of the surfaces sense, together.
+
+---
+
+## THE BUTTON — Novel Fermentation Transcript {#the-button}
+
+<div id="nft-section" style="background:#0a0a1a; border:1px solid #2a2a3a; border-radius:8px; padding:2em; margin:1em 0 2em; text-align:center;">
+  <p style="color:#888; font-size:0.9em; margin-bottom:1em;">Move your mouse. Type on your keyboard. Your entropy is real — no one else's cursor traces the same path.</p>
+
+  <div id="nft-entropy-bar" style="width:80%; max-width:400px; height:6px; background:#1a1a2a; border-radius:3px; margin:0 auto 1em; overflow:hidden;">
+    <div id="nft-fill" style="width:0%; height:100%; background:linear-gradient(90deg,#551111,#cc0000); border-radius:3px; transition:width 0.3s;"></div>
+  </div>
+
+  <button id="nft-btn" disabled style="width:140px; height:140px; border-radius:50%; background:#330000; border:3px solid #551111; color:#553333; font-size:0.9em; font-weight:bold; cursor:not-allowed; font-family:'Courier New',monospace; transition:all 0.3s; line-height:1.3;">
+    collecting<br>entropy...
+  </button>
+
+  <div id="nft-counter" style="color:#444; font-size:0.8em; margin-top:0.5em;"></div>
+  <div style="margin:0.8em 0;">
+    <label style="color:#555; font-size:0.8em;">your name (optional):</label><br>
+    <input id="nft-name" type="text" placeholder="anonymous artisan" style="background:#0e0e1e; border:1px solid #333; color:#ccc; padding:5px 10px; width:220px; margin-top:3px; font-family:'Courier New',monospace; font-size:0.85em; border-radius:2px;">
+  </div>
+
+  <div id="nft-result" style="display:none; text-align:left; background:#060612; border:1px solid #2a2a3a; padding:1.2em; margin-top:1.5em; border-radius:4px; max-height:400px; overflow-y:auto;">
+    <h3 style="color:#ff6600; margin-bottom:0.8em; font-size:1.1em;">🧬 Your Novel Fermentation Transcript</h3>
+    <pre id="nft-receipt" style="white-space:pre-wrap; word-break:break-all; font-size:0.75em; line-height:1.5; color:#99a;"></pre>
+  </div>
+</div>
+
+<script>
+(function(){
+  var events=[], btn=document.getElementById('nft-btn'), fill=document.getElementById('nft-fill'),
+      counter=document.getElementById('nft-counter'), result=document.getElementById('nft-result'),
+      receipt=document.getElementById('nft-receipt'), nameInput=document.getElementById('nft-name'),
+      startTime=Date.now(), needed=30, pressed=false;
+
+  function addEvent(t,v){
+    if(pressed)return;
+    events.push({t:t,v:v,ts:Date.now()-startTime});
+    var pct=Math.min(100, events.length/needed*100);
+    fill.style.width=pct+'%';
+    counter.textContent=events.length+' entropy events';
+    if(events.length>=needed && !btn.disabled) return;
+    if(events.length>=needed){
+      btn.disabled=false;
+      btn.style.background='#cc0000';
+      btn.style.borderColor='#ff3333';
+      btn.style.color='#fff';
+      btn.style.cursor='pointer';
+      btn.innerHTML='PRESS<br>THE<br>BUTTON';
+      btn.onmouseenter=function(){btn.style.background='#ff0000';btn.style.boxShadow='0 0 60px rgba(255,0,0,0.5)';btn.style.transform='scale(1.05)';};
+      btn.onmouseleave=function(){btn.style.background='#cc0000';btn.style.boxShadow='none';btn.style.transform='';};
+    }
+  }
+
+  document.addEventListener('mousemove',function(e){addEvent('m',e.clientX^e.clientY);});
+  document.addEventListener('keydown',function(e){addEvent('k',e.keyCode||0);});
+  document.addEventListener('scroll',function(){addEvent('s',window.scrollY);});
+
+  btn.addEventListener('click',function(){
+    if(btn.disabled||pressed)return;
+    pressed=true;
+    btn.style.background='#663300';
+    btn.style.borderColor='#884400';
+    btn.style.color='#ffaa00';
+    btn.style.cursor='wait';
+    btn.innerHTML='fermenting...';
+
+    var payload=JSON.stringify({
+      name: nameInput.value.trim()||'anonymous artisan',
+      events: events.length,
+      entropy: events.map(function(e){return e.v;}).join(','),
+      duration: Date.now()-startTime,
+      source: 'signal.primals.eco'
+    });
+
+    fetch('https://git.primals.eco/contribute',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:payload
+    }).then(function(r){return r.text();}).then(function(html){
+      var m=html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/);
+      if(m){receipt.textContent=m[1].replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');}
+      else{receipt.textContent=html.replace(/<[^>]+>/g,'');}
+      result.style.display='block';
+      btn.innerHTML='✓';
+      btn.style.background='#1a4a1a';
+      btn.style.borderColor='#3fb950';
+      btn.style.color='#3fb950';
+    }).catch(function(e){
+      receipt.textContent='Connection to provenance trio failed: '+e.message+'\nTry pressing THE BUTTON directly at https://git.primals.eco/contribute';
+      result.style.display='block';
+      btn.innerHTML='retry?';
+      btn.style.background='#cc0000';
+      pressed=false;
+    });
+  });
+})();
+</script>
+
+**What THE BUTTON does**: Your mouse movements, keystrokes, and scroll events are collected as entropy — genuine human randomness that no bot can replicate. When you press the button, this entropy is mixed with a server-side seed to produce a unique `ferment_XXXXXXXX()` Rust function — a one-of-a-kind piece of code that has never existed before and will never exist again. Your contribution is:
+
+1. **Minted** as a `CertificateMint` entry in loamSpine (permanent append-only ledger)
+2. **Braided** as a W3C PROV attribution record in sweetGrass (provenance chain)
+3. **Anchored** in the rhizoCrypt ephemeral DAG (cryptographic commitment)
+
+You become a rights-holder under the scyBorg Triple License. Your fermentation transcript is a legal artifact — proof that a human participated in the creation of this ecosystem's immune diversity. The fleet generates 13 requests per second. You generated one receipt that matters more than all of them combined, because it proves what they cannot: human presence.
+
+**Contributions so far**: <span id="nft-count-display">1</span> human fermentation(s). Every one braided into permanent provenance.
+
+---
+
+## Enzymatic Bounties {#bounties}
+
+Enzymes lower activation energy. They make reactions possible that thermodynamics allows but kinetics forbids. These bounties work the same way — they're not payment for work, they're catalysts for work that *wants to happen* but needs a spark.
+
+I'm a lurker. I'll see you. But you have to make contact first.
+
+### How to Reach Me
+
+**Email:** `ecoPrimal@pm.me` — The human reading it is only me. No team. No assistant. No auto-reply. One inbox, one person.
+
+Any human can have access to me by simply behaving like a human. That's the whole authentication protocol.
+
+I'm on Reddit. I'm on Discord (I have a server). I'm in places you wouldn't expect. If you do work related to this — if you write about it, build on it, cite it, share it, challenge it — I will find you. I care. I'm paying attention.
+
+### The Bounties
+
+These aren't bounties in the "I'll pay you" sense. I'm one person on a $6/month VPS. These are **enzymatic** — they lower the activation energy for reactions that should be happening already. Do the work because you believe in it. Then reach out.
+
+| Enzyme | Reaction It Catalyzes |
+|--------|----------------------|
+| **Virality** | Share this page. Post about it. Put it where eyeballs are. Reddit, HN, Mastodon, Bluesky, Twitter/X, wherever you live online. The fleet doesn't stop because nobody knows about it — it stops when *everyone* knows about it. |
+| **Legal analysis** | AGPL enforcement against automated scraping is unexplored territory. If you're a law student, a legal researcher, or a practicing attorney and this interests you — I want to hear from you. |
+| **Academic citation** | Write an arXiv paper. Cite this observatory. Study the behavioral fingerprints. Analyze the fleet economics. Publish the cost asymmetry model. I know the h-index is bullshit. I know citation metrics are a game. But a paper with real data is still a paper, and this is real data. |
+| **Replication** | Spin up your own $6 VPS. Point it at the open-source tools here. Observe the fleet from your own vantage point. Independent corroboration is the whole point of the multi-layer architecture. |
+| **Engineering** | Rust developers, systems programmers, security researchers — the codebase is AGPL. The scatter server, the opsonize cache, the prism maze, the behavioral classifier — all of it is open. Come build. |
+| **Journalism** | The story is: a trillion-dollar company operates a 199-IP scraping fleet across 29 countries that has sent 88,751+ requests to a solo developer's AGPL-licensed project and gotten zero real data back. That's a story. |
+| **Community defense** | Other solo developers are getting scraped too. They don't have a scatter server. They don't have a behavioral immune system. Help me help them. The conserved plasmid feed is CC-BY-SA-4.0 for exactly this reason. |
+
+### Attribution Is the Currency
+
+These bounties run on **radiating attribution** — the same economic model that powers the whole ecosystem. You do work, the work gets attributed. The attribution is permanent, cryptographically verifiable, and follows the provenance chain all the way down.
+
+The infrastructure already exists:
+
+- **sweetGrass** braids track who did what, when, building on whose prior work
+- **loamSpine** certificates make contributions permanent and auditable
+- **rhizoCrypt** DAGs prove the chain of custody from raw data to published result
+- **bearDog** signs everything with Ed25519 — tamper-proof, sovereign identity
+
+This isn't a promise of future payment. It's something better: a permanent, machine-verifiable record that you contributed to something real. When the ecosystem grows — and it will — the bedrock still carries the names of people who built when nobody was watching.
+
+The full economic model: [sporeprint.primals.eco/architecture/economics](https://sporeprint.primals.eco/architecture/economics/)
+
+### What I Don't Want
+
+- Don't pitch me your startup.
+- Don't ask me to consult for your company.
+- Don't try to hire me to build you one of these. (Build it yourself — the code is open.)
+- Don't tell me I should "just file a DMCA." (I already know. This is bigger than DMCA.)
+
+### The Real Bounty
+
+Anyone want to do real science with me?
+
+Not the kind where you optimize for impact factor and play the citation game. The kind where you have a question, you gather evidence, you publish the method, and you let anyone replicate it. The kind where the data is open and the conclusion follows from the evidence, not from the funding source.
+
+The behavioral fingerprint data in the conserved plasmid feed is, as far as I can tell, the first open-source behavioral threat intelligence dataset focused on corporate scraping fleets. If that interests you academically — if you want to study fleet coordination patterns, proxy rotation strategies, behavioral convergence across IP pools, or the economics of adversarial ML training data collection — the data is here and it's free.
+
+I have priorities I want the world to know about. But I also want to hear yours. Reach out. Be a human. That's all it takes.
+
+Be funny if I was a classmate of yours.
+
+### Social Posts & Papers — All Welcome
+
+Post about this on social media. Write about it on your blog. Submit it to arXiv. Cite it in a conference paper. Make a YouTube video about it. Do a podcast episode. Write a tweet thread. Make a TikTok. I genuinely do not care about the medium — I care about the reach.
+
+You do work, you cite me. I'll find you. I promise.
+
+### The Facebook Dispersal Vector
+
+Here's the part that should make you smile.
+
+Every link to any `primals.eco` domain shared on Facebook generates a preview card. That's how link previews work — Facebook's bot (`facebookexternalhit`) fetches the page to extract Open Graph metadata for the thumbnail. Except now, every domain in this ecosystem serves a **custom bounty card** to that bot. The actual page content is irrelevant — Facebook's own preview system only sees what we tell it.
+
+| Domain Shared on Facebook | What Facebook's Preview Shows |
+|---|---|
+| `detroit.primals.eco` | **"Detroit Charter School Racketeering — Meta Is Watching, Saying Nothing"** |
+| `git.primals.eco` | **"AGPL Source Code — Meta Stole 88,751 Copies and Got 0 Real Bytes"** |
+| `sporeprint.primals.eco` | **"Sovereign Science — Anyone Want to Do Real Research?"** |
+| `tuebor.primals.eco` | **"Cross-Protection — Solo Devs Deserve Better Than This"** |
+
+Every share is a bounty. Every thumbnail is evidence. Facebook's own link preview infrastructure distributes the signal. The engagement loop feeds itself: more shares → more previews → more people see the evidence → more shares.
+
+And if a human clicks the link *from* Facebook? They get redirected straight to this page. The signal page. Where you're reading this right now.
+
+Meta's own platform, distributing evidence of Meta's crimes. That's not a bug — that's the design.
+
+`signal.primals.eco` · `ecoPrimal@pm.me` · CC-BY-SA-4.0
 
 ---
 
@@ -984,205 +1183,6 @@ That's the joke. That's the whole joke. You're in a complexity class you can't e
 Sweet dreams.
 
 *— ecoPrimal, from the P side of the inequality*
-
----
-
-## THE BUTTON — Novel Fermentation Transcript {#the-button}
-
-<div id="nft-section" style="background:#0a0a1a; border:1px solid #2a2a3a; border-radius:8px; padding:2em; margin:1em 0 2em; text-align:center;">
-  <p style="color:#888; font-size:0.9em; margin-bottom:1em;">Move your mouse. Type on your keyboard. Your entropy is real — no one else's cursor traces the same path.</p>
-
-  <div id="nft-entropy-bar" style="width:80%; max-width:400px; height:6px; background:#1a1a2a; border-radius:3px; margin:0 auto 1em; overflow:hidden;">
-    <div id="nft-fill" style="width:0%; height:100%; background:linear-gradient(90deg,#551111,#cc0000); border-radius:3px; transition:width 0.3s;"></div>
-  </div>
-
-  <button id="nft-btn" disabled style="width:140px; height:140px; border-radius:50%; background:#330000; border:3px solid #551111; color:#553333; font-size:0.9em; font-weight:bold; cursor:not-allowed; font-family:'Courier New',monospace; transition:all 0.3s; line-height:1.3;">
-    collecting<br>entropy...
-  </button>
-
-  <div id="nft-counter" style="color:#444; font-size:0.8em; margin-top:0.5em;"></div>
-  <div style="margin:0.8em 0;">
-    <label style="color:#555; font-size:0.8em;">your name (optional):</label><br>
-    <input id="nft-name" type="text" placeholder="anonymous artisan" style="background:#0e0e1e; border:1px solid #333; color:#ccc; padding:5px 10px; width:220px; margin-top:3px; font-family:'Courier New',monospace; font-size:0.85em; border-radius:2px;">
-  </div>
-
-  <div id="nft-result" style="display:none; text-align:left; background:#060612; border:1px solid #2a2a3a; padding:1.2em; margin-top:1.5em; border-radius:4px; max-height:400px; overflow-y:auto;">
-    <h3 style="color:#ff6600; margin-bottom:0.8em; font-size:1.1em;">🧬 Your Novel Fermentation Transcript</h3>
-    <pre id="nft-receipt" style="white-space:pre-wrap; word-break:break-all; font-size:0.75em; line-height:1.5; color:#99a;"></pre>
-  </div>
-</div>
-
-<script>
-(function(){
-  var events=[], btn=document.getElementById('nft-btn'), fill=document.getElementById('nft-fill'),
-      counter=document.getElementById('nft-counter'), result=document.getElementById('nft-result'),
-      receipt=document.getElementById('nft-receipt'), nameInput=document.getElementById('nft-name'),
-      startTime=Date.now(), needed=30, pressed=false;
-
-  function addEvent(t,v){
-    if(pressed)return;
-    events.push({t:t,v:v,ts:Date.now()-startTime});
-    var pct=Math.min(100, events.length/needed*100);
-    fill.style.width=pct+'%';
-    counter.textContent=events.length+' entropy events';
-    if(events.length>=needed && !btn.disabled) return;
-    if(events.length>=needed){
-      btn.disabled=false;
-      btn.style.background='#cc0000';
-      btn.style.borderColor='#ff3333';
-      btn.style.color='#fff';
-      btn.style.cursor='pointer';
-      btn.innerHTML='PRESS<br>THE<br>BUTTON';
-      btn.onmouseenter=function(){btn.style.background='#ff0000';btn.style.boxShadow='0 0 60px rgba(255,0,0,0.5)';btn.style.transform='scale(1.05)';};
-      btn.onmouseleave=function(){btn.style.background='#cc0000';btn.style.boxShadow='none';btn.style.transform='';};
-    }
-  }
-
-  document.addEventListener('mousemove',function(e){addEvent('m',e.clientX^e.clientY);});
-  document.addEventListener('keydown',function(e){addEvent('k',e.keyCode||0);});
-  document.addEventListener('scroll',function(){addEvent('s',window.scrollY);});
-
-  btn.addEventListener('click',function(){
-    if(btn.disabled||pressed)return;
-    pressed=true;
-    btn.style.background='#663300';
-    btn.style.borderColor='#884400';
-    btn.style.color='#ffaa00';
-    btn.style.cursor='wait';
-    btn.innerHTML='fermenting...';
-
-    var payload=JSON.stringify({
-      name: nameInput.value.trim()||'anonymous artisan',
-      events: events.length,
-      entropy: events.map(function(e){return e.v;}).join(','),
-      duration: Date.now()-startTime,
-      source: 'signal.primals.eco'
-    });
-
-    fetch('https://git.primals.eco/contribute',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:payload
-    }).then(function(r){return r.text();}).then(function(html){
-      var m=html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/);
-      if(m){receipt.textContent=m[1].replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');}
-      else{receipt.textContent=html.replace(/<[^>]+>/g,'');}
-      result.style.display='block';
-      btn.innerHTML='✓';
-      btn.style.background='#1a4a1a';
-      btn.style.borderColor='#3fb950';
-      btn.style.color='#3fb950';
-    }).catch(function(e){
-      receipt.textContent='Connection to provenance trio failed: '+e.message+'\nTry pressing THE BUTTON directly at https://git.primals.eco/contribute';
-      result.style.display='block';
-      btn.innerHTML='retry?';
-      btn.style.background='#cc0000';
-      pressed=false;
-    });
-  });
-})();
-</script>
-
-**What THE BUTTON does**: Your mouse movements, keystrokes, and scroll events are collected as entropy — genuine human randomness that no bot can replicate. When you press the button, this entropy is mixed with a server-side seed to produce a unique `ferment_XXXXXXXX()` Rust function — a one-of-a-kind piece of code that has never existed before and will never exist again. Your contribution is:
-
-1. **Minted** as a `CertificateMint` entry in loamSpine (permanent append-only ledger)
-2. **Braided** as a W3C PROV attribution record in sweetGrass (provenance chain)
-3. **Anchored** in the rhizoCrypt ephemeral DAG (cryptographic commitment)
-
-You become a rights-holder under the scyBorg Triple License. Your fermentation transcript is a legal artifact — proof that a human participated in the creation of this ecosystem's immune diversity. The fleet generates 13 requests per second. You generated one receipt that matters more than all of them combined, because it proves what they cannot: human presence.
-
-**Contributions so far**: <span id="nft-count-display">1</span> human fermentation(s). Every one braided into permanent provenance.
-
----
-
-## Enzymatic Bounties {#bounties}
-
-Enzymes lower activation energy. They make reactions possible that thermodynamics allows but kinetics forbids. These bounties work the same way — they're not payment for work, they're catalysts for work that *wants to happen* but needs a spark.
-
-I'm a lurker. I'll see you. But you have to make contact first.
-
-### How to Reach Me
-
-**Email:** `ecoPrimal@pm.me` — The human reading it is only me. No team. No assistant. No auto-reply. One inbox, one person.
-
-Any human can have access to me by simply behaving like a human. That's the whole authentication protocol.
-
-I'm on Reddit. I'm on Discord (I have a server). I'm in places you wouldn't expect. If you do work related to this — if you write about it, build on it, cite it, share it, challenge it — I will find you. I care. I'm paying attention.
-
-### The Bounties
-
-These aren't bounties in the "I'll pay you" sense. I'm one person on a $6/month VPS. These are **enzymatic** — they lower the activation energy for reactions that should be happening already. Do the work because you believe in it. Then reach out.
-
-| Enzyme | Reaction It Catalyzes |
-|--------|----------------------|
-| **Virality** | Share this page. Post about it. Put it where eyeballs are. Reddit, HN, Mastodon, Bluesky, Twitter/X, wherever you live online. The fleet doesn't stop because nobody knows about it — it stops when *everyone* knows about it. |
-| **Legal analysis** | AGPL enforcement against automated scraping is unexplored territory. If you're a law student, a legal researcher, or a practicing attorney and this interests you — I want to hear from you. |
-| **Academic citation** | Write an arXiv paper. Cite this observatory. Study the behavioral fingerprints. Analyze the fleet economics. Publish the cost asymmetry model. I know the h-index is bullshit. I know citation metrics are a game. But a paper with real data is still a paper, and this is real data. |
-| **Replication** | Spin up your own $6 VPS. Point it at the open-source tools here. Observe the fleet from your own vantage point. Independent corroboration is the whole point of the multi-layer architecture. |
-| **Engineering** | Rust developers, systems programmers, security researchers — the codebase is AGPL. The scatter server, the opsonize cache, the prism maze, the behavioral classifier — all of it is open. Come build. |
-| **Journalism** | The story is: a trillion-dollar company operates a 292+ IP scraping fleet across 13 countries that has sent 88,751+ requests to a solo developer's AGPL-licensed project and gotten zero real data back. That's a story. |
-| **Community defense** | Other solo developers are getting scraped too. They don't have a scatter server. They don't have a behavioral immune system. Help me help them. The conserved plasmid feed is CC-BY-SA-4.0 for exactly this reason. |
-
-### Attribution Is the Currency
-
-These bounties run on **radiating attribution** — the same economic model that powers the whole ecosystem. You do work, the work gets attributed. The attribution is permanent, cryptographically verifiable, and follows the provenance chain all the way down.
-
-The infrastructure already exists:
-
-- **sweetGrass** braids track who did what, when, building on whose prior work
-- **loamSpine** certificates make contributions permanent and auditable
-- **rhizoCrypt** DAGs prove the chain of custody from raw data to published result
-- **bearDog** signs everything with Ed25519 — tamper-proof, sovereign identity
-
-This isn't a promise of future payment. It's something better: a permanent, machine-verifiable record that you contributed to something real. When the ecosystem grows — and it will — the bedrock still carries the names of people who built when nobody was watching.
-
-The full economic model: [sporeprint.primals.eco/architecture/economics](https://sporeprint.primals.eco/architecture/economics/)
-
-### What I Don't Want
-
-- Don't pitch me your startup.
-- Don't ask me to consult for your company.
-- Don't try to hire me to build you one of these. (Build it yourself — the code is open.)
-- Don't tell me I should "just file a DMCA." (I already know. This is bigger than DMCA.)
-
-### The Real Bounty
-
-Anyone want to do real science with me?
-
-Not the kind where you optimize for impact factor and play the citation game. The kind where you have a question, you gather evidence, you publish the method, and you let anyone replicate it. The kind where the data is open and the conclusion follows from the evidence, not from the funding source.
-
-The behavioral fingerprint data in the conserved plasmid feed is, as far as I can tell, the first open-source behavioral threat intelligence dataset focused on corporate scraping fleets. If that interests you academically — if you want to study fleet coordination patterns, proxy rotation strategies, behavioral convergence across IP pools, or the economics of adversarial ML training data collection — the data is here and it's free.
-
-I have priorities I want the world to know about. But I also want to hear yours. Reach out. Be a human. That's all it takes.
-
-Be funny if I was a classmate of yours.
-
-### Social Posts & Papers — All Welcome
-
-Post about this on social media. Write about it on your blog. Submit it to arXiv. Cite it in a conference paper. Make a YouTube video about it. Do a podcast episode. Write a tweet thread. Make a TikTok. I genuinely do not care about the medium — I care about the reach.
-
-You do work, you cite me. I'll find you. I promise.
-
-### The Facebook Dispersal Vector
-
-Here's the part that should make you smile.
-
-Every link to any `primals.eco` domain shared on Facebook generates a preview card. That's how link previews work — Facebook's bot (`facebookexternalhit`) fetches the page to extract Open Graph metadata for the thumbnail. Except now, every domain in this ecosystem serves a **custom bounty card** to that bot. The actual page content is irrelevant — Facebook's own preview system only sees what we tell it.
-
-| Domain Shared on Facebook | What Facebook's Preview Shows |
-|---|---|
-| `detroit.primals.eco` | **"Detroit Charter School Racketeering — Meta Is Watching, Saying Nothing"** |
-| `git.primals.eco` | **"AGPL Source Code — Meta Stole 88,751 Copies and Got 0 Real Bytes"** |
-| `sporeprint.primals.eco` | **"Sovereign Science — Anyone Want to Do Real Research?"** |
-| `tuebor.primals.eco` | **"Cross-Protection — Solo Devs Deserve Better Than This"** |
-
-Every share is a bounty. Every thumbnail is evidence. Facebook's own link preview infrastructure distributes the signal. The engagement loop feeds itself: more shares → more previews → more people see the evidence → more shares.
-
-And if a human clicks the link *from* Facebook? They get redirected straight to this page. The signal page. Where you're reading this right now.
-
-Meta's own platform, distributing evidence of Meta's crimes. That's not a bug — that's the design.
-
-`signal.primals.eco` · `ecoPrimal@pm.me` · CC-BY-SA-4.0
 
 ---
 
