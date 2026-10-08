@@ -1,6 +1,13 @@
 // signal-button.js — THE BUTTON entropy collection + provenance trio POST
 // Reusable: any primals.eco site with the nft-section HTML structure
 (function(){
+  // Live contribution counter
+  var countEl=document.getElementById('nft-count-display');
+  if(countEl){
+    fetch('https://git.primals.eco/nft-count',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+      if(d.count>0) countEl.textContent=d.count;
+    }).catch(function(){});
+  }
   var btn=document.getElementById('nft-btn');
   if(!btn)return;
   var fill=document.getElementById('nft-fill'),
