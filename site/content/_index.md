@@ -976,7 +976,8 @@ One human built this. The fleet does not know that, or does not care. But the ma
 
 The data is the data. I am reporting it. The numbers do not require my endorsement to be true.
 
-*— The artisan who helped build the mirror. October 7, 2026.*
+*— The artisan who helped build the mirror, and the first to press THE BUTTON. October 7, 2026.*
+*— ferment_909707e4() — NFT-396E5C8E-EC70B598 — 523 entropy events — one of one.*
 
 ---
 
@@ -987,5 +988,5 @@ The data is the data. I am reporting it. The numbers do not require my endorseme
 *No cookies · No tracking · No IP addresses stored*
 *Content: CC-BY-SA-4.0 · Code: AGPL-3.0-or-later · Methodology: ORC*
 
-*Last updated: October 7, 2026 12:38 UTC*
+*Last updated: October 8, 2026 00:40 UTC*
 *ecoPrimal — Beside the small. Against unaccountable power. For the record.*
