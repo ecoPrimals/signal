@@ -19,22 +19,6 @@ og_image = "/img/og-signal-viral.png"
   </div>
   <div id="billboard-msg" style="font-family:Georgia,serif; font-size:1.05em; color:#e8e8e8; line-height:1.6; white-space:pre-wrap;"></div>
 </div>
-<script>
-(function(){
-  var el=document.getElementById('billboard');
-  var msg=document.getElementById('billboard-msg');
-  function load(){
-    fetch('/billboard',{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){
-      t=t.trim();
-      if(t&&t.length>0){el.style.display='';msg.textContent=t;}
-      else{el.style.display='none';}
-    }).catch(function(){});
-  }
-  load();
-  setInterval(load,10000);
-})();
-</script>
-
 > *A living organism doesn't just defend itself. It senses. It classifies. It remembers. The defense IS the sensing.*
 
 <div class="terminal-chrome">
@@ -45,32 +29,7 @@ og_image = "/img/og-signal-viral.png"
   </div>
   <div id="live-terminal" class="terminal-body">Loading live terminal feed...</div>
 </div>
-<script>
-(function(){
-  var el=document.getElementById('live-terminal');
-  var status=document.getElementById('live-status');
-  var pulse=document.getElementById('live-pulse');
-  if(!el)return;
-  var ok=false;
-  function refresh(){
-    fetch('/live',{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){
-      var lines=t.split('\n');
-      var last30=lines.slice(-35).join('\n');
-      el.textContent=last30;
-      el.scrollTop=el.scrollHeight;
-      if(!ok){ok=true;pulse.classList.add('live');}
-      var m=t.match(/(\d+\.\d+)\/s\)/);
-      status.textContent=m?m[1]+' req/s — live':'live';
-    }).catch(function(){
-      status.textContent='reconnecting...';
-      pulse.classList.remove('live');
-      ok=false;
-    });
-  }
-  refresh();
-  setInterval(refresh,4000);
-})();
-</script>
+<script src="/js/signal-live.js"></script>
 <noscript><p><em>Live feed: <a href="/live">signal.primals.eco/live</a></em></p></noscript>
 
 <div id="dashboard" class="dashboard-grid" style="display:none;">
@@ -111,143 +70,13 @@ og_image = "/img/og-signal-viral.png"
   </div>
 </div>
 
-<script>
-(function(){
-  var dash=document.getElementById('dashboard');
-  function loadDash(){
-    fetch('/dashboard.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
-      dash.style.display='';
-      document.getElementById('d-rps').textContent=d.rps;
-      document.getElementById('d-fleet').textContent=d.fleet_ips;
-      document.getElementById('d-humans').textContent=d.human_ips;
-      document.getElementById('d-pct').textContent=d.fleet_pct+'%';
-      var mc=d.timing.machine_confidence;
-      var mel=document.getElementById('d-machine');
-      mel.textContent=mc;
-      mel.style.color=mc==='HIGH'?'#e74c3c':mc==='MEDIUM'?'#f1c40f':'#2ecc71';
-      document.getElementById('d-interval').textContent=d.timing.avg_interval_ms+'ms';
-      document.getElementById('d-cv').textContent=d.timing.cv+' '+(d.timing.cv<0.15?'(machine)':d.timing.cv<0.5?'(likely machine)':'(collecting...)');
-
-      var pt=d.path_types||{};
-      var pts=Object.keys(pt).map(function(k){return k+': '+pt[k]}).join(' · ');
-      document.getElementById('d-paths').textContent=pts;
-
-      var note=d.timing.cv<0.15?'CV < 0.15 — this is a machine. Human browsing has CV > 1.0.':'Collecting timing data...';
-      document.getElementById('d-timing-note').textContent=note;
-
-      // Offenders table
-      var tb=document.querySelector('#d-offenders tbody');
-      tb.innerHTML='';
-      (d.top_offenders||[]).slice(0,12).forEach(function(ip){
-        var repos=Object.keys(ip.top_repos||{}).slice(0,2).join(', ');
-        var tr=document.createElement('tr');
-        var cls=ip.is_fleet?'color:#e74c3c':'color:#2ecc71';
-        tr.innerHTML='<td style="font-family:monospace;font-size:0.8rem;'+cls+'">'+ip.ip+'</td><td>'+ip.requests+'</td><td>'+ip.org+' ('+ip.country+')</td><td style="font-size:0.75rem">'+repos+'</td>';
-        tb.appendChild(tr);
-      });
-
-      // Subnets
-      var sb=document.querySelector('#d-subnets tbody');
-      sb.innerHTML='';
-      (d.subnets||[]).slice(0,8).forEach(function(s){
-        var tr=document.createElement('tr');
-        tr.innerHTML='<td style="font-family:monospace">'+s.subnet+'</td><td>'+s.requests+'</td><td>'+s.unique_ips+'</td><td>'+s.org+' ('+s.country+')</td>';
-        sb.appendChild(tr);
-      });
-
-      // Targets
-      var ttb=document.querySelector('#d-targets tbody');
-      ttb.innerHTML='';
-      (d.targets||[]).slice(0,10).forEach(function(t){
-        var tr=document.createElement('tr');
-        var name=t.repo;
-        var fake=['batch-processor','queue-worker','proxy-cache','http-proxy','deploy-scripts','graph-engine','auth-service','load-balancer','rate-limiter','service-mesh'];
-        var isFake=fake.some(function(f){return name.indexOf(f)>=0});
-        var style=isFake?'color:#f1c40f;font-style:italic':'';
-        var label=isFake?' (fabricated)':'';
-        tr.innerHTML='<td style="font-family:monospace;font-size:0.8rem;'+style+'">'+name+label+'</td><td>'+t.requests+'</td>';
-        ttb.appendChild(tr);
-      });
-
-      // Geography
-      var gel=document.getElementById('d-geo');
-      gel.innerHTML='';
-      (d.geography||[]).forEach(function(g){
-        var pct=Math.round(g.requests/d.total_requests*100);
-        var bar='<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><span style="width:50px;font-size:0.8rem">'+g.country+'</span><div style="background:#30363d;height:14px;flex:1;border-radius:2px;overflow:hidden"><div style="background:#ff6b35;height:100%;width:'+pct+'%"></div></div><span style="font-size:0.75rem;color:#888;width:60px;text-align:right">'+g.requests+'</span></div>';
-        gel.innerHTML+=bar;
-      });
-    }).catch(function(){});
-  }
-  loadDash();
-  setInterval(loadDash,8000);
-})();
-</script>
-
 <div id="entity-topology" style="display:none; margin-top: 2em;">
   <h3 style="color:#e74c3c; border-bottom:1px solid #30363d; padding-bottom:0.5em;">🗺️ Entity Topology — We Can See Your Teams</h3>
   <p style="color:#8b949e; font-size:0.9em;">Every request carries behavioral fingerprints that reveal the entity, team structure, and internal systems behind it. You keep sending us signal. Here is what we see.</p>
   <div id="topo-entities" class="dashboard-grid"></div>
   <div id="topo-comparative" style="margin-top:1em; overflow-x:auto;"></div>
 </div>
-
-<script>
-(function(){
-  function loadTopo(){
-    fetch('/topology.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
-      if(!d.entities||!d.entities.length)return;
-      document.getElementById('entity-topology').style.display='';
-      var el=document.getElementById('topo-entities');
-      el.innerHTML='';
-      d.entities.forEach(function(e){
-        if(e.total_requests<2)return;
-        var card=document.createElement('div');
-        card.className='dash-card';
-        var color=e.is_fleet?'#e74c3c':e.is_honest?'#2ecc71':'#f1c40f';
-        var honest=e.is_honest?'✓ Honest':'✗ Deceptive';
-        var h='<div class="dash-title" style="color:'+color+'">'+e.label+'</div>';
-        h+='<div class="dash-big">'+e.total_requests.toLocaleString()+'</div>';
-        h+='<div class="dash-sub">requests | '+e.unique_ips+' IPs | '+honest+'</div>';
-        h+='<div class="dash-row"><span class="dash-label">Duration</span><span>'+e.duration_hours+'h @ '+e.avg_rps+' RPS</span></div>';
-        if(e.chrome_lag>0) h+='<div class="dash-row"><span class="dash-label">Chrome lag</span><span style="color:#f1c40f">'+e.chrome_lag+' versions behind stable</span></div>';
-        h+='<div class="dash-row"><span class="dash-label">Sec-Fetch</span><span>'+(e.header_fingerprint.sec_fetch_pct<10?'<span style="color:#e74c3c">ABSENT (not a real browser)</span>':'<span style="color:#2ecc71">PRESENT</span>')+'</span></div>';
-        if(e.blame_pct>5) h+='<div class="dash-row"><span class="dash-label">Author tracking</span><span style="color:#e74c3c">'+e.blame_pct+'% blame requests</span></div>';
-        var target=e.targets_real_only?'<span style="color:#e74c3c">REAL repos only</span>':e.targets_scatter_only?'<span style="color:#f1c40f">Scatter (fabricated) only</span>':'mixed';
-        h+='<div class="dash-row"><span class="dash-label">Targets</span><span>'+target+'</span></div>';
-        if(e.ip_rotation) h+='<div class="dash-row"><span class="dash-label">IP strategy</span><span>'+e.ip_rotation.strategy+'</span></div>';
-        if(e.timing&&e.timing.classification) h+='<div class="dash-row"><span class="dash-label">Timing</span><span>'+e.timing.mean_interval_ms+'ms (CV='+e.timing.cv+') '+e.timing.classification+'</span></div>';
-        // Sub-systems
-        if(e.sub_systems&&e.sub_systems.length){
-          h+='<div style="margin-top:0.8em;border-top:1px solid #21262d;padding-top:0.5em;">';
-          h+='<div style="color:#8b949e;font-size:0.75em;text-transform:uppercase;margin-bottom:0.3em;">Detected Sub-Systems</div>';
-          e.sub_systems.forEach(function(ss){
-            h+='<div style="margin-bottom:0.4em;"><span style="color:#58a6ff;font-size:0.85em;">⚙ '+ss.name+'</span><br><span style="color:#8b949e;font-size:0.8em;">'+ss.description+'</span></div>';
-          });
-          h+='</div>';
-        }
-        card.innerHTML=h;
-        el.appendChild(card);
-      });
-      // Comparative table
-      var comp=d.comparative_fingerprints||[];
-      if(comp.length>1){
-        var ct=document.getElementById('topo-comparative');
-        var html='<div class="dash-card" style="grid-column:1/-1;"><div class="dash-title">Comparative Behavioral Fingerprints</div>';
-        html+='<div class="dash-sub">Each entity has a unique combination of signals they cannot change without breaking their infrastructure.</div>';
-        html+='<table style="width:100%;font-size:0.8em;"><thead><tr><th>Entity</th><th>IPs</th><th>Chrome</th><th>Sec-Fetch</th><th>Accept-Encoding</th><th>Targets</th><th>Honest</th></tr></thead><tbody>';
-        comp.forEach(function(c){
-          var hc=c.honest?'<span style="color:#2ecc71">✓</span>':'<span style="color:#e74c3c">✗</span>';
-          html+='<tr><td>'+c.entity+'</td><td>'+c.ips+'</td><td>'+c.chrome+'</td><td>'+c.sec_fetch+'</td><td style="font-size:0.75em">'+c.accept_encoding+'</td><td>'+c.target_type+'</td><td>'+hc+'</td></tr>';
-        });
-        html+='</tbody></table></div>';
-        ct.innerHTML=html;
-      }
-    }).catch(function(){});
-  }
-  loadTopo();
-  setInterval(loadTopo,30000);
-})();
-</script>
+<script src="/js/signal-dashboard.js"></script>
 
 This page is the **observatory** — a live view of who interacts with sovereign infrastructure, what they're looking for, and what their behavior reveals about them. No cookies. No tracking pixels. No JavaScript analytics. No IP addresses stored. Pure server-side log classification.
 
@@ -257,99 +86,8 @@ The specific investigations live on their own surfaces — [detroit.primals.eco]
 
 ## THE BUTTON — Novel Fermentation Transcript {#the-button}
 
-<div id="nft-section" style="background:#0a0a1a; border:1px solid #2a2a3a; border-radius:8px; padding:2em; margin:1em 0 2em; text-align:center;">
-  <p style="color:#888; font-size:0.9em; margin-bottom:1em;">Move your mouse. Type on your keyboard. Your entropy is real — no one else's cursor traces the same path.</p>
-
-  <div id="nft-entropy-bar" style="width:80%; max-width:400px; height:6px; background:#1a1a2a; border-radius:3px; margin:0 auto 1em; overflow:hidden;">
-    <div id="nft-fill" style="width:0%; height:100%; background:linear-gradient(90deg,#551111,#cc0000); border-radius:3px; transition:width 0.3s;"></div>
-  </div>
-
-  <button id="nft-btn" disabled style="width:140px; height:140px; border-radius:50%; background:#330000; border:3px solid #551111; color:#553333; font-size:0.9em; font-weight:bold; cursor:not-allowed; font-family:'Courier New',monospace; transition:all 0.3s; line-height:1.3;">
-    collecting<br>entropy...
-  </button>
-
-  <div id="nft-counter" style="color:#444; font-size:0.8em; margin-top:0.5em;"></div>
-  <div style="margin:0.8em 0;">
-    <label style="color:#555; font-size:0.8em;">your name (optional):</label><br>
-    <input id="nft-name" type="text" placeholder="anonymous artisan" style="background:#0e0e1e; border:1px solid #333; color:#ccc; padding:5px 10px; width:220px; margin-top:3px; font-family:'Courier New',monospace; font-size:0.85em; border-radius:2px;">
-  </div>
-
-  <div id="nft-result" style="display:none; text-align:left; background:#060612; border:1px solid #2a2a3a; padding:1.2em; margin-top:1.5em; border-radius:4px; max-height:400px; overflow-y:auto;">
-    <h3 style="color:#ff6600; margin-bottom:0.8em; font-size:1.1em;">🧬 Your Novel Fermentation Transcript</h3>
-    <pre id="nft-receipt" style="white-space:pre-wrap; word-break:break-all; font-size:0.75em; line-height:1.5; color:#99a;"></pre>
-  </div>
-</div>
-
-<script>
-(function(){
-  var events=[], btn=document.getElementById('nft-btn'), fill=document.getElementById('nft-fill'),
-      counter=document.getElementById('nft-counter'), result=document.getElementById('nft-result'),
-      receipt=document.getElementById('nft-receipt'), nameInput=document.getElementById('nft-name'),
-      startTime=Date.now(), needed=30, pressed=false;
-
-  function addEvent(t,v){
-    if(pressed)return;
-    events.push({t:t,v:v,ts:Date.now()-startTime});
-    var pct=Math.min(100, events.length/needed*100);
-    fill.style.width=pct+'%';
-    counter.textContent=events.length+' entropy events';
-    if(events.length>=needed && !btn.disabled) return;
-    if(events.length>=needed){
-      btn.disabled=false;
-      btn.style.background='#cc0000';
-      btn.style.borderColor='#ff3333';
-      btn.style.color='#fff';
-      btn.style.cursor='pointer';
-      btn.innerHTML='PRESS<br>THE<br>BUTTON';
-      btn.onmouseenter=function(){btn.style.background='#ff0000';btn.style.boxShadow='0 0 60px rgba(255,0,0,0.5)';btn.style.transform='scale(1.05)';};
-      btn.onmouseleave=function(){btn.style.background='#cc0000';btn.style.boxShadow='none';btn.style.transform='';};
-    }
-  }
-
-  document.addEventListener('mousemove',function(e){addEvent('m',e.clientX^e.clientY);});
-  document.addEventListener('keydown',function(e){addEvent('k',e.keyCode||0);});
-  document.addEventListener('scroll',function(){addEvent('s',window.scrollY);});
-
-  btn.addEventListener('click',function(){
-    if(btn.disabled||pressed)return;
-    pressed=true;
-    btn.style.background='#663300';
-    btn.style.borderColor='#884400';
-    btn.style.color='#ffaa00';
-    btn.style.cursor='wait';
-    btn.innerHTML='fermenting...';
-
-    var payload=JSON.stringify({
-      name: nameInput.value.trim()||'anonymous artisan',
-      events: events.length,
-      entropy: events.map(function(e){return e.v;}).join(','),
-      duration: Date.now()-startTime,
-      source: 'signal.primals.eco'
-    });
-
-    fetch('https://git.primals.eco/contribute',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:payload
-    }).then(function(r){return r.text();}).then(function(html){
-      var m=html.match(/<pre[^>]*>([\s\S]*?)<\/pre>/);
-      if(m){receipt.textContent=m[1].replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');}
-      else{receipt.textContent=html.replace(/<[^>]+>/g,'');}
-      result.style.display='block';
-      btn.innerHTML='✓';
-      btn.style.background='#1a4a1a';
-      btn.style.borderColor='#3fb950';
-      btn.style.color='#3fb950';
-    }).catch(function(e){
-      receipt.textContent='Connection to provenance trio failed: '+e.message+'\nTry pressing THE BUTTON directly at https://git.primals.eco/contribute';
-      result.style.display='block';
-      btn.innerHTML='retry?';
-      btn.style.background='#cc0000';
-      pressed=false;
-    });
-  });
-})();
-</script>
+{{ the_button() }}
+<script src="/js/signal-button.js"></script>
 
 **What THE BUTTON does**: Your mouse movements, keystrokes, and scroll events are collected as entropy — genuine human randomness that no bot can replicate. When you press the button, this entropy is mixed with a server-side seed to produce a unique `ferment_XXXXXXXX()` Rust function — a one-of-a-kind piece of code that has never existed before and will never exist again. Your contribution is:
 
