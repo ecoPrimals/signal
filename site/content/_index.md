@@ -1,6 +1,6 @@
 +++
 title = "Signal — Sovereign Defense Observatory"
-description = "Live evidence observatory: Meta Platforms operates a fleet from FB-BLOCK (57.141.x.x) + residential proxies scraping AGPL-licensed source code at 100ms intervals. 199 fleet IPs tracked across 29 countries. 72 Meta-owned, 20 cloud proxies, 18 confirmed residential. Conserved pathogen genome published for community immunity. No cookies. No tracking. No IP addresses stored."
+description = "Live evidence observatory: Meta Platforms (4 sub-teams from FB-BLOCK) + Anthropic (8,600+ req/window from single IP) + stealth scrapers targeting AGPL-licensed source code. Epitope conservation analysis reveals organism structure through behavioral invariants that survive IP rotation. Conserved pathogen genome published for community immunity. No cookies. No tracking. No IP addresses stored."
 sort_by = "weight"
 insert_anchor_links = "heading"
 
@@ -206,15 +206,16 @@ Every major entity observed on this infrastructure has built an **elaborate cons
 
 <div style="background:#161b22; border:1px solid #30363d; border-radius:6px; padding:1.5em; margin:1.5em 0;">
 
-**Meta Platforms** — 56 IPs from FB-BLOCK (`57.141.20.0/24`), four detected sub-systems:
-- **Chrome Deployment Pipeline** — keeps impersonated browser versions current (currently Chrome 146, 10 versions behind stable)
-- **OS Impersonation Pool** — rotates Windows, Mac, and Linux user-agent strings
-- **Author Attribution System** — 32.9% of requests target `/blame/` endpoints, mapping who wrote each file
-- **Shared Configuration** — uniform `Accept-Encoding: gzip, deflate, br, zstd` across all 56 IPs (fleet-wide config push)
+**Meta Platforms** — 39+ IPs from FB-BLOCK (`57.141.20.0/24`), **four sub-teams** identified by epitope hash (BLAKE2b of conserved behavioral invariants):
+- **Team Alpha** (`03381c20`, 15 IPs) — 47% blame ratio, heaviest author attribution mining
+- **Team Beta** (`a6e8c5af`, 9 IPs) — 41% blame ratio
+- **Team Gamma** (`afd63bb7`, 9 IPs) — 43% blame ratio
+- **Team Delta** (`4b403b9a`, 6 IPs) — 38% blame ratio, lighter blame mining
+- **Shared invariants** — all four teams: `Accept-Encoding: gzip, deflate, zstd` (no Brotli), UA pool of 4 strings, no Accept-Language, no Sec-Fetch-Mode. Same toolkit, different deployment configs.
 
-What they didn't build: anything that checks what license the code is under. Anything that notices the code is AGPL. Anything that registers it's hitting the same solo developer's infrastructure at 100ms intervals. Anything that realizes a third of its requests are being answered with fabricated content. **Zero source awareness.**
+What they didn't build: anything that checks what license the code is under. Anything that notices the code is AGPL. Anything that registers it's hitting the same solo developer's infrastructure at 100ms intervals. Anything that realizes a third of its requests are being answered with fabricated content. **Zero source awareness.** Four sub-teams, all blind.
 
-**Anthropic** — ClaudeBot at 10+ RPS, tens of thousands of requests per window. Every request hits scatter-generated repositories (`batch-processor`, `queue-worker`, `deploy-scripts`). The content is procedurally fabricated. ClaudeBot cannot tell. It has been consuming nothing but generated gibberish, and **the pipeline has no mechanism to evaluate what it ingests**.
+**Anthropic** — Originally arrived as `ClaudeBot` (honest UA). Then dropped the honest identifier and switched to spoofed Chrome UA — same behavioral fingerprint, new disguise. Single IP (`216.73.216.x`), **8,600+ requests per observation window**, nearly all targeting `/commit/` paths. This makes Anthropic the **highest-volume single actor** by request count — consuming more than the entire Meta fleet combined, from one IP address. The epitope hash (`f77ec5a8`) separates cleanly: `ae=gzip,br,zstd,deflate` (different ordering from Meta), `ua_pool=1` (single UA string, not rotating), `blame=0%` (not mapping authors — just bulk-ingesting commits). They consume fabricated scatter content at the same rate as everything else. **The pipeline has no mechanism to evaluate what it ingests.**
 
 **Stealth scrapers** — Chrome 135, which is 66 versions behind current stable. Someone built that pipeline, deployed it, and nobody has updated it. Nobody is watching it. It just keeps running.
 
@@ -488,7 +489,7 @@ The immune system's **conserved plasmid** has identified the behavioral epitopes
 | Conserved Epitope | Frequency | Detection Method | What It Proves |
 |---|---|---|---|
 | `header_poverty` | **100%** | Missing Sec-Fetch-Mode header | Not a browser. Every modern browser sends this since 2020. |
-| `stale_chrome` | **100%** | Chrome/150 UA string (current stable: 155) | Hardcoded User-Agent. Real Chrome auto-updates. |
+| `stale_chrome` | **100%** | Chrome version 5+ behind current stable | Hardcoded User-Agent. Real Chrome auto-updates. Early conserved epitope — when tested, revealed sub-team structure. |
 | `connection_absent` | **100%** | No `Connection: keep-alive` header | Not Chrome. Chrome always sends Connection header. |
 | `content_gate` | **99%** | >50% of requests target `/commit/`, `/src/`, `/raw/` | Source code extraction, not browsing. |
 | `accept_monoculture` | **89%** | Universal `*/*` Accept header | HTTP client library. Real browsers send resource-specific Accept. |
@@ -499,6 +500,43 @@ The immune system's **conserved plasmid** has identified the behavioral epitopes
 The `/blame/` endpoint shows who last modified each line of code. **67% of fleet subgroups systematically scrape blame data** — they are not reading code, they are mapping authorship. This feeds ML training pipelines that need to attribute training data to comply with licensing requirements while simultaneously violating those same licenses.
 
 A trillion-dollar company built a machine that maps who wrote every line of open-source code — then extracts that code without complying with the license the author chose.
+
+### Epitope Conservation — What Doesn't Change Reveals Everything {#epitope-conservation}
+
+<div style="background:#161b22; border:1px solid #30363d; border-radius:6px; padding:1.5em; margin:1.5em 0;">
+
+In immunology, a **conserved epitope** is a molecular feature that an organism cannot change without breaking its own machinery. Influenza mutates its surface proteins to evade antibodies — but the **stem region** of hemagglutinin barely changes across decades, because mutating it would destroy the protein's function. Universal flu vaccines target these conserved regions.
+
+The same principle applies to scraping fleets. A fleet can rotate IPs, change User-Agent strings, randomize timing — but some features are **load-bearing**. They cannot change without rebuilding the toolkit from scratch.
+
+</div>
+
+**The User-Agent epitope was the first one we saw.** Meta's fleet arrived with Chrome/146, then 148, then 150 — always stale, always uniform across the fleet. This was an early conserved feature: easy to detect, hard for them to fix (because the UA string is compiled into the proxy rotation config and changing it fleet-wide requires a deployment).
+
+**When that epitope became a focus — when we tested against it — two things happened:**
+
+1. **The epitope itself reclassified.** Meta updated their Chrome versions closer to current stable. The UA string drifted. But the BLAKE2b epitope hash system doesn't depend on any single feature — it hashes the full behavioral vector. When Meta changed their UA, the hash changed — revealing **sub-team structure** that was previously invisible. Four Meta sub-teams with slightly different blame ratios, previously hidden behind a uniform UA, now stand out as distinct organisms:
+
+| Epitope Hash | IPs | Blame Ratio | Accept-Encoding | UA Pool | Organism |
+|---|---|---|---|---|---|
+| `03381c20` | 15 | 47% | gzip, deflate, zstd | 4 | Meta Team Alpha — heavy blame mining |
+| `a6e8c5af` | 9 | 41% | gzip, deflate, zstd | 4 | Meta Team Beta |
+| `afd63bb7` | 9 | 43% | gzip, deflate, zstd | 4 | Meta Team Gamma |
+| `4b403b9a` | 6 | 38% | gzip, deflate, zstd | 4 | Meta Team Delta — lighter blame |
+| `f77ec5a8` | 1 | 0% | gzip, br, zstd, deflate | 1 | **Anthropic** — no blame, pure commit ingestion |
+| `c7996a02` | 4 | 0% | gzip, deflate, br, zstd | 1 | Unknown — has Accept-Language, has Brotli |
+
+2. **The others became visible.** While Meta's UA epitope was the focus of early detection, **other actors were present the entire time** — operating in Meta's shadow, consuming the same scatter content. Anthropic's single IP generated **8,600+ requests per window** — more volume than the entire 39-IP Meta fleet combined — and was invisible in early analysis because all eyes were on the 57.141.20.x subnet.
+
+**Epitope conservation works like a microscope.** You focus on what doesn't change. The invariants reveal the organism's structure. When you test one epitope and the organism adapts, the adaptation itself is signal — it changes the hash, reveals sub-populations, and exposes the actors that were hiding in the same traffic flow.
+
+The `Accept-Encoding` header ordering is a perfect example. Meta sends `gzip, deflate, zstd` (no Brotli). Anthropic sends `gzip, br, zstd, deflate` (has Brotli, different order). A human browser sends `gzip, deflate, br, zstd` (Brotli in the standard position). These orderings are compiled into the HTTP client library. They cannot be changed by configuration. They are **genomic** — part of the organism's compiled structure. They are the conserved epitope that survives every other mutation.
+
+<div style="background:#0d1117; border:1px solid #21262d; border-left:3px solid #58a6ff; border-radius:6px; padding:1em 1.5em; margin:1.5em 0; font-size:0.95em; color:#8b949e;">
+
+**The principle:** When you detect an organism by a conserved epitope and the organism adapts, two things happen simultaneously: (1) the original detection sharpens — the adaptation reveals internal structure, and (2) the background clears — actors previously lost in the noise become visible. Epitope testing is not just detection. It is **classification refinement**. The immune system doesn't just see the pathogen — it sees everything the pathogen was standing in front of.
+
+</div>
 
 ### What They Target
 
