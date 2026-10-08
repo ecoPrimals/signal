@@ -1,4 +1,4 @@
-// signal-dashboard.js — Dashboard + entity topology loaders
+// signal-dashboard.js — Dashboard + entity topology + epitope organisms + geo subdivision
 // Fetches /dashboard.json and /topology.json, populates the dashboard grid
 (function(){
   var dash=document.getElementById('dashboard');
@@ -49,15 +49,234 @@
         tr.innerHTML='<td style="font-family:monospace;font-size:0.8rem;'+style+'">'+name+(isFake?' (fabricated)':'')+'</td><td>'+t.requests+'</td>';
         ttb.appendChild(tr);
       });
-      // Geography
-      var gel=document.getElementById('d-geo');
-      gel.innerHTML='';
-      (d.geography||[]).forEach(function(g){
-        var pct=Math.round(g.requests/d.total_requests*100);
-        gel.innerHTML+='<div style="display:flex;align-items:center;gap:8px;margin:3px 0"><span style="width:50px;font-size:0.8rem">'+g.country+'</span><div style="background:#30363d;height:14px;flex:1;border-radius:2px;overflow:hidden"><div style="background:#ff6b35;height:100%;width:'+pct+'%"></div></div><span style="font-size:0.75rem;color:#888;width:60px;text-align:right">'+g.requests+'</span></div>';
-      });
+
+      // ── Epitope Organisms ──
+      renderEpitopes(d.epitope_clusters||[], d.epitope_summary||{}, d.total_requests||0);
+
+      // ── Geography with subdivision ──
+      renderGeo(d.geography||[], d.total_requests||0, d.subnets||[], d.top_offenders||[], d.asn_types||{});
     }).catch(function(){});
   }
+
+  // ── Epitope Organism Renderer ──
+  function renderEpitopes(clusters, summary, total) {
+    var el=document.getElementById('d-epitopes');
+    if(!el)return;
+    el.innerHTML='';
+    if(!clusters.length){el.innerHTML='<span style="color:#6e7681">Collecting epitope data...</span>';return;}
+
+    // Summary bar
+    var bar=document.createElement('div');
+    bar.style.cssText='display:flex;gap:1em;margin-bottom:1em;flex-wrap:wrap;';
+    bar.innerHTML='<div style="text-align:center"><div style="font-size:1.8em;color:#58a6ff">'+summary.unique_hashes+'</div><div style="font-size:0.7em;color:#6e7681">organisms</div></div>'
+      +'<div style="text-align:center"><div style="font-size:1.8em;color:#e74c3c">'+summary.largest_cluster+'</div><div style="font-size:0.7em;color:#6e7681">largest cluster</div></div>'
+      +'<div style="text-align:center"><div style="font-size:1.8em;color:#f1c40f">'+summary.total_hashed+'</div><div style="font-size:0.7em;color:#6e7681">IPs hashed</div></div>'
+      +'<div style="text-align:center"><div style="font-size:1.8em;color:#2ecc71">'+summary.clusters_gt1+'</div><div style="font-size:0.7em;color:#6e7681">multi-IP organisms</div></div>';
+    el.appendChild(bar);
+
+    // Organism cards
+    var grid=document.createElement('div');
+    grid.style.cssText='display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.8em;';
+
+    clusters.forEach(function(c){
+      var card=document.createElement('div');
+      var isFleet=!c.has_lang&&c.ua_pool_size>1;
+      var isMeta=(c.sample_ae||'').indexOf('gzip, deflate, zstd')===0&&!c.has_lang&&c.ua_pool_size>=4;
+      var isAnthropic=c.ips===1&&(c.sample_ae||'').indexOf('gzip, br, zstd')===0;
+      var isSelf=c.has_lang&&c.ips===1&&(c.sample_ae||'').indexOf('br, zstd')>0;
+
+      var borderColor=isMeta?'#e74c3c':isAnthropic?'#ff6b35':isSelf?'#2ecc71':'#f1c40f';
+      var label=isMeta?'Meta (FB-BLOCK)':isAnthropic?'Anthropic':isSelf?'Self (house)':'Unknown organism';
+
+      card.style.cssText='background:#161b22;border:1px solid #21262d;border-left:3px solid '+borderColor+';border-radius:6px;padding:1em;';
+
+      var h='<div style="display:flex;justify-content:space-between;align-items:center">';
+      h+='<span style="color:'+borderColor+';font-weight:600;font-size:0.95em">'+label+'</span>';
+      h+='<code style="font-size:0.7em;color:#6e7681;background:#0d1117;padding:2px 6px;border-radius:3px">'+c.hash+'</code></div>';
+
+      h+='<div style="font-size:1.6em;color:#c9d1d9;margin:0.3em 0">'+c.ips+' <span style="font-size:0.5em;color:#6e7681">IP'+(c.ips>1?'s':'')+'</span></div>';
+
+      // Behavioral fingerprint bars
+      h+='<div style="font-size:0.75em;color:#8b949e;margin-top:0.5em">';
+      h+='<div style="display:flex;justify-content:space-between;margin:2px 0"><span>Accept-Encoding</span><code style="color:#c9d1d9;font-size:0.9em">'+(c.sample_ae||'?')+'</code></div>';
+      h+='<div style="display:flex;justify-content:space-between;margin:2px 0"><span>UA pool</span><span style="color:'+(c.ua_pool_size>3?'#e74c3c':'#c9d1d9')+'">'+c.ua_pool_size+' string'+(c.ua_pool_size>1?'s':'')+'</span></div>';
+
+      if(c.blame_ratio>0){
+        var bpct=Math.round(c.blame_ratio*100);
+        h+='<div style="display:flex;justify-content:space-between;margin:2px 0"><span>Blame ratio</span><span style="color:#e74c3c">'+bpct+'% <span style="color:#6e7681">(author mining)</span></span></div>';
+        h+='<div style="background:#30363d;height:4px;border-radius:2px;margin:3px 0;overflow:hidden"><div style="background:#e74c3c;height:100%;width:'+bpct+'%"></div></div>';
+      }
+
+      h+='<div style="display:flex;justify-content:space-between;margin:2px 0"><span>Accept-Language</span><span style="color:'+(c.has_lang?'#2ecc71':'#e74c3c')+'">'+(c.has_lang?'present':'ABSENT')+'</span></div>';
+      h+='</div>';
+
+      // Conserved epitope indicators
+      var conserved=[];
+      if(!c.has_lang) conserved.push('no-lang');
+      if((c.sample_ae||'').indexOf('br')<0) conserved.push('no-brotli');
+      if(c.ua_pool_size>3) conserved.push('ua-pool');
+      if(c.blame_ratio>0.1) conserved.push('blame');
+      if(conserved.length){
+        h+='<div style="margin-top:0.5em;display:flex;gap:4px;flex-wrap:wrap">';
+        conserved.forEach(function(tag){
+          var tc=tag==='blame'?'#e74c3c':tag==='no-brotli'?'#ff6b35':'#f1c40f';
+          h+='<span style="font-size:0.65em;background:'+tc+'22;color:'+tc+';padding:1px 6px;border-radius:3px;border:1px solid '+tc+'44">'+tag+'</span>';
+        });
+        h+='</div>';
+      }
+
+      card.innerHTML=h;
+      grid.appendChild(card);
+    });
+
+    el.appendChild(grid);
+  }
+
+  // ── Geographic Subdivision Renderer ──
+  // Progressive: country → region → city → org → subnet → fiber
+  function renderGeo(geo, total, subnets, offenders, asnTypes) {
+    var gel=document.getElementById('d-geo');
+    if(!gel)return;
+    gel.innerHTML='';
+
+    if(!geo.length){gel.innerHTML='<span style="color:#6e7681">Collecting geographic data...</span>';return;}
+
+    // ASN type summary bar
+    if(asnTypes&&Object.keys(asnTypes).length){
+      var asnBar=document.createElement('div');
+      asnBar.style.cssText='display:flex;gap:8px;margin-bottom:1em;flex-wrap:wrap;';
+      var asnTotal=Object.values(asnTypes).reduce(function(a,b){return a+b},0);
+      Object.keys(asnTypes).sort(function(a,b){return asnTypes[b]-asnTypes[a]}).forEach(function(t){
+        var pct=asnTotal>0?Math.round(asnTypes[t]/asnTotal*100):0;
+        var tc=t==='datacenter'?'#e74c3c':t==='cloud'?'#f1c40f':t==='residential'?'#2ecc71':t==='self'?'#58a6ff':'#8b949e';
+        asnBar.innerHTML+='<span style="font-size:0.75em;background:'+tc+'18;color:'+tc+';padding:3px 10px;border-radius:4px;border:1px solid '+tc+'33">'+t+': '+pct+'%</span>';
+      });
+      gel.appendChild(asnBar);
+    }
+
+    // Build subnet lookup for enrichment
+    var subnetByCountry={};
+    (subnets||[]).forEach(function(s){
+      var c=s.country||'??';
+      if(!subnetByCountry[c]) subnetByCountry[c]=[];
+      subnetByCountry[c].push(s);
+    });
+
+    geo.forEach(function(g){
+      var country=g.country;
+      var reqs=g.requests;
+      var pct=total>0?Math.round(reqs/total*100):0;
+      var regions=g.regions||[];
+
+      var row=document.createElement('div');
+      row.style.cssText='margin-bottom:0.8em;';
+
+      // Country bar
+      var header=document.createElement('div');
+      header.style.cssText='display:flex;align-items:center;gap:8px;cursor:pointer;';
+      header.innerHTML='<span style="font-size:0.9em;font-weight:600;color:#c9d1d9;min-width:55px">'+country+'</span>'
+        +'<div style="background:#30363d;height:16px;flex:1;border-radius:3px;overflow:hidden;position:relative">'
+        +'<div style="background:'+countryColor(country)+';height:100%;width:'+pct+'%;min-width:2px;transition:width 0.5s"></div>'
+        +'<span style="position:absolute;right:6px;top:1px;font-size:0.7em;color:#8b949e">'+reqs.toLocaleString()+' · '+pct+'%</span>'
+        +'</div>'
+        +'<span style="font-size:0.7em;color:#6e7681;cursor:pointer" class="geo-toggle">▶</span>';
+
+      var detail=document.createElement('div');
+      detail.style.cssText='display:none;margin-left:63px;margin-top:4px;';
+
+      // Region subdivision (from backend)
+      if(regions.length){
+        regions.forEach(function(r){
+          var rpct=reqs>0?Math.round(r.requests/reqs*100):0;
+          var rrow=document.createElement('div');
+          rrow.style.cssText='margin-bottom:6px;';
+
+          var rhead=document.createElement('div');
+          rhead.style.cssText='display:flex;align-items:center;gap:6px;cursor:pointer;';
+          rhead.innerHTML='<span style="font-size:0.8em;color:#c9d1d9;min-width:100px">'+r.region+'</span>'
+            +'<div style="background:#21262d;height:10px;flex:1;border-radius:2px;overflow:hidden">'
+            +'<div style="background:'+countryColor(country)+'99;height:100%;width:'+rpct+'%"></div>'
+            +'</div>'
+            +'<span style="font-size:0.65em;color:#6e7681;min-width:60px;text-align:right">'+r.requests.toLocaleString()+'</span>'
+            +'<span style="font-size:0.65em;color:#484f58;cursor:pointer" class="reg-toggle">▶</span>';
+
+          var cityDetail=document.createElement('div');
+          cityDetail.style.cssText='display:none;margin-left:106px;margin-top:2px;';
+
+          // Cities within region
+          (r.cities||[]).forEach(function(c){
+            var crow=document.createElement('div');
+            crow.style.cssText='display:flex;align-items:center;gap:6px;margin:2px 0;font-size:0.75em;';
+            crow.innerHTML='<span style="color:#58a6ff;min-width:90px">'+c.city+'</span>'
+              +'<span style="color:#8b949e">'+c.requests.toLocaleString()+' req</span>';
+            cityDetail.appendChild(crow);
+          });
+
+          rhead.onclick=function(e){
+            e.stopPropagation();
+            var open=cityDetail.style.display!=='none';
+            cityDetail.style.display=open?'none':'block';
+            rhead.querySelector('.reg-toggle').textContent=open?'▶':'▼';
+          };
+
+          rrow.appendChild(rhead);
+          rrow.appendChild(cityDetail);
+          detail.appendChild(rrow);
+        });
+      }
+
+      // Subnet breakdown for this country
+      var countrySubnets=subnetByCountry[country]||[];
+      if(countrySubnets.length){
+        var subHeader=document.createElement('div');
+        subHeader.style.cssText='font-size:0.7em;color:#6e7681;margin-top:8px;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.05em;border-top:1px solid #21262d;padding-top:6px;';
+        subHeader.textContent='Network blocks ('+countrySubnets.length+')';
+        detail.appendChild(subHeader);
+
+        countrySubnets.sort(function(a,b){return b.requests-a.requests}).slice(0,10).forEach(function(s){
+          var srow=document.createElement('div');
+          srow.style.cssText='display:flex;align-items:center;gap:6px;margin:2px 0;font-size:0.75em;';
+          var orgLabel=s.org||'Unknown';
+          var cityLabel=s.city?(' · '+s.city):'';
+          var asnLabel=s.asn_type?(' · <span style="color:#484f58">'+s.asn_type+'</span>'):'';
+          srow.innerHTML='<code style="color:#58a6ff;min-width:100px">'+s.subnet+'</code>'
+            +'<span style="color:#8b949e;flex:1">'+orgLabel+cityLabel+asnLabel+'</span>'
+            +'<span style="color:#6e7681;min-width:60px;text-align:right">'+s.requests.toLocaleString()+' · '+s.unique_ips+' IP'+(s.unique_ips>1?'s':'')+'</span>';
+          detail.appendChild(srow);
+        });
+      }
+
+      // Progressive resolution note
+      var note=document.createElement('div');
+      note.style.cssText='font-size:0.6em;color:#484f58;margin-top:8px;font-style:italic;';
+      note.textContent='Resolution sharpens as evidence accumulates → country → region → city → ASN → fiber';
+      detail.appendChild(note);
+
+      header.onclick=function(){
+        var open=detail.style.display!=='none';
+        detail.style.display=open?'none':'block';
+        header.querySelector('.geo-toggle').textContent=open?'▶':'▼';
+      };
+
+      row.appendChild(header);
+      row.appendChild(detail);
+      gel.appendChild(row);
+    });
+  }
+
+  function countryColor(c){
+    if(c==='US')return '#ff6b35';
+    if(c==='IE/US'||c==='IE')return '#e74c3c';
+    if(c==='CN')return '#f1c40f';
+    return '#58a6ff';
+  }
+  function orgColor(org){
+    if(org.indexOf('Anthropic')>=0)return '#ff6b35';
+    if(org.indexOf('Meta')>=0)return '#e74c3c';
+    if(org.indexOf('AWS')>=0)return '#f1c40f';
+    return '#58a6ff';
+  }
+
   loadDash();
   setInterval(loadDash,8000);
 })();

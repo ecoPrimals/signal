@@ -58,9 +58,15 @@ og_image = "/img/og-signal-viral.png"
     <div class="dash-row"><span class="dash-label">Path types</span><span id="d-paths">—</span></div>
     <div class="dash-sub" id="d-timing-note" style="margin-top:0.5em;color:#6e7681;"></div>
   </div>
-  <div class="dash-card" id="dash-geo">
-    <div class="dash-title">Geography — Where They're Hiding</div>
+  <div class="dash-card" id="dash-geo" style="grid-column:1/-1;">
+    <div class="dash-title">Geography — Progressive Subdivision</div>
+    <div class="dash-sub">Click a country to drill into organizations and subnets. Evidence accumulates → resolution sharpens → country → region → city → ASN → fiber.</div>
     <div id="d-geo"></div>
+  </div>
+  <div class="dash-card" id="dash-epitope-panel" style="grid-column:1/-1;">
+    <div class="dash-title">🧬 Live Organisms — Epitope Classification</div>
+    <div class="dash-sub">Each organism is identified by BLAKE2b hash of conserved behavioral invariants (Accept-Encoding, UA pool, blame ratio, Accept-Language). These features are <strong>genomic</strong> — compiled into the HTTP client, not configurable. Same behavior → same hash → same organism, regardless of IP rotation.</div>
+    <div id="d-epitopes"></div>
   </div>
 </div>
 
