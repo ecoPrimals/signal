@@ -382,6 +382,25 @@ hr {
   .dash-big { font-size: 2rem; }
 }
 
+/* ── petalTongue viz containers ── */
+.pt-viz {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pt-viz svg {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+}
+.pt-viz:empty::after {
+  content: '⏳ waiting for petalTongue...';
+  color: var(--text-muted, #6e7681);
+  font-size: 0.75em;
+  font-style: italic;
+}
+
 /* ── Signal exploration graph ── */
 #signal-exploration {
   min-height: 400px;

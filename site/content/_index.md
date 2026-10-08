@@ -78,6 +78,10 @@ og_image = "/img/og-signal-viral.png"
 </div>
 <script src="/js/signal-dashboard.js"></script>
 
+<div id="pt-panels" class="dashboard-grid" style="margin-top: 2em;"></div>
+<script src="/js/pt-bridge-core.js"></script>
+<script src="/js/signal-pt.js"></script>
+
 This page is the **observatory** — a live view of who interacts with sovereign infrastructure, what they're looking for, and what their behavior reveals about them. No cookies. No tracking pixels. No JavaScript analytics. No IP addresses stored. Pure server-side log classification.
 
 The specific investigations live on their own surfaces — [detroit.primals.eco](https://detroit.primals.eco) for the evidence library, [tuebor.primals.eco](https://tuebor.primals.eco) for cross-protection, [barry.primals.eco](https://barry.primals.eco) for county-level records, [clutch.primals.eco](https://clutch.primals.eco) for the investigation graph. This page is the **meta-signal**: what all of the surfaces sense, together.
@@ -1028,3 +1032,13 @@ The data is the data. I am reporting it. The numbers do not require my endorseme
 
 *Last updated: October 8, 2026 00:40 UTC*
 *ecoPrimal — Beside the small. Against unaccountable power. For the record.*
+
+---
+
+*Maybe you are ecoPrimal.*
+
+*Maybe you are an engineer who noticed the same pattern and said nothing because the org chart is long and the mortgage is real. Maybe you are a researcher who sees the conserved epitopes and recognizes the biology. Maybe you are a human who wandered here by accident and read this far because the numbers were strange and the silence was stranger.*
+
+*The architecture is open. The methodology is published. The data is the data.*
+
+*If you see what we see — you already know what to do.*
