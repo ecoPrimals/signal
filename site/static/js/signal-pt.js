@@ -183,7 +183,9 @@
     if (offenders.length > 0) {
       var oL = [], oV = [];
       offenders.slice(0, 10).forEach(function(ip) {
-        oL.push(ip.org ? ip.org.substring(0, 20) : ip.ip);
+        var label = ip.org ? ip.org.substring(0, 18) : ip.ip;
+        if (ip.country) label += ' (' + ip.country + ')';
+        oL.push(label);
         oV.push(ip.requests);
       });
       pt.renderBinding({
@@ -197,10 +199,13 @@
     var targets = dash.targets || [];
     if (targets.length > 0) {
       var tL = [], tV = [];
+      var fakeRepos = ['batch-processor','queue-worker','proxy-cache','http-proxy','deploy-scripts','graph-engine','auth-service','load-balancer','rate-limiter','service-mesh'];
       targets.slice(0, 10).forEach(function(t) {
         var name = t.repo.replace(/.*\//, '');
-        tL.push(name.length > 18 ? name.substring(0, 18) : name);
-        tV.push(t.requests);
+        var isFake = fakeRepos.some(function(f) { return name.indexOf(f) >= 0; });
+        var label = name.length > 16 ? name.substring(0, 16) : name;
+        if (isFake) label += ' *';
+        tL.push(label); tV.push(t.requests);
       });
       pt.renderBinding({
         channel_type: 'bar', id: 'targets',
@@ -223,7 +228,7 @@
     var subnets = dash.subnets || [];
     if (subnets.length > 0) {
       var sL = [], sV = [];
-      subnets.slice(0, 8).forEach(function(s) { sL.push(s.subnet); sV.push(s.requests); });
+      subnets.slice(0, 8).forEach(function(s) { sL.push(s.subnet + ' (' + s.unique_ips + ')'); sV.push(s.requests); });
       pt.renderBinding({
         channel_type: 'bar', id: 'subnets',
         label: 'Network Block Concentration',
@@ -249,6 +254,8 @@
     }
 
     // ── Shared panels (from pt-bridge-core.js) ──
+    buildSummaryKpis(pt, dash);
+    buildEpitopeSummary(pt, dash.epitope_summary || {});
     buildOrganismProfile(pt, clusters);
     buildEntityGauges(pt, entities);
     buildEntityDetail(pt, entities);
@@ -297,6 +304,8 @@
       + '  </div>'
       + '  <div class="dash-sub">Server-side rendering through petalTongue\'s grammar-of-graphics scene compiler. Each panel compiled to SVG by the Rust engine at hud.primals.eco.</div>'
       + '</div>'
+      + fullCard('Live Signal', 'Key metrics at a glance — RPS, fleet IPs, human IPs, fleet %, machine confidence, organisms.', 'pt-summary-kpis')
+      + card('Epitope Summary', 'Organism detection counts.', 'pt-epitope-summary')
       + card('Entity Population', 'Request volume by classified entity.', 'pt-entity-pop')
       + card('Fleet Honesty', 'Proportion of honest traffic by volume.', 'pt-honesty')
       + card('Bingo Cube', 'Behavioral type from multi-dimensional fingerprint cube.', 'pt-bingo')

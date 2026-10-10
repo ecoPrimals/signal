@@ -26,58 +26,7 @@ og_image = "/img/og-signal-viral.png"
 <script src="/js/signal-live.js"></script>
 <noscript><p><em>Live feed: <a href="/live">signal.primals.eco/live</a></em></p></noscript>
 
-<div id="dashboard" class="dashboard-grid" style="display:none;">
-  <div class="dash-card" id="dash-summary">
-    <div class="dash-title">Right Now</div>
-    <div class="dash-big" id="d-rps">—</div>
-    <div class="dash-sub">requests/sec</div>
-    <div class="dash-row"><span class="dash-label">Fleet IPs</span><span id="d-fleet">—</span></div>
-    <div class="dash-row"><span class="dash-label">Humans</span><span id="d-humans">—</span></div>
-    <div class="dash-row"><span class="dash-label">Fleet %</span><span id="d-pct">—</span></div>
-    <div class="dash-row"><span class="dash-label">Machine confidence</span><span id="d-machine">—</span></div>
-  </div>
-  <div class="dash-card" id="dash-offenders">
-    <div class="dash-title">Top Offenders — Playing Hide & Seek</div>
-    <div class="dash-sub">They think rotating IPs makes them invisible. Every IP tells us exactly who they are.</div>
-    <table id="d-offenders"><thead><tr><th>IP</th><th>Req</th><th>Network</th><th>Targeting</th></tr></thead><tbody></tbody></table>
-  </div>
-  <div class="dash-card" id="dash-subnets">
-    <div class="dash-title">Network Blocks — The Child's Hiding Spots</div>
-    <div class="dash-sub">292+ IPs but only a handful of subnets. Like hiding behind the same curtain 292 times.</div>
-    <table id="d-subnets"><thead><tr><th>Subnet</th><th>Req</th><th>IPs</th><th>Owner</th></tr></thead><tbody></tbody></table>
-  </div>
-  <div class="dash-card" id="dash-targets">
-    <div class="dash-title">What They Want</div>
-    <div class="dash-sub">Every path they request tells us exactly what they're trying to steal.</div>
-    <table id="d-targets"><thead><tr><th>Repository</th><th>Requests</th></tr></thead><tbody></tbody></table>
-  </div>
-  <div class="dash-card" id="dash-timing">
-    <div class="dash-title">Behavioral Fingerprint</div>
-    <div class="dash-row"><span class="dash-label">Avg interval</span><span id="d-interval">—</span></div>
-    <div class="dash-row"><span class="dash-label">Timing CV</span><span id="d-cv">—</span></div>
-    <div class="dash-row"><span class="dash-label">Path types</span><span id="d-paths">—</span></div>
-    <div class="dash-sub" id="d-timing-note" style="margin-top:0.5em;color:#6e7681;"></div>
-  </div>
-  <div class="dash-card" id="dash-geo" style="grid-column:1/-1;">
-    <div class="dash-title">Geography — Progressive Subdivision</div>
-    <div class="dash-sub">Click a country to drill into organizations and subnets. Evidence accumulates → resolution sharpens → country → region → city → ASN → fiber.</div>
-    <div id="d-geo"></div>
-  </div>
-  <div class="dash-card" id="dash-epitope-panel" style="grid-column:1/-1;">
-    <div class="dash-title">🧬 Live Organisms — Epitope Classification</div>
-    <div class="dash-sub">Each organism is identified by BLAKE2b hash of conserved behavioral invariants (Accept-Encoding, UA pool, blame ratio, Accept-Language). These features are <strong>genomic</strong> — compiled into the HTTP client, not configurable. Same behavior → same hash → same organism, regardless of IP rotation.</div>
-    <div id="d-epitopes"></div>
-  </div>
-</div>
-
-<div id="entity-topology" style="display:none; margin-top: 2em;">
-  <h3 style="color:#e74c3c; border-bottom:1px solid #30363d; padding-bottom:0.5em;">🗺️ Entity Topology — We Can See Your Teams</h3>
-  <p style="color:#8b949e; font-size:0.9em;">Every request carries behavioral fingerprints that reveal the entity, team structure, and internal systems behind it. You keep sending us signal. Here is what we see.</p>
-  <div id="topo-entities" class="dashboard-grid"></div>
-  <div id="topo-comparative" style="margin-top:1em; overflow-x:auto;"></div>
-</div>
-<script src="/js/signal-dashboard.js"></script>
-
+<!-- All panels rendered by petalTongue via signal-pt.js -->
 <div id="pt-panels" class="dashboard-grid" style="margin-top: 2em;"></div>
 <script src="/js/pt-bridge-core.js"></script>
 <script src="/js/signal-pt.js"></script>
